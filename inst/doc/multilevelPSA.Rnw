@@ -1,0 +1,118 @@
+\documentclass[letterpaper,11pt]{article}
+
+\oddsidemargin 0.0in
+\evensidemargin 0.0in
+\textwidth 6.5in
+%\headheight 0.0in
+
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{appendix}
+\usepackage{verbatim}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{longtable}
+
+
+<<rsetup,echo=FALSE,eval=TRUE,results=hide>>=
+library(multilevelPSA)
+library(ggplot2)
+library(plyr)
+library(party)
+library(psych)
+library(mice)
+library(xtable)
+
+source('../../../../pisa.ColNames.R')
+source('../../../../Colours.R')
+source('../../../../ggplot.theme.R')
+@
+
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\cov}{cov}
+
+\begin{document}
+
+\title{\texttt{multilevelPSA}: An R Package for Multilevel Propensity Score Analysis}
+\author{Jason M. Bryer\\
+\small{}jbryer@bryer.org}
+\date{\today}
+
+\maketitle
+
+\abstract{The use of propensity score analysis (Rosenbaum \& Rubin, 1983) has gained increasing popularity for the estimation of causal effects within observational studies. However, its use in situations where data is multilevel, or clustered, is limited (Arpino \& Mealli, 2008). This talk will introduce the multilevelPSA (Bryer, 2011) package for R that provides functions for estimating propensity scores for large datasets using logistic regression and conditional inference trees. Furthermore, a set of graphical functions that extends the framework of visualizing propensity score analysis introduced by Helmreich and Pruzek (2009) to multilevel analysis will be discussed. An application for estimating the effects of private schools on reading, mathematics, and science outcomes from the Programme for International Student Assessment (PISA; Organization for Economic Co-operation and Development, 2009) is provided.
+\ \\ \ \\
+\noindent Keywords: \textit{PSA, propensity score analysis, multilevel, graphics}}
+
+
+
+\section{Introduction}
+
+
+<<eval=FALSE>>=
+install.packages('multilevelPSA', repos=c('http://R-Forge.R-project.org', 
+'http://cran.r-project.org'), dep=TRUE)
+@
+
+<<>>=
+library(multilevelPSA)
+@
+
+
+\section{Programme for International Student Achievement}
+
+\url{http://www.pisa.oecd.org/}
+
+<<eval=FALSE>>=
+download.file('http://multilevelpsa.r-forge.r-project.org/pisa/pisa.student.Rdata', 
+'pisa.student.Rdata')
+download.file('http://multilevelpsa.r-forge.r-project.org/pisa/pisa.school.Rdata',
+'pisa.school.Rdata')
+@
+
+
+<<>>=
+load('../../../../pisa.student.Rdata')
+nrow(student.orig)
+load('../../../../pisa.school.Rdata')
+nrow(school.orig)
+school = school.orig[,c('COUNTRY', "CNT", "SCHOOLID",
+	"SC02Q01", #Public (1) or private (2)
+	"STRATIO" #Student-teacher ration    
+)]
+names(school) = c('COUNTRY', 'CNT', 'SCHOOLID', 'PUBPRIV', 'STRATIO')
+school$SCHOOLID = as.integer(school$SCHOOLID)
+student.orig = NULL #This is a very large data frame. We can remove it once we get what we need
+@
+
+<<echo=FALSE,results=tex>>=
+t = table(school$COUNTRY, school$PUBPRIV, useNA='ifany')
+addtorow = list()
+addtorow$pos = list()
+addtorow$pos[[1]] = c(0)
+addtorow$command = c('Public & Private & Missing \\\\ \\endfirsthead \\multicolumn{3}{l}{{...continued from previous page}}\\\\ \\hline Public & Private & Missing  \\\\ \\hline \\endhead')
+x = xtable(t, caption='Number of Private and Public Schools by Country', label='ppxtab')
+print(x, include.rownames=FALSE, include.colnames=FALSE, caption.placement='top', tabular.environment='longtable', add.to.row=addtorow, floating=FALSE, table.placement="ht")
+@
+
+<<echo=FALSE,results=tex>>=
+addtorow = list()
+addtorow$pos = list()
+addtorow$pos[[1]] = c(0)
+addtorow$command = c('Variable & Name & Description \\\\ \\endfirsthead \\multicolumn{3}{l}{{...continued from previous page}}\\\\ \\hline Variable & Name & Description  \\\\ \\hline \\endhead')
+x = xtable(psa.cols.names, caption='Covariates Used for Propensity Score Estimations', label='covariates')
+print(x, include.rownames=FALSE, include.colnames=FALSE, tabular.environment='longtable', add.to.row=addtorow, floating=FALSE, table.placement="ht", caption.placement='top')
+@
+
+
+<<>>=
+student = merge(student, school, by=c('CNT', 'SCHOOLID'), all.x=TRUE)
+student = student[!is.na(student$PUBPRIV),] #Remove rows with missing PUBPRRIV
+@
+
+
+\end{document}
