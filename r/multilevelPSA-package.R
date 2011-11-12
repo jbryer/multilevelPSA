@@ -8,7 +8,7 @@
 #'  Date: \tab 2011-03-18\cr
 #'  License: \tab GPL (>= 2)\cr
 #'  LazyLoad: \tab yes\cr
-#'  Depends: \tab ggplot2 reshape plyr psych
+#'  Depends: \tab ggplot2 reshape plyr psych proto
 #' }
 #'
 #' This package extends the principles put forth by the \code{PSAgraphics} 
@@ -23,7 +23,7 @@
 #' 		\url{http://www.jstatsoft.org/v29/i06/}
 #' @keywords psa multilevel
 #' @seealso \code{\link{PSAgraphics}}
-#' @import ggplot2 reshape plyr psych
+#' @import ggplot2 reshape plyr psych proto
 NA
 
 #' Student results from the 2009 Programme of International Student Assessment (PISA)
