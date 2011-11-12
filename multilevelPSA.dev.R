@@ -3,6 +3,7 @@ install.packages(c('devtools', 'roxygen2', 'RSQLite', 'ipeds'),
 
 require(devtools)
 require(roxygen2)
+require(ggplot2)
 
 setwd("~/Dropbox/Projects") #Mac
 setwd("C:/Dropbox/My Dropbox/Projects") #Windows
