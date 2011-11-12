@@ -10,7 +10,8 @@
 \details{
   \tabular{ll}{ Package: \tab multilevelPSA\cr Type: \tab
   Package\cr Version: \tab 0.9\cr Date: \tab 2011-03-18\cr
-  License: \tab GPL (>= 2)\cr LazyLoad: \tab yes\cr }
+  License: \tab GPL (>= 2)\cr LazyLoad: \tab yes\cr
+  Depends: \tab ggplot2 reshape plyr psych }
 
   This package extends the principles put forth by the
   \code{PSAgraphics} (Helmreich, Pruzek, & Xiong, 2010) for

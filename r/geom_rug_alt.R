@@ -1,5 +1,3 @@
-require(ggplot2)
-
 #'
 #' @export GeomRugAlt
 GeomRugAlt <- proto(Geom, {
