@@ -1,0 +1,195 @@
+%\documentclass[handout]{beamer}
+%\documentclass[handout,10pt,slidestop,mathserif]{beamer}
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}
+\documentclass[10pt,slidestop,mathserif]{beamer}
+\usetheme{Madrid}
+%\usepackage[bars]{beamerthemetree}
+\usecolortheme{seahorse}
+
+\usepackage{tabularx}
+\usepackage{verbatim}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{Sweave}
+\usepackage{moreverb}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{sparklines}
+
+\newcommand{\putat}[3]{\begin{picture}(0,0)(0,0)\put(#1,#2){#3}\end{picture}}
+  
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+
+%% Define a new 'leo' style for the package that will use a smaller font.
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\tiny\ttfamily}}}
+\makeatother
+
+\title[MultilevelPSA]{\texttt{multilevelPSA}: An R Package for Estimating and Visualizing Multilevel Propensity Score Models}
+\subtitle{}
+\author[Bryer]{Jason Bryer}
+\institute[University at Albany]{University at Albany}
+\date{November 14, 2011}
+
+<<setup,echo=FALSE,results=hide>>=
+library(ggplot2)
+library(plyr)
+library(party)
+library(psych)
+library(mice)
+library(xtable)
+
+source('../../lsos.R')
+source('../../pisa.ColNames.R')
+source('../../Colours.R')
+source('../../ggplot.theme.R')
+source('../../impute.R')
+@
+
+\begin{document}
+
+
+\frame{\titlepage}
+\frame{\frametitle{Agenda}\tableofcontents[hideallsubsections]}
+
+\section{Overview}
+
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{Installing multilevelPSA}
+	The \texttt{multilevelPSA} package is currently under development and is available on \href{http://github.com}{github}. The \texttt{devtools} package provides a function to install R packages directly from github.
+<<eval=FALSE>>=
+library(devtools)
+install_github('multilevelPSA', 'jbryer')
+@
+\pause
+Once installed from github, it can be loaded just like any other R package.
+<<>>=
+library(multilevelPSA)
+ls('package:multilevelPSA')
+@
+\end{frame}
+
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{PISA: Programme for International Student Assessment}
+	The  Economic Co-operation and Development (OECD) began assessing student achievement in 2003 with the Programme of International Student Assessment (PISA; \url{http://www.pisa.oecd.org/}). In 2009 they evaluated students at the end of secondary school (or equivalent depending on country) in mathematics, reading, and science. Data is freely available on their website but an R data is made available with the \texttt{multilevelPSA} package. There are two data frames, \texttt{student.orig} and \texttt{school.orig} and are loaded using the \texttt{data} command.
+<<>>=
+data(pisa.student)
+#names(student.orig)
+nrow(student.orig)
+ncol(student.orig)
+
+data(pisa.school)
+#names(school.orig)
+nrow(school.orig)
+ncol(school.orig)
+@
+\end{frame}
+
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{Covariates}
+<<echo=FALSE,results=tex>>=
+x = xtable(psa.cols.names[1:16,], caption='Covariates Used for Propensity Score Estimations')
+print(x, include.rownames=FALSE, include.colnames=TRUE, caption.placement='bottom')
+@
+
+\end{frame}
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{Covariates (cont.)}
+<<echo=FALSE,results=tex>>=
+x = xtable(psa.cols.names[17:32,], caption='Covariates Used for Propensity Score Estimations')
+print(x, include.rownames=FALSE, include.colnames=TRUE, caption.placement='bottom')
+@
+
+\end{frame}
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{Covariates (cont.)}
+<<echo=FALSE,results=tex>>=
+x = xtable(psa.cols.names[33:nrow(psa.cols.names),], caption='Covariates Used for Propensity Score Estimations')
+print(x, include.rownames=FALSE, include.colnames=TRUE, caption.placement='bottom')
+@
+
+\end{frame}
+
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{Setup School Data}
+<<>>=
+school = school.orig[,c('COUNTRY', "CNT", "SCHOOLID",
+	"SC02Q01", #Public (1) or private (2)
+	"STRATIO" #Student-teacher ration    
+)]
+names(school) = c('COUNTRY', 'CNT', 'SCHOOLID', 'PUBPRIV', 'STRATIO')
+school$SCHOOLID = as.integer(school$SCHOOLID)
+@
+\end{frame}
+
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{Number of Private and Public Schools by Country}
+<<>>
+t = table(school$COUNTRY, school$PUBPRIV, useNA='ifany')
+x = xtable(t[1:22,], caption='Number of Private and Public Schools by Country', label='ppxtab')
+@
+<<echo=FALSE,results=tex>>=
+print(x, include.rownames=FALSE, include.colnames=TRUE)
+@
+
+\end{frame}
+
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{Eliminate countries with fewer than 10 private schools}
+<<>>=
+t = as.data.frame(table(school$CNT, school$PUBPRIV))
+t = cast(t, Var1 ~ Var2, value='Freq')
+countries = t[which(t$Private >= 10), 'Var1']
+student = student.orig[which(student.orig$CNT %in% countries), psa.cols]
+rm(student.orig)
+rm(school.orig)
+@
+
+\end{frame}
+
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{}
+\end{frame}
+
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{}
+\end{frame}
+
+
+\begin{frame}[containsverbatim,fragile,c]
+	\frametitle{}
+\end{frame}
+
+{ % Figure that fills the frame
+    \setbeamertemplate{navigation symbols}{}
+    \begin{frame}[plain]
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[at=(current page.center)] {
+               	
+            };
+        \end{tikzpicture}
+     \end{frame}
+}
+
+
+
+\section{Conclusions \& Questions}
+\begin{frame}[c]
+	\LARGE{Thank You}\\
+	\normalsize
+	Jason Bryer (jason@bryer.org)\\
+	\url{https://github.com/jbryer/multilevelPSA}
+\end{frame}
+
+\end{document}

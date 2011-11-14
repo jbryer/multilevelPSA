@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  11 NOV 2011 12:52
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  14 NOV 2011 10:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -394,43 +394,82 @@ Underfull \hbox (badness 10000) in paragraph at lines 35--38
 
  []
 
-LaTeX Font Info:    Try loading font information for TS1+aett on input line 46.
+LaTeX Font Info:    Try loading font information for TS1+aett on input line 48.
 
-LaTeX Font Info:    No file TS1aett.fd. on input line 46.
+LaTeX Font Info:    No file TS1aett.fd. on input line 48.
 
 LaTeX Font Warning: Font shape `TS1/aett/m/sl' undefined
 (Font)              using `TS1/cmr/m/n' instead
-(Font)              for symbol `textquotesingle' on input line 46.
+(Font)              for symbol `textquotesingle' on input line 48.
 
 [1
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \vbox (badness 10000) detected at line 111
+Underfull \vbox (badness 10000) detected at line 130
  []
 
-[2]
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 1 on input line 159.
-
-
-Underfull \vbox (badness 10000) detected at line 186
+[2] [3]
+Underfull \vbox (badness 10000) detected at line 205
  []
 
-[3] [4]
+[4]
 
-Package longtable Warning: Table widths have changed. Rerun LaTeX.
+LaTeX Warning: Reference `fig:missing plot' on page 5 undefined on input line 2
+69.
 
-[5] (./multilevelPSA.aux)
+<figures/MissingPlot.pdf, id=25, 728.7225pt x 505.89pt>
+File: figures/MissingPlot.pdf Graphic file (type pdf)
+
+<use figures/MissingPlot.pdf>
+Package pdftex.def Info: figures/MissingPlot.pdf used on input line 273.
+(pdftex.def)             Requested size: 469.75499pt x 326.10742pt.
+ [5] [6 <./figures/MissingPlot.pdf>]
+<multilevelPSA-014.pdf, id=36, 542.025pt x 317.185pt>
+File: multilevelPSA-014.pdf Graphic file (type pdf)
+
+<use multilevelPSA-014.pdf>
+Package pdftex.def Info: multilevelPSA-014.pdf used on input line 331.
+(pdftex.def)             Requested size: 375.80542pt x 219.92264pt.
+
+<multilevelPSA-017.pdf, id=37, 542.025pt x 542.025pt>
+File: multilevelPSA-017.pdf Graphic file (type pdf)
+
+<use multilevelPSA-017.pdf>
+Package pdftex.def Info: multilevelPSA-017.pdf used on input line 352.
+(pdftex.def)             Requested size: 375.80542pt x 375.81718pt.
+ [7] [8 <./multilevelPSA-014.pdf>] [9 <./multilevelPSA-017.pdf>] [10] [11] [12]
+
+<multilevelPSA-021.pdf, id=69, 542.025pt x 542.025pt>
+File: multilevelPSA-021.pdf Graphic file (type pdf)
+
+<use multilevelPSA-021.pdf>
+Package pdftex.def Info: multilevelPSA-021.pdf used on input line 534.
+(pdftex.def)             Requested size: 375.80542pt x 375.81718pt.
+ [13
+
+] [14 <./multilevelPSA-021.pdf>]
+<multilevelPSA-023.pdf, id=91, 542.025pt x 542.025pt>
+File: multilevelPSA-023.pdf Graphic file (type pdf)
+
+<use multilevelPSA-023.pdf>
+Package pdftex.def Info: multilevelPSA-023.pdf used on input line 552.
+(pdftex.def)             Requested size: 375.80542pt x 375.81718pt.
+ [15 <./multilevelPSA-023.pdf>] (./multilevelPSA.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 3750 strings out of 493633
- 51521 string characters out of 3143378
- 115939 words of memory out of 3000000
- 6934 multiletter control sequences out of 15000+200000
+ 3784 strings out of 493633
+ 52257 string characters out of 3143378
+ 114972 words of memory out of 3000000
+ 6961 multiletter control sequences out of 15000+200000
  31439 words of font info for 72 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  38i,7n,23p,957b,310s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -445,10 +484,10 @@ local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/l
 ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/lo
 cal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/loc
 al/texlive/2011/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on multilevelPSA.pdf (5 pages, 118147 bytes).
+Output written on multilevelPSA.pdf (15 pages, 456973 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
- 43 compressed objects within 1 object stream
+ 141 PDF objects out of 1000 (max. 8388607)
+ 103 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 
