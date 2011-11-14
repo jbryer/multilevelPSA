@@ -32,7 +32,7 @@ NA
 #'
 #' @name pisa.student
 #' @docType data
-#' @format a data frame with 475,460 ovservations of 305 variables from North America.
+#' @format a data frame with 475,460 ovservations of 305 variables.
 #' @source Organization for Economic Co-operation and Development
 #' @keywords datasets
 NULL
@@ -43,7 +43,7 @@ NULL
 #'
 #' @name pisa.school
 #' @docType data
-#' @format a data frame with 17,145 ovservations of 247 variables from North America.
+#' @format a data frame with 17,145 ovservations of 247 variables.
 #' @source Organization for Economic Co-operation and Development
 #' @keywords datasets
 NULL
