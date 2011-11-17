@@ -1,4 +1,5 @@
 require(ggplot2)
+require(proto)
 
 #'
 #' @export GeomRugAlt
