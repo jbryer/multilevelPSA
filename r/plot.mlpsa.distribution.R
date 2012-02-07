@@ -1,7 +1,8 @@
 #'
-#' @export plot.multilevel.distribution
-plot.multilevel.distribution <- function(multilevelPSA, x='level2', y='Public', colour.values=NULL, flip=TRUE, xlab=NULL, ylab=y) {
+#' @export 
+plot.mlpsa.distribution <- function(multilevelPSA, x='level2', y='Public', colour.values=NULL, flip=TRUE, xlab=NULL, ylab=y) {
 	p = ggplot(multilevelPSA$level1.summary, aes_string(x=x, y=y))
+	p = p + scale_y_continuous(limits=multilevelPSA$plot.range)
 	if(flip) {
 		p = p + coord_flip() 
 		p = p + opts(legend.position=c(-1,-1), axis.text.x=theme_text(size=10, angle=0, hjust=.5, vjust=1))

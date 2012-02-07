@@ -1,7 +1,12 @@
 require(ggplot2)
 require(proto)
 
-#'
+#' A ggplot2 alternate rug geomtry.
+#' 
+#' This creates an additional ggplot2 geometry \code{geom_rug_alt} which allows
+#' for rug plots to be placed on the top and right of the graph. 
+#' 
+#' @seealso geom_rug_alt
 #' @export GeomRugAlt
 GeomRugAlt <- proto(Geom, {
 	draw <- function(., data, scales, coordinates, ...) {
@@ -10,7 +15,6 @@ GeomRugAlt <- proto(Geom, {
 		if (!is.null(data$x)) {
 			rugs$x <- with(data, segmentsGrob(
 							x0 = unit(x, "native"), x1 = unit(x, "native"), 
-							#y0 = unit(max(y) + 0.02, "npc"), y1 = unit(max(y) + 0.05, "npc"),
 							y0 = unit(.97, "npc"), y1 = unit(1, "npc"),
 							gp = gpar(col = alpha(colour, alpha), lty = linetype, lwd = size * .pt)
 					))

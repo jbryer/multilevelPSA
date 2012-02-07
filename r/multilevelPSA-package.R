@@ -1,16 +1,6 @@
-#' This packages provides functions to perform and visualize multilvel propensity
+#' This packages provides functions to estimate and visualize multilvel propensity
 #' score analys.
 #' 
-#' \tabular{ll}{
-#'  Package: \tab multilevelPSA\cr
-#'  Type: \tab Package\cr
-#'  Version: \tab 0.9\cr
-#'  Date: \tab 2011-03-18\cr
-#'  License: \tab GPL (>= 2)\cr
-#'  LazyLoad: \tab yes\cr
-#'  Depends: \tab ggplot2 reshape plyr psych proto
-#' }
-#'
 #' This package extends the principles put forth by the \code{PSAgraphics} 
 #' (Helmreich, Pruzek, & Xiong, 2010) for multilevel, or clustered, data.
 #' 
@@ -23,14 +13,13 @@
 #' 		\url{http://www.jstatsoft.org/v29/i06/}
 #' @keywords psa multilevel
 #' @seealso \code{\link{PSAgraphics}}
-#' @import ggplot2 reshape plyr psych proto
 NA
 
 #' Student results from the 2009 Programme of International Student Assessment (PISA)
 #' as provided by the Organization for Economic Co-operation and Development (OECD).
 #' See \url{http://www.pisa.oecd.org/} for more information including the code book.
 #'
-#' @name pisa.student
+#' @name pisana
 #' @docType data
 #' @format a data frame with 475,460 ovservations of 305 variables.
 #' @source Organization for Economic Co-operation and Development
@@ -41,15 +30,10 @@ NULL
 #' as provided by the Organization for Economic Co-operation and Development (OECD).
 #' See \url{http://www.pisa.oecd.org/} for more information including the code book.
 #'
-#' @name pisa.school
+#' @name pisanaschool
 #' @docType data
 #' @format a data frame with 17,145 ovservations of 247 variables.
 #' @source Organization for Economic Co-operation and Development
 #' @keywords datasets
 NULL
 
-.First.lib <- function(libname, pkgname) {
-}
-
-.Last.lib <- function(libname, pkgname) {
-}

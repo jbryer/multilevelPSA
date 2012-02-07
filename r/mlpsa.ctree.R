@@ -3,8 +3,8 @@
 #' TODO: Need more details
 #' 
 #' @return a list of BinaryTree-class classes for each level 2
-#' @export multilevelCtree
-multilevelCtree <- function(vars, formula, level2) {
+#' @export
+mlpsa.ctree <- function(vars, formula, level2) {
 	partyPlyr <- function(x) {
 		excludeVars = names(x) %in% c(level2)
 		x = x[,!excludeVars]
@@ -20,11 +20,12 @@ multilevelCtree <- function(vars, formula, level2) {
 #' 
 #' @param data data frame to merge results to
 #' @return a data frame
-#' @export getStrata
+#' @export
 getStrata <- function(party.results, data, level2) {
 	data$strata = as.numeric(NA)
 	for(i in names(party.results)) {
-		data[which(data[,level2] == i),]$strata = where(party.results[i][[1]], newdata=data[which(data[,level2] == i),])
+		data[which(data[,level2] == i),]$strata = where(party.results[i][[1]], 
+									newdata=data[which(data[,level2] == i),])
 	}
 	return(data)
 }

@@ -3,8 +3,8 @@
 #' TODO: Need more details
 #' 
 #' @return a ggplot2 expression
-#' @export treeHeat
-treeHeat <- function(trees, colNames, level2Col, colLabels=NULL) {
+#' @export
+plot.tree <- function(trees, colNames, level2Col, colLabels=NULL) {
 	ncol = length(colNames) + 1
 	tree.df <- as.data.frame(matrix(nrow=length(unique(level2Col)), ncol=ncol))
 	names(tree.df) = c('level2', colNames)

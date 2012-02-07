@@ -7,8 +7,8 @@
 #' @param level2 the name of the column containing the level 2 specification
 #' @param stepAIC if true, stepAIC will be called for each level.
 #' @return a list of glm classes for each level 2 or stepwise-selected model if stepAIC is true.
-#' @export multilevelLR
-multilevelLR <- function(vars, formula, level2, stepAIC=FALSE) {
+#' @export
+mlpsa.logistic <- function(vars, formula, level2, stepAIC=FALSE, ...) {
 	lrPlyr <- function(x) {
 		excludeVars = names(x) %in% c(level2)
 		x = x[,!excludeVars]

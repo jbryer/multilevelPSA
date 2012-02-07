@@ -7,8 +7,8 @@
 #' @param grouping a vector of length nrow(vars) corresponding to how missing will be grouped by
 #' @param grid whether to draw a grid between tiles
 #' @return a ggplot2 expression
-#' @export missingPlot
-missingPlot <- function(vars, grouping, grid=FALSE) {
+#' @export
+plot.missing <- function(vars, grouping, grid=FALSE) {
 	empty <- plyr::empty
 	
 	Layout <- grid.layout(nrow = 1, ncol = 2)

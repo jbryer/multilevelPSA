@@ -1,4 +1,4 @@
-#' This function will calculate the multilevel propensity score analysis.
+#' This function will perform the multilevel propensity score analysis.
 #' 
 #' TODO: Need more details
 #' 
@@ -7,9 +7,14 @@
 #' @param strata vector containing the strata for each response
 #' @param level2 vector containing the level 2 specifications
 #' @param minN the minimum number of subjects per strata for that strata to be included in the analysis.
-#' @return a multilevel.psa class
-#' @export multilevelPSA
-multilevelPSA <- function(response, treatment=NULL, strata=NULL, level2=NULL, minN=1) {
+#' @return a mlpsa class
+#' @export
+#' @examples
+#' \dontrun{party.results = multilevelCtree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')}
+mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL, minN=1) {
+	stopifnot(length(response) == length(treatment)  & 
+		length(treatment) == length(strata) & length(strata) == length(level2))
+
 	multilevelPSA = list()
 	
 	xscale = .1
@@ -47,6 +52,8 @@ multilevelPSA <- function(response, treatment=NULL, strata=NULL, level2=NULL, mi
 		wtss = tmp$n/n
 		mny = sum(tmp[,4] * wtss)
 		mnx = sum(tmp[,5] * wtss)
+		yn = sum(tmp[,2])
+		xn = sum(tmp[,3])
 		mnxy = (mnx + mny)/2
 		diffwtd = sum(tmp$Diff * tmp$n) / n
 		
@@ -75,8 +82,16 @@ multilevelPSA <- function(response, treatment=NULL, strata=NULL, level2=NULL, mi
 		ci.min=ci.diff - qt(0.975, df) * se.wtd
 		ci.max=ci.diff + qt(0.975, df) * se.wtd
 		
-		diff.wtd = rbind(diff.wtd, data.frame(level2=i, n=n, diffwtd=diffwtd, mnx=mnx, mny=mny, mnxy=mnxy, ci.min=ci.min, ci.max=ci.max, df=df, se.wtd=se.wtd))
+		diff.wtd = rbind(diff.wtd, data.frame(level2=i, n=n, diffwtd=diffwtd, 
+							mnx=mnx, mny=mny, mnxy=mnxy,
+							xn=xn, yn=yn,
+							ci.min=ci.min, ci.max=ci.max, 
+							df=df, se.wtd=se.wtd))
 	}
+	names(diff.wtd)[which(names(diff.wtd)=='mnx')] = names(d)[5]
+	names(diff.wtd)[which(names(diff.wtd)=='mny')] = names(d)[4]
+	names(diff.wtd)[which(names(diff.wtd)=='xn')] = names(d)[3]
+	names(diff.wtd)[which(names(diff.wtd)=='yn')] = names(d)[2]
 	
 	multilevelPSA$x.label = names(d)[5]
 	multilevelPSA$y.label = names(d)[4]
@@ -132,5 +147,8 @@ multilevelPSA <- function(response, treatment=NULL, strata=NULL, level2=NULL, mi
 	multilevelPSA$unweighted.summary = as.data.frame(d2)
 	multilevelPSA$level2.summary = diff.wtd
 	
+	class(multilevelPSA) <- 'mlpsa'
+	
 	return(multilevelPSA)
 }
+
