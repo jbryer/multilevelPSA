@@ -1,4 +1,5 @@
-\documentclass[letterpaper,11pt]{article}
+%\documentclass[letterpaper,11pt]{article}
+\documentclass[nojss]{jss}
 
 \oddsidemargin 0.0in
 \evensidemargin 0.0in
@@ -35,19 +36,29 @@ source('../../ggplot.theme.R')
 \DeclareMathOperator{\var}{var}
 \DeclareMathOperator{\cov}{cov}
 
-\begin{document}
+%\VignetteIndexEntry{Multilevel Propensity Score Analysis}
+%\VignetteKeywords{PSA, propensity score analysis, multilevel, graphics}
+%\VignettePackage{multilevelPSA}
 
 \title{\texttt{multilevelPSA}: An R Package for Multilevel Propensity Score Analysis}
-\author{Jason M. Bryer\\
-\small{}jbryer@bryer.org}
+\shorttitle{Multilevel PSA}
+\author{Jason M. Bryer
 \date{\today}
 
-\maketitle
+\Address{
+  Jason M. Bryer \\
+  University at Albany \\
+  1400 Western Ave \\
+  Albany, NY 12222 \\
+  Email: \email{jason@bryer.org} \\
+  URL: \url{http://bryer.org}
+}
 
-\abstract{The use of propensity score analysis (Rosenbaum \& Rubin, 1983) has gained increasing popularity for the estimation of causal effects within observational studies. However, its use in situations where data is multilevel, or clustered, is limited (Arpino \& Mealli, 2008). This talk will introduce the multilevelPSA (Bryer, 2011) package for R that provides functions for estimating propensity scores for large datasets using logistic regression and conditional inference trees. Furthermore, a set of graphical functions that extends the framework of visualizing propensity score analysis introduced by Helmreich and Pruzek (2009) to multilevel analysis will be discussed. An application for estimating the effects of private schools on reading, mathematics, and science outcomes from the Programme for International Student Assessment (PISA; Organization for Economic Co-operation and Development, 2009) is provided.
-\ \\ \ \\
-\noindent Keywords: \textit{PSA, propensity score analysis, multilevel, graphics}}
+\abstract{The use of propensity score analysis (Rosenbaum \& Rubin, 1983) has gained increasing popularity for the estimation of causal effects within observational studies. However, its use in situations where data is multilevel, or clustered, is limited (Arpino \& Mealli, 2008). This talk will introduce the multilevelPSA (Bryer, 2011) package for R that provides functions for estimating propensity scores for large datasets using logistic regression and conditional inference trees. Furthermore, a set of graphical functions that extends the framework of visualizing propensity score analysis introduced by Helmreich and Pruzek (2009) to multilevel analysis will be discussed. An application for estimating the effects of private schools on reading, mathematics, and science outcomes from the Programme for International Student Assessment (PISA; Organization for Economic Co-operation and Development, 2009) is provided.}
 
+\keywords{PSA, propensity score analysis, multilevel, graphics}
+
+\begin{document}
 
 
 \section{Introduction}
@@ -205,7 +216,8 @@ results.psa.math$level2.summary
 @
 
 <<>>=
-options(digits=2)results.psa.math$level2.summary
+options(digits=2)
+results.psa.math$level2.summary
 @
 
 <<echo=TRUE,results=hide>>=

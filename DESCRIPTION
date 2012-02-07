@@ -1,23 +1,33 @@
 Package: multilevelPSA
-Maintainer: Jason Bryer <jason@bryer.org>
 License: GPL (>= 2)
 Title: Multilevel Propensity Score Analysis
 Type: Package
-LazyLoad: yes
 Author: Jason Bryer <jason@bryer.org>
-Description: Functions to perform and visualize propensity
+Maintainer: Jason Bryer <jason@bryer.org>
+Description: Functions to estimate and visualize propensity
     score analysis for multilevel, or clustered, data.
 Version: 1.0
-URL: http://multilevelpsa.r-forge.r-project.org
+URL: http://github.com/jbryer/multilevelPSA
+Depends:
+    ggplot2,
+    plyr,
+    psych,
+    reshape,
+    proto
+Suggests:
+    testthat,
+    party
 Date: 2011-03-18
 Collate:
-    'ctree.R'
     'geom_rug_alt.R'
-    'logestic.R'
-    'missingPlot.R'
-    'multilevelPSA.R'
-    'plotCirc.R'
-    'plotPSA.R'
-    'treeHeat.R'
     'multilevelPSA-package.R'
-    'plotMultilevelDistribution.R'
+    'align.R'
+    'mlpsa.R'
+    'mlpsa.ctree.R'
+    'mlpsa.logestic.R'
+    'mlpsa.print.R'
+    'plot.missing.R'
+    'plot.mlpsa.R'
+    'plot.mlpsa.difference.R'
+    'plot.mlpsa.distribution.R'
+    'plot.tree.R'

@@ -7,11 +7,13 @@ require(ggplot2)
 
 setwd("~/Dropbox/Projects") #Mac
 setwd("C:/Dropbox/My Dropbox/Projects") #Windows
+getwd()
 
 #Package building
 document("multilevelPSA", clean=TRUE)
 document("multilevelPSA")
 check_doc("multilevelPSA")
+run_examples("multilevelPSA")
 build("multilevelPSA", binary=FALSE)
 build("multilevelPSA", binary=TRUE)
 install("multilevelPSA")
@@ -19,15 +21,14 @@ check("multilevelPSA")
 library(multilevelPSA)
 ls('package:multilevelPSA')
 
-#Build Vignette
-setwd("C:/Dropbox/My Dropbox/Projects/multilevelPSA")
-setwd(paste(getwd(), '/man/doc/', sep=''))
-getwd()
-Stangle('multilevelPSA.Rnw')
-Sweave('multilevelPSA.Rnw')
-texi2dvi('multilevelPSA.tex', pdf=TRUE)
+
+
+test('multilevelPSA')
+test_package('multilevelPSA')
+
+test_file('multilevelPSA/inst/tests/test-pisa.R')
 
 #Load included data
-data(pisa.student)
-data(pisa.school)
+data(pisana)
+data(pisanaschool)
 
