@@ -1,8 +1,9 @@
-\name{multilevelLR}
-\alias{multilevelLR}
+\name{mlpsa.logistic}
+\alias{mlpsa.logistic}
 \title{Performs a logistic regression analysis for each level 2.}
 \usage{
-  multilevelLR(vars, formula, level2, stepAIC = FALSE)
+  mlpsa.logistic(vars, formula, level2, stepAIC = FALSE,
+    ...)
 }
 \arguments{
   \item{vars}{data frame containing the variables to

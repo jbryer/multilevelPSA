@@ -1,9 +1,9 @@
-\name{multilevelPSA}
-\alias{multilevelPSA}
-\title{This function will calculate the multilevel propensity score analysis.}
+\name{mlpsa}
+\alias{mlpsa}
+\title{This function will perform the multilevel propensity score analysis.}
 \usage{
-  multilevelPSA(response, treatment = NULL, strata = NULL,
-  level2 = NULL, minN = 1)
+  mlpsa(response, treatment = NULL, strata = NULL,
+    level2 = NULL, minN = 1)
 }
 \arguments{
   \item{response}{vector containing the response values}
@@ -21,9 +21,12 @@
   that strata to be included in the analysis.}
 }
 \value{
-  a multilevel.psa class
+  a mlpsa class
 }
 \description{
   TODO: Need more details
+}
+\examples{
+\dontrun{party.results = multilevelCtree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')}
 }
 

@@ -1,6 +1,6 @@
 \docType{data}
-\name{pisa.school}
-\alias{pisa.school}
+\name{pisanaschool}
+\alias{pisanaschool}
 \title{School results from the 2009 Programme of International Student Assessment (PISA)
 as provided by the Organization for Economic Co-operation and Development (OECD).
 See \url{http://www.pisa.oecd.org/} for more information including the code book.}
@@ -15,5 +15,6 @@ See \url{http://www.pisa.oecd.org/} for more information including the code book
   \url{http://www.pisa.oecd.org/} for more information
   including the code book.
 }
+\keyword{dataset}
 \keyword{datasets}
 

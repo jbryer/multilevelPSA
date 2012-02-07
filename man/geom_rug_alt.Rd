@@ -2,8 +2,8 @@
 \alias{geom_rug_alt}
 \title{A ggplot2 alternate rug geomtry.}
 \usage{
-  geom_rug_alt(mapping = NULL, data = NULL, stat =
-  "identity", position = "identity", ...)
+  geom_rug_alt(mapping = NULL, data = NULL,
+    stat = "identity", position = "identity", ...)
 }
 \description{
   This creates an additional ggplot2 geometry
