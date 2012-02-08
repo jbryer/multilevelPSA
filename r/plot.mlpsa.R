@@ -11,13 +11,23 @@
 plot.mlpsa <- function(multilevelPSA,
 		xlab=names(multilevelPSA$level2.summary)[4], 
 		ylab=names(multilevelPSA$level2.summary)[5], 
-		legendlab='Level 2', title=NULL,
-		overall.col="blue", overall.ci.col='green',
-		level1.plot=FALSE, level1.point.size=NULL, level1.rug.plot=NULL, 
+		legendlab='Level 2', 
+		title=NULL,
+		overall.col="blue", 
+		overall.ci.col='green',
+		level1.plot=FALSE, 
+		level1.point.size=NULL, 
+		level1.rug.plot=NULL, 
 		level1.projection.lines=FALSE,
-		level2.plot=TRUE, level2.point.size=NULL, level2.rug.plot=geom_rug_alt, 
-		level2.projection.lines=TRUE, level2.label=FALSE, 
-		unweighted.means=FALSE, weighted.means=FALSE, fill.colours=NULL, ...
+		level2.plot=TRUE, 
+		level2.point.size=NULL,
+		level2.rug.plot=geom_rug_alt, 
+		level2.projection.lines=TRUE,
+		level2.label=FALSE, 
+		unweighted.means=FALSE, 
+		weighted.means=FALSE,
+		fill.colours=NULL, 
+		...
 ) {
 	ggplot.alpha <- function(...) get("alpha", grep("package:ggplot2$", search()))(...)
 
@@ -39,11 +49,12 @@ plot.mlpsa <- function(multilevelPSA,
 	#function to use the treatment levels. This will duplicate those columns.
 	level2.summary$mnx = multilevelPSA$level2.summary[,4]
 	level2.summary$mny = multilevelPSA$level2.summary[,5]
+	level2.summary$panel = 'Circular'
 	
 	#Setup ggplot2
-	p = ggplot(data=level2.summary, 
-			aes(x=mnx, y=mny, fill=level2, size=n)) +
-			coord_equal(ratio=1) + 
+	p = ggplot(level1.summary, aes_string(x=names(multilevelPSA$level2.summary)[4], 
+										  y=names(multilevelPSA$level2.summary)[5]))
+	p = p + coord_fixed(ratio=1) + 
 			scale_x_continuous(limits=plot.range) +
 			scale_y_continuous(limits=plot.range) +
 			opts(axis.ticks.margin=unit(.1, "cm"))
@@ -109,10 +120,10 @@ plot.mlpsa <- function(multilevelPSA,
 			geom_hline(yintercept=overall.mny, 
 					   colour=overall.col, size=.6, alpha=.7)
 	#Label the mean lines
-	p = p + geom_text( x=plot.range[1], y=overall.mny,
+	p = p + geom_text(x=plot.range[1], y=overall.mny,
 					   label=prettyNum(overall.mny, digits=2), 
 					   colour=overall.col, vjust=-.5, hjust=-.6, size=3) +
-			geom_text( y=plot.range[1], x=overall.mnx, 
+			geom_text(y=plot.range[1], x=overall.mnx, 
 					   label=prettyNum(overall.mnx, digits=2), 
 					   colour=overall.col, vjust=-.5, hjust=1.5, angle=-90, size=3)
 	#Point for each level 1 stratum
@@ -137,9 +148,13 @@ plot.mlpsa <- function(multilevelPSA,
 	#Level 2 points
 	if(level2.plot) {
 		if(is.null(level2.point.size)) {
-			p = p + geom_point(shape=21, colour='black') 
+			p = p + geom_point(data=level2.summary, 
+							   aes(x=mnx, y=mny, fill=level2, size=n), 
+							   shape=21, colour='black') 
 		} else {
-			p = p + geom_point(size=multilevelPSA$level2.point.size, shape=21, colour='black')
+			p = p + geom_point(data=level2.summary, 
+							   aes(x=mnx, y=mny, fill=level2, size=n), 
+							   size=multilevelPSA$level2.point.size, shape=21, colour='black')
 		}
 	}
 	#Label level 2 points
@@ -153,7 +168,7 @@ plot.mlpsa <- function(multilevelPSA,
 						intercept=(projection.intercept - .03 * diff(plot.range)), 
 						colour='black', size=.5, alpha=.7)
 	#Labels
-	p = p + xlab(xlab) + ylab(ylab) + scale_size_continuous('Size')
+ 	p = p + xlab(xlab) + ylab(ylab) + scale_size_continuous('Size')
 	#Difference disttribution (as x's)
 	p = p + geom_point(data=level2.summary, 
 					   aes(x=xmark, y=ymark, colour=level2), 
