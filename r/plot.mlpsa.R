@@ -9,7 +9,8 @@
 #' @method plot mlpsa
 #' @export
 plot.mlpsa <- function(multilevelPSA,
-		xlab=names(multilevelPSA$level2.summary)[4], ylab=names(multilevelPSA$level2.summary)[5], 
+		xlab=names(multilevelPSA$level2.summary)[4], 
+		ylab=names(multilevelPSA$level2.summary)[5], 
 		legendlab='Level 2', title=NULL,
 		overall.col="blue", overall.ci.col='green',
 		level1.plot=FALSE, level1.point.size=NULL, level1.rug.plot=NULL, 
@@ -38,7 +39,6 @@ plot.mlpsa <- function(multilevelPSA,
 	#function to use the treatment levels. This will duplicate those columns.
 	level2.summary$mnx = multilevelPSA$level2.summary[,4]
 	level2.summary$mny = multilevelPSA$level2.summary[,5]
-
 	
 	#Setup ggplot2
 	p = ggplot(data=level2.summary, 

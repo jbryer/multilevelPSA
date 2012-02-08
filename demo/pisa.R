@@ -47,22 +47,25 @@ plot.multilevel.distribution(results.psa.math)
 
 
 ##### Experimental
-p1 = plotcirc.multilevel.psa(results.psa.math, xlab='Public', ylab='Private', legendlab=FALSE, level1.plot=FALSE, level1.rug.plot=NULL, level1.projection.lines=FALSE) + opts(legend.position='none') +
+p1 = plot(results.psa.math, xlab='Public', ylab='Private', legendlab=FALSE, level1.plot=FALSE, level1.rug.plot=NULL, level1.projection.lines=FALSE) + opts(legend.position='none') +
 	xlab(NULL) + ylab(NULL) #opts(legend.position=c(.88,.25)) +  scale_size_continuous('Sample Size') 
-p2 = plot.multilevel.distribution(results.psa.math, x='level2', y='Public', flip=TRUE)
-p3 = plot.multilevel.distribution(results.psa.math, x='level2', y='Private', flip=FALSE)
+p2 = plot.mlpsa.distribution(results.psa.math, treat='Public', flip=TRUE, label='Public')
+p3 = plot.mlpsa.distribution(results.psa.math, treat='Private', flip=FALSE, label='Private')
 
-
+#Circ top right
 grid_layout <- grid.layout(nrow=2, ncol=2, widths=c(1,2), heights=c(2,1))
 grid.newpage()
 pushViewport( viewport( layout=grid_layout ) )
-align.plots(grid_layout, list(p3, 1, 1), list(p1, 1, 2), list(p2, 2, 2))
+multilevelPSA:::align.plots(grid_layout, list(p1, 1, 2), list(p2, 2, 2), list(p3, 1, 1))
 
+#Circ bottom left
+grid_layout <- grid.layout(nrow=2, ncol=2, widths=c(2,1), heights=c(1,2))
+grid.newpage()
+pushViewport( viewport( layout=grid_layout ) )
+multilevelPSA:::align.plots(grid_layout, list(p1, 2, 1), list(p3, 2, 2), list(p2, 1, 1))
 
 
 grid.arrange(p1,p2)
-
-
 
 
 l1 = results.psa.math$level1.summary
