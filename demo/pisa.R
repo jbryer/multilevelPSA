@@ -38,7 +38,7 @@ results.psa.math$level1.summary
 results.psa.math$level2.summary
 
 plot(results.psa.math)
-plot.mlpsa.difference(results.psa.math)
+plot.mlpsa.difference(results.psa.math, sd=mean(student$mathscore, na.rm=TRUE))
 
 
 plotcirc.multilevel.psa(results.psa.math, xlab='Public', ylab='Private', legendlab=FALSE, level1.plot=FALSE, level1.rug.plot=NULL, level1.projection.lines=FALSE) + opts(legend.position='none')
