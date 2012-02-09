@@ -4,7 +4,7 @@
 #' can be made. This plot is an extension of the \code{circ.psa} function in the
 #' \code{PSAgraphics} package for multilevel models.
 #'
-#' @param multilevelPSA the results of \code{\link{mlpsa}}.
+#' @param x the results of \code{\link{mlpsa}}.
 #' @param xlab label for the x-axis.
 #' @param ylab label for the y-axis.
 #' @param legendlab the label for the legend, or NULL to exclude.
@@ -34,7 +34,7 @@
 #' @param fill.colours if specified, the colors to use for level 2 points.
 #' @param ... currently unused.
 #' @export
-plot.mlpsa.circ <- function(multilevelPSA,
+plot.mlpsa.circ <- function(x,
 		xlab=names(multilevelPSA$level2.summary)[4], 
 		ylab=names(multilevelPSA$level2.summary)[5], 
 		legendlab='Level 2', 
@@ -55,6 +55,8 @@ plot.mlpsa.circ <- function(multilevelPSA,
 		fill.colours=NULL, 
 		...
 ) {
+	stopifnot(is.mlpsa(x))
+	multilevelPSA = x
 	ggplot.alpha <- function(...) get("alpha", grep("package:ggplot2$", search()))(...)
 
 	if(missing(multilevelPSA)) {

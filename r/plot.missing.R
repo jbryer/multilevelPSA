@@ -1,13 +1,15 @@
 #' Returns a heat map graphic representing missinging of variables grouped by
 #' the given grouping vector.
 #' 
-#' @param vars a data frame containing the variables to visualize missingness
+#' @param x a data frame containing the variables to visualize missingness
 #' @param grouping a vector of length nrow(vars) corresponding to how missing will be grouped by
 #' @param grid whether to draw a grid between tiles
+#' @param ... currently unused.
 #' @return a ggplot2 expression
 #' @export
-plot.missing <- function(vars, grouping, grid=FALSE) {
-	#TODO: rework to use the align.plots method
+plot.missing <- function(x, grouping, grid=FALSE, ...) {
+	vars = x
+	
 	empty <- plyr::empty
 	
 # 	Layout <- grid.layout(nrow = 1, ncol = 2)

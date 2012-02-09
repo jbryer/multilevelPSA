@@ -12,7 +12,7 @@
 #' @seealso \link{pisa}
 #' @export
 pisaschool <- function() {
-	dataurl = 'http://multilevelpsa.r-forge.r-project.org/pisa/pisa.school.Rdata'
+	dataurl = 'http://multilevelpsa.r-forge.r-project.org/pisa/pisa.school.rda'
 	pkgdir = system.file(package='multilevelPSA')
 	pisafile = paste(pkgdir, '/data/pisa.school.rda', sep='')
 	if(!file.exists(pisafile)) {

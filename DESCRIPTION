@@ -13,7 +13,8 @@ Depends:
     plyr,
     psych,
     reshape,
-    proto
+    proto,
+    R (>= 2.14)
 Suggests:
     testthat,
     party,

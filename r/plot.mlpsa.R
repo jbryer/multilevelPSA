@@ -4,7 +4,7 @@
 #' can be made. This plot is an extension of the \code{circ.psa} function in the
 #' \code{PSAgraphics} package for multilevel models.
 #'
-#' @param mlpsa the results of \code{\link{mlpsa}}.
+#' @param x the results of \code{\link{mlpsa}}.
 #' @param ratio the ratio of the size of the distribution plots (left and bottom)
 #'        to the circular plot.
 #' @param plotExtra a plot to place in the lower left corner.
@@ -12,7 +12,10 @@
 #' @S3method plot mlpsa
 #' @method plot mlpsa
 #' @export
-plot.mlpsa <- function(mlpsa, ratio=c(1,2), plotExtra=NULL, ...) {
+plot.mlpsa <- function(x, ratio=c(1,2), plotExtra=NULL, ...) {
+	stopifnot(is.mlpsa(x))
+	mlpsa = x
+	
 	pcirc = plot.mlpsa.circ(mlpsa, legendlab=FALSE, ...) + 
 				opts(legend.position='none') +
 				xlab(NULL) + ylab(NULL)

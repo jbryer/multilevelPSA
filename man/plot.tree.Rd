@@ -2,11 +2,10 @@
 \alias{plot.tree}
 \title{Heat map representing variables used in a conditional inference tree across level 2 variables.}
 \usage{
-  plot.tree(trees, colNames, level2Col, colLabels = NULL,
-    ...)
+  plot.tree(x, colNames, level2Col, colLabels = NULL, ...)
 }
 \arguments{
-  \item{trees}{the results of \code{\link{mlpsa.ctree}}}
+  \item{x}{the results of \code{\link{mlpsa.ctree}}}
 
   \item{colNames}{the columns to include in the graphic}
 

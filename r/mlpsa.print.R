@@ -1,3 +1,11 @@
+#' Returns true if the object is of type \code{mlpsa}
+#'
+#' @param x the object to test
+#' @export
+is.mlpsa <- function(x) {
+	inherits(x, 'mlpsa')
+}
+
 #' Prints basic information about a \code{mlpsa} class.
 #'
 #' @param x the \code{mlpsa} class.

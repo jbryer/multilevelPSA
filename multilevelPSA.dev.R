@@ -21,7 +21,6 @@ check("multilevelPSA")
 library(multilevelPSA)
 ls('package:multilevelPSA')
 
-
 tools::resaveRdaFiles(paste(getwd(), '/multilevelPSA/data', sep=''))
 
 test('multilevelPSA')

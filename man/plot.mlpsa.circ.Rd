@@ -2,7 +2,7 @@
 \alias{plot.mlpsa.circ}
 \title{Plots the results of a multilevel propensity score model.}
 \usage{
-  plot.mlpsa.circ(multilevelPSA,
+  plot.mlpsa.circ(x,
     xlab = names(multilevelPSA$level2.summary)[4],
     ylab = names(multilevelPSA$level2.summary)[5],
     legendlab = "Level 2", title = NULL,
@@ -17,7 +17,7 @@
     fill.colours = NULL, ...)
 }
 \arguments{
-  \item{multilevelPSA}{the results of \code{\link{mlpsa}}.}
+  \item{x}{the results of \code{\link{mlpsa}}.}
 
   \item{xlab}{label for the x-axis.}
 

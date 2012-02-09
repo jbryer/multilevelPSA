@@ -2,11 +2,11 @@
 \alias{plot.mlpsa}
 \title{Plots the results of a multilevel propensity score model.}
 \usage{
-  \method{plot}{mlpsa} (mlpsa, ratio = c(1, 2),
+  \method{plot}{mlpsa} (x, ratio = c(1, 2),
     plotExtra = NULL, ...)
 }
 \arguments{
-  \item{mlpsa}{the results of \code{\link{mlpsa}}.}
+  \item{x}{the results of \code{\link{mlpsa}}.}
 
   \item{ratio}{the ratio of the size of the distribution
   plots (left and bottom) to the circular plot.}

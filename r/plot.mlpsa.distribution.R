@@ -1,6 +1,6 @@
 #' Plots distribution for either the treatment or comparison group.
 #' 
-#' @param multilevelPSA the results of \code{\link{mlpsa}}.
+#' @param x the results of \code{\link{mlpsa}}.
 #' @param treat the group to plot. This must be one of the two levels of the treatment variable.
 #' @param fill.colours if specified, the colors to use for level 2 points.
 #' @param flip if TRUE, the level 2 clusters will be on the y-axis and the outcome
@@ -10,7 +10,7 @@
 #' @param legendlab the label for the legend, or NULL to exclude a legend.
 #' @param ... currently unused.
 #' @export 
-plot.mlpsa.distribution <- function(multilevelPSA, 
+plot.mlpsa.distribution <- function(x, 
 									treat, 
 									fill.colours=NULL, 
 									flip=TRUE, 
@@ -18,6 +18,9 @@ plot.mlpsa.distribution <- function(multilevelPSA,
 									level2.label=NULL, 
 									legendlab=NULL, 
 									...) {
+	stopifnot(is.mlpsa(x))
+	multilevelPSA = x
+	
 	if(is.na(treat) | !treat %in% names(multilevelPSA$level2.summary)[4:5]) {
 		stop(paste('treat parameter must be specified. Possible values are ', 
 				   names(multilevelPSA$level2.summary)[4], ' or ',

@@ -2,12 +2,12 @@
 \alias{plot.mlpsa.distribution}
 \title{Plots distribution for either the treatment or comparison group.}
 \usage{
-  plot.mlpsa.distribution(multilevelPSA, treat,
-    fill.colours = NULL, flip = TRUE, label = treat,
-    level2.label = NULL, legendlab = NULL, ...)
+  plot.mlpsa.distribution(x, treat, fill.colours = NULL,
+    flip = TRUE, label = treat, level2.label = NULL,
+    legendlab = NULL, ...)
 }
 \arguments{
-  \item{multilevelPSA}{the results of \code{\link{mlpsa}}.}
+  \item{x}{the results of \code{\link{mlpsa}}.}
 
   \item{treat}{the group to plot. This must be one of the
   two levels of the treatment variable.}

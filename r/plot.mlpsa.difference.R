@@ -1,7 +1,7 @@
 #' Creates a graphic summarizing the differences between treatment and comparison
 #' groups within and across level two clusters.
 #'
-#' @param multilevelPSA the results of \code{\link{mlpsa}}.
+#' @param x the results of \code{\link{mlpsa}}.
 #' @param xlab label for the x-axis, or NULL to exclude.
 #' @param ylab label for the y-aixs, or NULL to exclude.
 #' @param title title of the figure, or NULL to exclude.
@@ -22,7 +22,7 @@
 #'        native unit.
 #' @param ... currently unused.
 #' @export
-plot.mlpsa.difference <- function(multilevelPSA,
+plot.mlpsa.difference <- function(x,
 		xlab='Difference Score', 
 		ylab=NULL,
 		title=NULL,
@@ -38,6 +38,8 @@ plot.mlpsa.difference <- function(multilevelPSA,
 		sd=NULL,
 		...
 ) {
+	stopifnot(is.mlpsa(x))
+	multilevelPSA = x
 	ggplot.alpha <- function(...) get("alpha", grep("package:ggplot2$", search()))(...)
 
 	if(missing(multilevelPSA)) {

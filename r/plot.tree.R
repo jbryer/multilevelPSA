@@ -1,6 +1,6 @@
 #' Heat map representing variables used in a conditional inference tree across level 2 variables.
 #' 
-#' @param trees the results of \code{\link{mlpsa.ctree}}
+#' @param x the results of \code{\link{mlpsa.ctree}}
 #' @param colNames the columns to include in the graphic
 #' @param level2Col the name of the level 2 column.
 #' @param colLabels column labels to use. This is a data frame with two columns, the
@@ -9,7 +9,9 @@
 #' @param ... currently unused.
 #' @return a ggplot2 expression
 #' @export
-plot.tree <- function(trees, colNames, level2Col, colLabels=NULL, ...) {
+plot.tree <- function(x, colNames, level2Col, colLabels=NULL, ...) {
+	trees = x
+	
 	ncol = length(colNames) + 1
 	tree.df <- as.data.frame(matrix(nrow=length(unique(level2Col)), ncol=ncol))
 	names(tree.df) = c('level2', colNames)
