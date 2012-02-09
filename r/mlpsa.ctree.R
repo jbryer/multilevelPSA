@@ -18,6 +18,7 @@
 #' @seealso \code{\link{getStrata}}
 #' @export
 mlpsa.ctree <- function(vars, formula, level2, ...) {
+	require(party)
 	partyPlyr <- function(x) {
 		excludeVars = names(x) %in% c(level2)
 		x = x[,!excludeVars]
