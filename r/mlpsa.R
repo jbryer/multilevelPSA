@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' \dontrun{party.results = multilevelCtree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')}
-mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL, minN=1) {
+mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL, minN=5) {
 	stopifnot(length(response) == length(treatment)  & 
 		length(treatment) == length(strata) & length(strata) == length(level2))
 
