@@ -31,3 +31,6 @@ Collate:
     'plot.mlpsa.difference.R'
     'plot.mlpsa.distribution.R'
     'plot.tree.R'
+    'lsos.R'
+    'plot.difftable.R'
+    'plot.mlpsa.circ.R'

@@ -1,7 +1,12 @@
 #'
 #' @export 
-plot.mlpsa.distribution <- function(multilevelPSA, treat='Public', 
-			colour.values=NULL, flip=TRUE, label=treat, level2.label=NULL) {
+plot.mlpsa.distribution <- function(multilevelPSA, treat, 
+			fill.colours=NULL, flip=TRUE, label=treat, level2.label=NULL, legendlab=NULL) {
+	if(is.na(treat) | !treat %in% names(multilevelPSA$level2.summary)[4:5]) {
+		stop(paste('treat parameter must be specified. Possible values are ', 
+				   names(multilevelPSA$level2.summary)[4], ' or ',
+				   names(multilevelPSA$level2.summary)[4], sep=''))
+	}
 	xname = 'level2'
 	yname = treat
 	fillname = 'level2'
@@ -9,12 +14,12 @@ plot.mlpsa.distribution <- function(multilevelPSA, treat='Public',
 	level2.summary = multilevelPSA$level2.summary
 	unweighted.summary = multilevelPSA$unweighted.summary
 	plot.range = multilevelPSA$plot.range
-	overall.ci = multilevelPSA$overall.ci
-	overall.wtd = multilevelPSA$overall.wtd
-	overall.mnx = multilevelPSA$overall.mnx
-	overall.mny = multilevelPSA$overall.mny
-	projection.intercept = multilevelPSA$projection.intercept
-	level1.summary$panel = treat
+	overall = NA
+	if(treat == multilevelPSA$x.label) {
+		overall = multilevelPSA$overall.mnx
+	}  else {
+		overall = multilevelPSA$overall.mny
+	}
 	
 	if(flip) {
 		xname = treat
@@ -30,6 +35,7 @@ plot.mlpsa.distribution <- function(multilevelPSA, treat='Public',
 		p = p + ylab(level2.label)+ xlab(label)
 		p = p + geom_rug(data=level1.summary, aes_string(x=treat, y=NULL, colour=fillname), 
 						 alpha=.6, size=.5)
+		p = p + geom_vline(xintercept=overall, colour='blue', size=.6)
 	} else {
 		p = ggplot(level1.summary, aes_string(x=xname, y=yname))
 		level2.summary$mnx = multilevelPSA$level2.summary[,4]
@@ -40,11 +46,21 @@ plot.mlpsa.distribution <- function(multilevelPSA, treat='Public',
 		p = p + ylab(label) + xlab(level2.label)
 		p = p + geom_rug(data=level1.summary, aes_string(x=NULL, y=treat, colour=fillname), 
 						 alpha=.6, size=.5)
+		p = p + geom_hline(yintercept=overall, colour='blue', size=.6)
 	}
 	
-	p = p + geom_point(stat='identity', alpha=.3, size=.8)
-	#p = p + geom_hline(yintercept=overall.mnx, colour='blue', size=.6)
-	if(!is.null(colour.values)) p = p + scale_fill_manual(values=colour.values)
+	p = p + geom_point(stat='identity', alpha=.3, size=1.5)
+	if(!is.null(fill.colours)) {
+		p = p + scale_colour_manual(legend=FALSE, values=fill.colours) + 
+			scale_fill_manual(legend=FALSE, values=fill.colours)
+	} else if(length(unique(level2.summary$level2)) > 20) {
+		#No legend since the legend would be bigger than the plot
+		p = p + scale_colour_hue(legend=FALSE) + scale_fill_hue(legend=FALSE)
+	} else if(length(unique(level1.summary$level2)) > 8) {
+		p = p + scale_colour_hue(legendlab) + scale_fill_hue(legendlab)
+	} else {
+		p = p + scale_colour_brewer(legendlab) + scale_fill_brewer(legendlab)
+	}
 	p = p + geom_point(data=level2.summary, aes_string(x=xname, y=yname, size='n', fill=fillname), 
 					   stat='identity', shape=21, colour='black')
 	if(flip) {
