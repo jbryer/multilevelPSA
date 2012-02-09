@@ -35,6 +35,4 @@ Collate:
     'lsos.R'
     'plot.difftable.R'
     'plot.mlpsa.circ.R'
-    'pisa.r'
-    'pisaschool.r'
     'mlpsa.logistic.R'
