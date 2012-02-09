@@ -9,8 +9,6 @@ imputePISA <- function(student, school) {
 	amelia.results <<- list()
 	mice.results <<- list()
 	imputePlyr <- function(x) {
-		#x2 = merge(x, school[which(school$CNT == x[1,'CNT']),], by=c('CNT', 'SCHOOLID'), all.x=TRUE)
-		#x2 = x2[!is.na(x2$PUBPRIV),] #Remove rows with missing PUBPRRIV
 		tmp = x[,c(5:48)]
 		v1 = x[1,'CNT']
 		print(paste('Imputing for ', v1, '...', sep=''))
