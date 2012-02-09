@@ -27,6 +27,7 @@
 #' \url{# http://stackoverflow.com/questions/1358003/tricks-to-manage-the-available-memory-in-an-r-session}
 #'
 #' @param n the number of objects to return.
+#' @param ... not used.
 #' @return a list of objects loaded sorted by size.
 #' @export
 lsos <- function(..., n=10) {

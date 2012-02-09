@@ -1,0 +1,10 @@
+citHeader("To cite multilevelPSA in publications, please use:")
+
+citEntry(entry = "article",
+	author = "Jason M. Bryer and Robert M. Pruzek",
+	title = "An international comparison of private and public schools using multilevel propensity score methods and graphics (Abstract)",
+	year = "2011",
+	number = "46",
+	pages = "1010--1011",
+	journal = "Multivariate Behavior Research"
+)

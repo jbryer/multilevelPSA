@@ -6,7 +6,12 @@ and the leaves from the conditional inference trees.}
   getStrata(party.results, data, level2)
 }
 \arguments{
-  \item{data}{data frame to merge results to}
+  \item{party.results}{the results of
+  \code{\link{mlpsa.ctree}}}
+
+  \item{data}{the data frame to merge results to}
+
+  \item{level2}{the name of the level 2 variable.}
 }
 \value{
   a data frame
@@ -15,5 +20,8 @@ and the leaves from the conditional inference trees.}
   Returns a data frame with two columns corresponding to
   the level 2 variable and the leaves from the conditional
   inference trees.
+}
+\seealso{
+  mlpsa.ctree
 }
 

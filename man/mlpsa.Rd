@@ -1,6 +1,6 @@
 \name{mlpsa}
 \alias{mlpsa}
-\title{This function will perform the multilevel propensity score analysis.}
+\title{This function will perform phase II of the multilevel propensity score analysis.}
 \usage{
   mlpsa(response, treatment = NULL, strata = NULL,
     level2 = NULL, minN = 1)
@@ -28,5 +28,8 @@
 }
 \examples{
 \dontrun{party.results = multilevelCtree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')}
+}
+\seealso{
+  \code{\link{mlpsa.ctree}} \code{\link{mlpsa.logistic}}
 }
 

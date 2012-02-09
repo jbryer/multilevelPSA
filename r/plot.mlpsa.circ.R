@@ -4,7 +4,35 @@
 #' can be made. This plot is an extension of the \code{circ.psa} function in the
 #' \code{PSAgraphics} package for multilevel models.
 #'
-#' @param multilevelPSA 
+#' @param multilevelPSA the results of \code{\link{mlpsa}}.
+#' @param xlab label for the x-axis.
+#' @param ylab label for the y-axis.
+#' @param legendlab the label for the legend, or NULL to exclude.
+#' @param title title for the figure.
+#' @param overall.col the color used for the overall results.
+#' @param overall.ci.col the color used for the confidence intervals.
+#' @param level1.plot logical value indicating whether level 1 points should be plotted.
+#' @param level1.point.size the size of level 1 points
+#' @param level1.rug.plot the geom to use for plotting a level 1 rug. Possible values
+#'        are geom_rug (for left and bottom), geom_rug_alt (for top and right), or
+#'        NULL (to exclude).
+#' @param level1.projection.lines logical value indicating whether level 1 project lines
+#'        (parallel to the unit line) are drawn.
+#' @param level2.plot logical value indicating whether level 2 points should be plotted.
+#' @param level2.point.size the size of level 2 points
+#' @param level2.rug.plot the geom to use for plotting a level 2 rug. Possible values
+#'        are geom_rug (for left and bottom), geom_rug_alt (for top and right), or
+#'        NULL (to exclude).
+#' @param level2.projection.lines logical value indicating whether level 2 project lines
+#'        (parallel to the unit line) are drawn.
+#' @param level2.label logical value indicating whether level 2 points should be labeled.
+#' @param unweighted.means logical value indicating whether horizontal and vertical
+#'        lines are drawn representing the unweighted (i.e. unadjusted from phase I
+#'        of PSA) means for each level 2, or cluster.
+#' @param weighted.means logical value indicating whether horizontal and vertical
+#'        lines are drawn representing the weighted means for each level 2, or cluster.
+#' @param fill.colours if specified, the colors to use for level 2 points.
+#' @param ... currently unused.
 #' @export
 plot.mlpsa.circ <- function(multilevelPSA,
 		xlab=names(multilevelPSA$level2.summary)[4], 

@@ -1,7 +1,23 @@
-#'
+#' Plots distribution for either the treatment or comparison group.
+#' 
+#' @param multilevelPSA the results of \code{\link{mlpsa}}.
+#' @param treat the group to plot. This must be one of the two levels of the treatment variable.
+#' @param fill.colours if specified, the colors to use for level 2 points.
+#' @param flip if TRUE, the level 2 clusters will be on the y-axis and the outcome
+#'        variable on the x-axis. Otherwise reversed.
+#' @param label the label to use for the axis.
+#' @param level2.label the axis label for the level 2 indicators.
+#' @param legendlab the label for the legend, or NULL to exclude a legend.
+#' @param ... currently unused.
 #' @export 
-plot.mlpsa.distribution <- function(multilevelPSA, treat, 
-			fill.colours=NULL, flip=TRUE, label=treat, level2.label=NULL, legendlab=NULL) {
+plot.mlpsa.distribution <- function(multilevelPSA, 
+									treat, 
+									fill.colours=NULL, 
+									flip=TRUE, 
+									label=treat, 
+									level2.label=NULL, 
+									legendlab=NULL, 
+									...) {
 	if(is.na(treat) | !treat %in% names(multilevelPSA$level2.summary)[4:5]) {
 		stop(paste('treat parameter must be specified. Possible values are ', 
 				   names(multilevelPSA$level2.summary)[4], ' or ',
@@ -31,7 +47,7 @@ plot.mlpsa.distribution <- function(multilevelPSA, treat,
 		level2.summary$mny = multilevelPSA$level2.summary[,4]
 		p = p + scale_x_continuous(limits=plot.range)
 		p = p + opts(legend.position='none', 
-					 axis.text.y=theme_text(size=10, angle=0, hjust=.5, vjust=1))
+					 axis.text.y=theme_text(size=8, angle=0, hjust=.5))
 		p = p + ylab(level2.label)+ xlab(label)
 		p = p + geom_rug(data=level1.summary, aes_string(x=treat, y=NULL, colour=fillname), 
 						 alpha=.6, size=.5)
@@ -42,14 +58,14 @@ plot.mlpsa.distribution <- function(multilevelPSA, treat,
 		level2.summary$mny = multilevelPSA$level2.summary[,5]
 		p = p + scale_y_continuous(limits=plot.range)
 		p = p + opts(legend.position=c(-1,-1), 
-					 axis.text.x=theme_text(size=10, angle=-90, hjust=0, vjust=.5))
+					 axis.text.x=theme_text(size=8, angle=-90, hjust=0, vjust=.5))
 		p = p + ylab(label) + xlab(level2.label)
 		p = p + geom_rug(data=level1.summary, aes_string(x=NULL, y=treat, colour=fillname), 
 						 alpha=.6, size=.5)
 		p = p + geom_hline(yintercept=overall, colour='blue', size=.6)
 	}
 	
-	p = p + geom_point(stat='identity', alpha=.3, size=1.5)
+	p = p + geom_point(stat='identity', alpha=.3, size=1.3)
 	if(!is.null(fill.colours)) {
 		p = p + scale_colour_manual(legend=FALSE, values=fill.colours) + 
 			scale_fill_manual(legend=FALSE, values=fill.colours)

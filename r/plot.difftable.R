@@ -1,6 +1,14 @@
+#' This function produces a ggplot2 figure contianing the mean differences for
+#' each level two, or cluster.
 #'
-#'
-plot.difftable <- function(multilevelPSA, fill.colours=NULL, legendlab=NULL) {
+#' @param multilevelPSA the results of \code{\link{mlpsa}}.
+#' @param fill.colours the colours to use for each level two.
+#' @param legendlab the label to use for the legend, or NULL to exclude.
+#' @param ... currently unused.
+#' @export
+plot.difftable <- function(multilevelPSA, 
+						   fill.colours=NULL, 
+						   legendlab=NULL, ...) {
 	level1.summary <- multilevelPSA$level1.summary
 	level2.summary <- multilevelPSA$level2.summary
 	p = ggplot(level2.summary, aes(x=level2, y=level2, 

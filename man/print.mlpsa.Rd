@@ -6,6 +6,8 @@
 }
 \arguments{
   \item{x}{the \code{mlpsa} class.}
+
+  \item{...}{unused.}
 }
 \description{
   Prints basic information about a \code{mlpsa} class.

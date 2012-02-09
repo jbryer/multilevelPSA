@@ -7,6 +7,8 @@
 }
 \arguments{
   \item{n}{the number of objects to return.}
+
+  \item{...}{not used.}
 }
 \value{
   a list of objects loaded sorted by size.

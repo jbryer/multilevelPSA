@@ -1,15 +1,7 @@
-#' Returns whether the given object is of type multilevelPSA.
-#' @param x Object to test.
-#'
-#' @S3method is mlpsa
-#' @export
-is.mlpsa <- function(x) {
-	inherits(x, "mlpsa")
-}
-
 #' Prints basic information about a \code{mlpsa} class.
 #'
 #' @param x the \code{mlpsa} class.
+#' @param ... unused.
 #' @method print mlpsa
 #' @S3method print mlpsa
 #' @export
@@ -22,6 +14,7 @@ print.mlpsa <- function(x, ...) {
 #' Provides a summary of a \code{mlpsa} class.
 #'
 #' @param object the mlpsa object.
+#' @param ... unused.
 #' @method summary mlpsa
 #' @S3method summary mlpsa
 #' @export

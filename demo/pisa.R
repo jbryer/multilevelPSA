@@ -4,7 +4,7 @@ data(pisana)
 data(pisanaschool)
 
 pkgdir = system.file(package='multilevelPSA')
-source(paste(pkgdir, '/demo/pisa.setup.R', sep=''))
+source(paste(pkgdir, '/pisa/pisa.setup.R', sep=''))
 
 school = pisanaschool[,c('COUNTRY', "CNT", "SCHOOLID",
 						"SC02Q01", #Public (1) or private (2)

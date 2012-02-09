@@ -1,6 +1,9 @@
 #' Adapted from ggExtra package which is no longer available. This is related to
 #' an experimental mlpsa plot that will combine the circular plot along with
 #' the two individual distributions.
+#' 
+#' @param gl grid.layout
+#' @param ... graphic elements to combine.
 align.plots <- function(gl, ...) {
 	# Obtained from http://groups.google.com/group/ggplot2/browse_thread/thread/1b859d6b4b441c90
 	# Adopted from http://ggextra.googlecode.com/svn/trunk/R/align.r
@@ -15,10 +18,6 @@ align.plots <- function(gl, ...) {
 	lstAll <- list(...)
 	
 	dots <- lapply(lstAll, function(.g) ggplotGrob(.g[[1]]))
-	#ytitles <- lapply(dots, function(.g) editGrob(getGrob(.g,"axis.title.y.text",grep=TRUE), vp=NULL))
-	#ylabels <- lapply(dots, function(.g) editGrob(getGrob(.g,"axis.text.y.text",grep=TRUE), vp=NULL))
-	#xtitles <- lapply(dots, function(.g) editGrob(getGrob(.g,"axis.title.x.text",grep=TRUE), vp=NULL))
-	#xlabels <- lapply(dots, function(.g) editGrob(getGrob(.g,"axis.text.x.text",grep=TRUE), vp=NULL))
 	plottitles <- lapply(dots, function(.g) editGrob(getGrob(.g,"plot.title.text",grep=TRUE), vp=NULL))
 	
 	xtitles <- lapply(dots, function(.g) if(!is.null(getGrob(.g,"axis.title.x.text",grep=TRUE)))

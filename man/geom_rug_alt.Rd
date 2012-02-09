@@ -5,6 +5,17 @@
   geom_rug_alt(mapping = NULL, data = NULL,
     stat = "identity", position = "identity", ...)
 }
+\arguments{
+  \item{mapping}{see ggplot2}
+
+  \item{data}{see ggplot2}
+
+  \item{stat}{see ggplot2}
+
+  \item{position}{see ggplot2}
+
+  \item{...}{other parameters passed to ggplot2}
+}
 \description{
   This creates an additional ggplot2 geometry
   \code{geom_rug_alt} which allows for rug plots to be

@@ -18,6 +18,7 @@ the given grouping vector.}
   a ggplot2 expression
 }
 \description{
-  TODO: Need more details
+  Returns a heat map graphic representing missinging of
+  variables grouped by the given grouping vector.
 }
 

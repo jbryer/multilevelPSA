@@ -1,4 +1,4 @@
-#' This function will perform the multilevel propensity score analysis.
+#' This function will perform phase II of the multilevel propensity score analysis.
 #' 
 #' TODO: Need more details
 #' 
@@ -8,6 +8,7 @@
 #' @param level2 vector containing the level 2 specifications
 #' @param minN the minimum number of subjects per strata for that strata to be included in the analysis.
 #' @return a mlpsa class
+#' @seealso \code{\link{mlpsa.ctree}} \code{\link{mlpsa.logistic}}
 #' @export
 #' @examples
 #' \dontrun{party.results = multilevelCtree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')}

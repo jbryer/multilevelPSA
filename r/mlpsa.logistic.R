@@ -1,12 +1,16 @@
-#' Performs a logistic regression analysis for each level 2.
+#' Estimates propensity scores using logistic regression.
 #' 
-#' TODO: Need more details
+#' This method will estimate a separate logistic regression model for each level 2
+#' (or cluster).
 #' 
 #' @param vars data frame containing the variables to estimate the logistic regression
 #' @param formula the logistic regression formula to use
 #' @param level2 the name of the column containing the level 2 specification
-#' @param stepAIC if true, stepAIC will be called for each level.
+#' @param stepAIC if true, the \code{\link{stepAIC}} from the \code{MASS} package
+#'        will be used within each level.
+#' @param ... currently unused.
 #' @return a list of glm classes for each level 2 or stepwise-selected model if stepAIC is true.
+#' @seealso getPropensityScores
 #' @export
 mlpsa.logistic <- function(vars, formula, level2, stepAIC=FALSE, ...) {
 	lrPlyr <- function(x) {
@@ -27,6 +31,8 @@ mlpsa.logistic <- function(vars, formula, level2, stepAIC=FALSE, ...) {
 #' Returns a data frame with two columns corresponding to the level 2 variable
 #' and the fitted value from the logistic regression.
 #' 
+#' @seealso mlpsa.logistic
+#' @param lr.results the results of \code{\link{mlpsa.logistic}}
 #' @return a data frame
 #' @export getPropensityScores
 getPropensityScores <- function(lr.results) {

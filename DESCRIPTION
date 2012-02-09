@@ -7,7 +7,7 @@ Maintainer: Jason Bryer <jason@bryer.org>
 Description: Functions to estimate and visualize propensity
     score analysis for multilevel, or clustered, data.
 Version: 1.0
-URL: http://github.com/jbryer/multilevelPSA
+URL: http://jbryer.github.com/multilevelPSA
 Depends:
     ggplot2,
     plyr,
@@ -16,7 +16,8 @@ Depends:
     proto
 Suggests:
     testthat,
-    party
+    party,
+    MASS
 Date: 2011-03-18
 Collate:
     'geom_rug_alt.R'
@@ -24,7 +25,6 @@ Collate:
     'align.R'
     'mlpsa.R'
     'mlpsa.ctree.R'
-    'mlpsa.logestic.R'
     'mlpsa.print.R'
     'plot.missing.R'
     'plot.mlpsa.R'
@@ -34,3 +34,6 @@ Collate:
     'lsos.R'
     'plot.difftable.R'
     'plot.mlpsa.circ.R'
+    'pisa.r'
+    'pisaschool.r'
+    'mlpsa.logistic.R'

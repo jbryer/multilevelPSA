@@ -7,7 +7,6 @@ require(proto)
 #' for rug plots to be placed on the top and right of the graph. 
 #' 
 #' @seealso geom_rug_alt
-#' @export GeomRugAlt
 GeomRugAlt <- proto(Geom, {
 	draw <- function(., data, scales, coordinates, ...) {
 		rugs <- list()
@@ -53,6 +52,11 @@ GeomRugAlt <- proto(Geom, {
 #' This creates an additional ggplot2 geometry \code{geom_rug_alt} which allows
 #' for rug plots to be placed on the top and right of the graph. 
 #' 
+#' @param mapping see ggplot2
+#' @param data see ggplot2
+#' @param stat see ggplot2
+#' @param position see ggplot2
+#' @param ... other parameters passed to ggplot2
 #' @references \url{http://stackoverflow.com/questions/4867597/can-you-easily-plot-rugs-axes-on-the-top-right-in-ggplot2}
 #' @author Jason Bryer \email{jason@@bryer.org}
 #' @author William Doane
