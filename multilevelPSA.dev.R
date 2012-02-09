@@ -4,9 +4,9 @@ install.packages(c('devtools', 'roxygen2', 'RSQLite', 'ipeds'),
 require(devtools)
 require(roxygen2)
 require(ggplot2)
+require(PSAgraphics)
 
 setwd("~/Dropbox/Projects") #Mac
-setwd("C:/Dropbox/My Dropbox/Projects") #Windows
 getwd()
 
 #Package building
@@ -22,6 +22,7 @@ library(multilevelPSA)
 ls('package:multilevelPSA')
 
 
+tools::resaveRdaFiles(paste(getwd(), '/multilevelPSA/data', sep=''))
 
 test('multilevelPSA')
 test_package('multilevelPSA')
