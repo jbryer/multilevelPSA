@@ -1,5 +1,8 @@
 #' Returns a heat map graphic representing missinging of variables grouped by
 #' the given grouping vector.
+#'
+#' NOTE: This is an experimental function and the results may vary depending on the
+#'       nature of the dataset.
 #' 
 #' @param x a data frame containing the variables to visualize missingness
 #' @param grouping a vector of length nrow(vars) corresponding to how missing will be grouped by
@@ -9,22 +12,21 @@
 #' @export
 plot.missing <- function(x, grouping, grid=FALSE, ...) {
 	vars = x
-	
 	empty <- plyr::empty
 	
-# 	Layout <- grid.layout(nrow = 1, ncol = 2)
-# 	vplayout <- function(...) {
-# 		grid.newpage()
-# 		pushViewport(viewport(layout = Layout))
-# 	}
-# 	subplot <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y) }
-# 	mplot <- function(p1, p2, p3, p4) {
-# 		vplayout()
-# 		print(p2, vp = subplot(1, 2))
-# 		print(p1, vp = subplot(1, 1))
-# 		#print(p3, vp = subplot(3, 1))
-# 		#print(p4, vp = subplot(4, 1))
-# 	}
+	Layout <- grid.layout(nrow = 1, ncol = 2)
+	vplayout <- function(...) {
+		grid.newpage()
+		pushViewport(viewport(layout = Layout))
+	}
+	subplot <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y) }
+	mplot <- function(p1, p2, p3, p4) {
+		vplayout()
+		print(p2, vp = subplot(1, 2))
+		print(p1, vp = subplot(1, 1))
+		#print(p3, vp = subplot(3, 1))
+		#print(p4, vp = subplot(4, 1))
+	}
 	
 	colMissing = apply(vars, 2, function(x) sum(is.na(x))) / nrow(vars)
 	colMissing = 100 * colMissing
@@ -62,11 +64,16 @@ plot.missing <- function(x, grouping, grid=FALSE, ...) {
 				 breaks=seq(0, 100, 10), labels=paste(seq(0,100,10), '%', sep=''))
 	p = p + geom_text(aes(label=round(value, digits=0)), size=2, colour='black')
 	p = p + scale_x_discrete(expand=c(0,0)) + scale_y_discrete(expand=c(0,0))
+	p = p + opts(legend.position='none')
 	p = p + opts(plot.margin=unit(c(0, -13, 0, 0), "lines"))
 	phist = phist + geom_hline(yintercept=0) + opts(plot.margin=unit(c(0.05,0,2.6,12), "lines"))
 	
-	grid_layout = grid.layout(nrow=1, ncol=2, widths=c(4,1), heights=c(1), respect=TRUE)
-	grid.newpage()
-	pushViewport( viewport( layout=grid_layout ) )
-	multilevelPSA:::align.plots(grid_layout, list(p, 1, 1), list(phist, 1, 2))
+	#TODO: use align.plots instead. Using the above configuration doesn't seem to work though
+# 	phist = phist + opts(legend.position='none')
+# 	grid_layout = grid.layout(nrow=1, ncol=2, widths=c(1,1), heights=c(2))
+# 	grid.newpage()
+# 	pushViewport( viewport( layout=grid_layout ) )
+# 	multilevelPSA:::align.plots(grid_layout, list(p, 1, 1), list(phist, 1, 2))
+
+	mplot(p, phist)
 }
