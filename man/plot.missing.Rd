@@ -20,7 +20,7 @@ the given grouping vector.}
   a ggplot2 expression
 }
 \description{
-  Returns a heat map graphic representing missinging of
-  variables grouped by the given grouping vector.
+  NOTE: This is an experimental function and the results
+  may vary depending on the nature of the dataset.
 }
 

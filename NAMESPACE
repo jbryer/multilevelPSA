@@ -1,6 +1,7 @@
 S3method(plot,mlpsa)
 S3method(print,mlpsa)
 S3method(summary,mlpsa)
+export(GeomRugAlt)
 export(geom_rug_alt)
 export(getPropensityScores)
 export(getStrata)

@@ -15,7 +15,8 @@
   corner.}
 
   \item{...}{parameters passed to
-  \code{\link{plot.mlpsa.circ}}.}
+  \code{\link{plot.mlpsa.circ}} and
+  \code{\link{plot.mlpsa.distribution}}}
 }
 \description{
   The plot created uses the \code{ggplot2} framework. As

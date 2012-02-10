@@ -4,7 +4,7 @@
 \usage{
   plot.mlpsa.distribution(x, treat, fill.colours = NULL,
     flip = TRUE, label = treat, level2.label = NULL,
-    legendlab = NULL, ...)
+    legendlab = NULL, axis.text.size = 8, ...)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa}}.}
@@ -26,6 +26,8 @@
 
   \item{legendlab}{the label for the legend, or NULL to
   exclude a legend.}
+
+  \item{axis.text.size}{the size of the axis text}
 
   \item{...}{currently unused.}
 }

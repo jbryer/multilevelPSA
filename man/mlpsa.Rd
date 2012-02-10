@@ -3,7 +3,7 @@
 \title{This function will perform phase II of the multilevel propensity score analysis.}
 \usage{
   mlpsa(response, treatment = NULL, strata = NULL,
-    level2 = NULL, minN = 1)
+    level2 = NULL, minN = 5)
 }
 \arguments{
   \item{response}{vector containing the response values}

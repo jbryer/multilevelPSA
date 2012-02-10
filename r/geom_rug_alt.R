@@ -6,6 +6,7 @@ require(proto)
 #' This creates an additional ggplot2 geometry \code{geom_rug_alt} which allows
 #' for rug plots to be placed on the top and right of the graph. 
 #' 
+#' @export
 #' @seealso geom_rug_alt
 GeomRugAlt <- proto(Geom, {
 	draw <- function(., data, scales, coordinates, ...) {
