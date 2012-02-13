@@ -17,6 +17,13 @@ mlpsa.logistic <- function(vars, formula, level2, stepAIC=FALSE, ...) {
 	lrPlyr <- function(x) {
 		excludeVars = names(x) %in% c(level2)
 		x = x[,!excludeVars]
+		missing = apply(x, 2, function(c) sum(is.na(c))) / nrow(x)
+		haveMissing = names(missing)[which(missing > 0)]
+		x = x[,!names(x) %in% haveMissing]
+		if(length(haveMissing) > 0) {
+			warning(paste('The following variable(s) have been removed due to missingness: ',
+						  paste(haveMissing, sep=', '), sep=''))
+		}
 		lr = glm(formula, data=x, family=binomial)
 		if(stepAIC) {
 			step = stepAIC(lr, trace=FALSE)
