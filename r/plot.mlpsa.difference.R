@@ -97,8 +97,8 @@ plot.mlpsa.difference <- function(x,
 	
 	if(labelLevel2) {
 		p = p + geom_text(data=multilevelPSA$level2.summary, aes(x=level2, 
-						label=prettyNum(diffwtd, digits=3, drop0trailing=FALSE)), 
-						y=(min(multilevelPSA$level2.summary$ci.min)+1), size=3, hjust=1)
+						label=prettyNum(diffwtd, digits=2, drop0trailing=FALSE)), 
+						y=(min(multilevelPSA$level2.summary$ci.min)), size=3, hjust=1)
 	}
 			
 	return(p)
