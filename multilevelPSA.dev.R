@@ -1,4 +1,4 @@
-install.packages(c('devtools', 'roxygen2'), 
+install.packages(c('devtools', 'roxygen2', 'ggplot2', 'PSAgraphics'), 
 		repos=c('http://cran.r-project.org', 'http://r-forge.r-project.org'))
 
 require(devtools)
