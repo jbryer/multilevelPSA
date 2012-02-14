@@ -1,41 +1,25 @@
-imputePISA <- function(student, school) {
-	tmp = student[,5:48]
-	names(tmp) = psa.cols.names[5:48,3]
-	missingPlot(tmp, student$CNT, grid=FALSE)
-	
-	student$CNT = as.character(student$CNT)
-	school$CNT = as.character(school$CNT)
-	badCountries = c('JPN', 'KOR', 'POL') 
-	amelia.results <<- list()
-	mice.results <<- list()
+#' This function will use the \code{MICE} package to impute missing values separately
+#' for each group.
+#'
+#' @param toimpute the variables to impute.
+#' @param the grouping variable.
+#' @param maxToImpute the maximum percentage to attempt to impute. Must be a value
+#'        between 0 and 1.
+#' @param ... other parameters passed to \code{mice}
+impute.pisa <- function(toimpute, grouping, maxToImpute=.5, ...) {
+	cols = names(toimpute)	
 	imputePlyr <- function(x) {
-		tmp = x[,c(5:48)]
-		v1 = x[1,'CNT']
-		print(paste('Imputing for ', v1, '...', sep=''))
-		if(class(amelia.results[[v1]]) == "amelia") {
-			a.out = amelia.results[[v1]]
-			complete = a.out$imputations[[5]]
-		} else if(class(mice.results[[v1]]) == 'mids') {
-			m.out = mice.results[[v1]]
-			complete = complete(m.out, 5)
-		} else {
-			if(v1 %in% badCountries) {
-				#This is a bit of a hack, but we need to remove this column for these countries since there is 100% missingness
-				tmp$ST07Q01 = NULL
-				tmp$ST06Q01 = NULL
-			}
-			#a.out = amelia(x=tmp, m=5, noms=names(tmp))
-			#complete = a.out$imputations[[5]]
-			#amelia.results[[as.character(v1)]] <<- a.out
-			m.out = mice(tmp)
-			complete = complete(m.out, 5)
-			mice.results[[as.character(v1)]] <<- m.out
+		missing = apply(x, 2, function(c) sum(is.na(c))) / nrow(x)
+		noImpute = names(missing)[which(missing > maxToImpute)]
+		x = x[,!names(x) %in% noImpute]
+		m.out = mice(x, m=1, ...)
+		complete = complete(m.out, m.out$m)
+		if(length(noImpute) > 0) {
+			complete[,noImpute] = NA
 		}
-		if(v1 %in% badCountries) {
-			complete$ST07Q01 = NA
-			complete$ST06Q01 = NA
-		}
-		return(m.out)
+		return(list(m.out, complete[,cols]))
 	}
-	results = dlply(student, .(CNT), imputePlyr, .progress='text', .parallel=FALSE)	
+	
+	results = dlply(toimpute, .(grouping), imputePlyr, .progress='text', .parallel=FALSE)
+	return(results)
 }
