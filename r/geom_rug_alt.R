@@ -8,7 +8,7 @@ require(proto)
 #' 
 #' @export
 #' @seealso geom_rug_alt
-GeomRugAlt <- proto(Geom, {
+GeomRugAlt <- proto(ggplot2:::Geom, {
 	draw <- function(., data, scales, coordinates, ...) {
 		rugs <- list()
 		data <- coordinates$transform(data, scales)    
