@@ -28,13 +28,14 @@
 \begin{document}
 
 \title{An International Comparison of Private and Public Schools using Multilevel Propensity Score Methods and Graphics}
-\author{Jason M. Bryer}
-\affiliation{University at Albany}
+\twoauthors{Jason M. Bryer}{Robert M. Pruzek}
+\twoaffiliations{University at Albany}{University at Albany}
 \date{\today}
 \rightheader{Multilevel PSA}
 \shorttitle{Multilevel PSA}
 \leftheader{Multilevel PSA}
 \note{\today}
+\acknowledgements{Source code for the \texttt{multilevelPSA} R package can be obtained from \url{http://jbryer.github.com/multilevelPSA}.}
 
 
 
@@ -63,6 +64,13 @@ The focus is on use of graphics for interpreting results of propensity score ana
 \end{figure}
 
 
+Figure \ref{fig:math} represents a multilevel assessment plot for the math assessment given at the end of secondary school. Coordinates for each point, one for each country, are overall adjusted means for stratifications based upon conditional inference trees of public and private schools on x- and y-axes. The size of each point (bubble) corresponds to the number of students sampled or tested within each country. Each point is projected, parallel to the identity line, to a ‘cross’ on the line with slope -1 in the bottom left of the figure, to show the distribution of differences between public and private school scores across countries. The average difference and a confidence interval are also shown.
+
+Figure \ref{fig:mathDiff} provides a more detailed representation of the distribution of differences. The x-axis corresponds to the difference scores and the y-axis to each country, for which differences are used to order results for countries. Blue dots correspond to the overall adjusted mean difference for each country along with the confidence intervals in green. The light grey dots correspond to differences for strata within each country. Similar to Figure 1, the vertical blue and green lines correspond to the overall adjusted mean difference and confidence interval, respectively.
+
+\section{Results and Discussion}
+Particularly for analyses of large data sets, focusing on statistical significance is limiting. As can readily be seen, overall results favor “private” over “public” schools, at least for end of secondary school math achievement. But the graphics, especially Figure 2, provide a more nuanced understanding of the nature and magnitude of adjusted differences for countries. Furthermore, the graphics are readily interpreted by a non-??technical audience. Broadly speaking, it is seen that modern graphics can enhance and extend conventional numerical summaries by focusing on details of what data have to say for multilevel comparisons of many countries based on PS methods.
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6.5in]{figures/pisaMath.pdf}
@@ -71,13 +79,6 @@ The focus is on use of graphics for interpreting results of propensity score ana
 \end{center}
 \end{figure}
 
-Figure 1 represents a multilevel assessment plot for the math assessment given at the end of secondary school. Coordinates for each point, one for each country, are overall adjusted means for stratifications based upon conditional inference trees of public and private schools on x- and y-axes. The size of each point (bubble) corresponds to the number of students sampled or tested within each country. Each point is projected, parallel to the identity line, to a ‘cross’ on the line with slope -1 in the bottom left of the figure, to show the distribution of differences between public and private school scores across countries. The average difference and a confidence interval are also shown.
-
-Figure 2 provides a more detailed representation of the distribution of differences. The x-axis corresponds to the difference scores and the y-axis to each country, for which differences are used to order results for countries. Blue dots correspond to the overall adjusted mean difference for each country along with the confidence intervals in green. The light grey dots correspond to differences for strata within each country. Similar to Figure 1, the vertical blue and green lines correspond to the overall adjusted mean difference and confidence interval, respectively.
-
-\section{Results and Discussion}
-Particularly for analyses of large data sets, focusing on statistical significance is limiting. As can readily be seen, overall results favor “private” over “public” schools, at least for end of secondary school math achievement. But the graphics, especially Figure 2, provide a more nuanced understanding of the nature and magnitude of adjusted differences for countries. Furthermore, the graphics are readily interpreted by a non-??technical audience. Broadly speaking, it is seen that modern graphics can enhance and extend conventional numerical summaries by focusing on details of what data have to say for multilevel comparisons of many countries based on PS methods.
-
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=6.5in]{figures/pisaMathDiff.pdf}
@@ -85,6 +86,40 @@ Particularly for analyses of large data sets, focusing on statistical significan
 \label{fig:mathdiff}
 \end{center}
 \end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6.5in]{figures/pisaRead.pdf}
+\caption{Multilevel PSA Assessment Plot: Reading}
+\label{fig:read}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6.5in]{figures/pisaReadDiff.pdf}
+\caption{Multilevel PSA Difference Plot: Reading}
+\label{fig:readdiff}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6.5in]{figures/pisaScie.pdf}
+\caption{Multilevel PSA Assessment Plot: Science}
+\label{fig:scie}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=6.5in]{figures/pisaScieDiff.pdf}
+\caption{Multilevel PSA Difference Plot: Science}
+\label{fig:sciediff}
+\end{center}
+\end{figure}
+
+
 
 
 %\clearpage
@@ -95,8 +130,8 @@ Particularly for analyses of large data sets, focusing on statistical significan
 %\appendix
 %\section{Level 2 Results}
 \input{tables/level2math.tex}
-\input{tables/level2scie.tex}
 \input{tables/level2read.tex}
+\input{tables/level2scie.tex}
 
 
 
