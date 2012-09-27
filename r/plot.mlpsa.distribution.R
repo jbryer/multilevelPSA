@@ -51,8 +51,8 @@ plot.mlpsa.distribution <- function(x,
 		level2.summary$mnx = multilevelPSA$level2.summary[,5]
 		level2.summary$mny = multilevelPSA$level2.summary[,4]
 		p = p + scale_x_continuous(limits=plot.range)
-		p = p + opts(legend.position='none', 
-					 axis.text.y=theme_text(size=axis.text.size, angle=0, hjust=.5))
+		p = p + theme(legend.position='none', 
+					 axis.text.y=element_text(size=axis.text.size, angle=0, hjust=.5))
 		p = p + ylab(level2.label)+ xlab(label)
 		p = p + geom_rug(data=level1.summary, aes_string(x=treat, y=NULL, colour=fillname), 
 						 alpha=.6, size=.5)
@@ -62,8 +62,8 @@ plot.mlpsa.distribution <- function(x,
 		level2.summary$mnx = multilevelPSA$level2.summary[,4]
 		level2.summary$mny = multilevelPSA$level2.summary[,5]
 		p = p + scale_y_continuous(limits=plot.range)
-		p = p + opts(legend.position=c(-1,-1), 
-					 axis.text.x=theme_text(size=axis.text.size, angle=-90, hjust=0, vjust=.5))
+		p = p + theme(legend.position=c(-1,-1), 
+					 axis.text.x=element_text(size=axis.text.size, angle=-90, hjust=0, vjust=.5))
 		p = p + ylab(label) + xlab(level2.label)
 		p = p + geom_rug(data=level1.summary, aes_string(x=NULL, y=treat, colour=fillname), 
 						 alpha=.6, size=.5)

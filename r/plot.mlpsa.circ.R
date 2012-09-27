@@ -85,7 +85,7 @@ plot.mlpsa.circ <- function(x,
 	p = p + coord_fixed(ratio=1) + 
 			scale_x_continuous(limits=plot.range) +
 			scale_y_continuous(limits=plot.range) +
-			opts(axis.ticks.margin=unit(.1, "cm"))
+			theme(axis.ticks.margin=unit(.1, "cm"))
 	#Draw dashed lines for unweighted means
 	if(unweighted.means) {
 		p = p + geom_segment(data=unweighted.summary, 
@@ -218,7 +218,7 @@ plot.mlpsa.circ <- function(x,
 		p = p + scale_colour_brewer(legendlab) + scale_fill_brewer(legendlab)
 	}
 	if(!is.null(title)) {
-		p = p + opts(title=title)
+		p = p + theme(title=title)
 	}
 	
 	return(p)

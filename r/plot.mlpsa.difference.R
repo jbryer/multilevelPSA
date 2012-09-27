@@ -40,7 +40,7 @@ plot.mlpsa.difference <- function(x,
 ) {
 	stopifnot(is.mlpsa(x))
 	multilevelPSA = x
-	ggplot.alpha <- function(...) get("alpha", grep("package:ggplot2$", search()))(...)
+	#ggplot.alpha <- function(...) get("alpha", grep("package:ggplot2$", search()))(...)
 
 	if(missing(multilevelPSA)) {
 		stop('Must provide multilevelPSA from multilevel.psa')
@@ -71,7 +71,7 @@ plot.mlpsa.difference <- function(x,
 			geom_hline(aes(y=0), colour='black', size=1, alpha=.7) +
 			geom_hline(yintercept=multilevelPSA$overall.wtd, colour=overall.col, size=1) + 
 			geom_hline(yintercept=multilevelPSA$overall.ci, colour=overall.ci.col, size=1) + 
-			opts(axis.ticks.margin=unit(0, "cm"), axis.text.y=theme_text(size=8, angle=0, hjust=.5))
+			theme(axis.ticks.margin=unit(0, "cm"), axis.text.y=element_text(size=8, angle=0, hjust=.5))
 	if(errorbars) {
 		p = p + geom_errorbar(data=multilevelPSA$level2.summary, 
 							  aes(x=level2, y=NULL, ymin=ci.min, ymax=ci.max), 
@@ -85,7 +85,7 @@ plot.mlpsa.difference <- function(x,
 		}
 	}
 	p = p + geom_point(data=multilevelPSA$level2.summary, aes(x=level2, y=diffwtd, size=n), 
-					   fill=ggplot.alpha('blue', .6), stat='identity', shape=21, colour='black')
+					   fill='blue', alpha=.6, stat='identity', shape=21, colour='black')
 	if(level2.rug.plot) {
 		p = p + geom_rug(data=multilevelPSA$level2.summary, aes(x=NULL, y=diffwtd), 
 						 alpha=.6, size=.5, colour='blue')

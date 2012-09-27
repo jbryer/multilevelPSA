@@ -5,6 +5,45 @@
 #' @param gl grid.layout
 #' @param ... graphic elements to combine.
 align.plots <- function(gl, ...) {
+	#With ggplot2 version .9.2 these functions were removed. This is a bit of
+	#a hack copying them from an older version, but seems to still work!
+	ggplotGrob <- function (x) {
+		gtable_gTree(ggplot_gtable(ggplot_build(x)))
+	}
+	
+	gtable_gTree <- function (x, ...) {
+		children <- gtable_gList(x)
+		vp <- gtable_viewport(x)
+		gTree(children = children, childrenvp = vp, ...)
+	}
+	
+	gtable_gList <- function (x) {
+		names <- with(x$layout, paste(name, t, l, sep = "-"))
+		grobs <- llply(seq_along(names), function(i) {
+			editGrob(x$grobs[[i]], vp = vpPath(x$name, names[i]), 
+					 name = names[i])
+		})
+		do.call("gList", grobs)
+	}
+	
+	gtable_viewport <- function (x) {
+		layout_vp <- viewport(layout = gtable_layout(x), name = x$name)
+		vp <- function(i) {
+			vp <- x$layout[i, ]
+			viewport(name = paste(vp$name, vp$t, vp$l, sep = "-"), 
+					 layout.pos.row = vp$t:vp$b, layout.pos.col = vp$l:vp$r, 
+					 clip = vp$clip)
+		}
+		children_vp <- do.call("vpList", llply(seq_along(x$grobs), 
+											   vp))
+		vpTree(layout_vp, children_vp)
+	}
+	
+	gtable_layout <- function (x) {
+		grid.layout(nrow = nrow(x), heights = x$heights, ncol = ncol(x), 
+					widths = x$widths, respect = x$respect)
+	}
+
 	# Obtained from http://groups.google.com/group/ggplot2/browse_thread/thread/1b859d6b4b441c90
 	# Adopted from http://ggextra.googlecode.com/svn/trunk/R/align.r
 	
@@ -17,30 +56,56 @@ align.plots <- function(gl, ...) {
 	
 	lstAll <- list(...)
 	
-	dots <- lapply(lstAll, function(.g) ggplotGrob(.g[[1]]))
-	plottitles <- lapply(dots, function(.g) editGrob(getGrob(.g,"plot.title.text",grep=TRUE), vp=NULL))
+	dots <- lapply(lstAll, function(.g) {
+			ggplotGrob(.g[[1]]) })
 	
-	xtitles <- lapply(dots, function(.g) if(!is.null(getGrob(.g,"axis.title.x.text",grep=TRUE)))
-		editGrob(getGrob(.g,"axis.title.x.text",grep=TRUE), vp=NULL) else ggplot2:::.zeroGrob)   
+	plottitles <- lapply(dots, function(.g) {
+				if(!is.null(getGrob(.g, 'plot.title.text', grep=TRUE)))
+					editGrob(getGrob(.g, "plot.title.text", grep=TRUE), vp=NULL) 
+				else ggplot2:::.zeroGrob
+				})
 	
-	xlabels <- lapply(dots, function(.g) if(!is.null(getGrob(.g,"axis.text.x.text",grep=TRUE)))
-		editGrob(getGrob(.g,"axis.text.x.text",grep=TRUE), vp=NULL) else ggplot2:::.zeroGrob)  
+	xtitles <- lapply(dots, function(.g) {
+				#.g <- ggplotGrob(.g)
+				if(!is.null(getGrob(.g, "axis.title.x.text", grep=TRUE)))
+					editGrob(getGrob(.g,"axis.title.x.text",grep=TRUE), vp=NULL) 
+				else ggplot2:::.zeroGrob
+				})   
 	
-	ytitles <- lapply(dots, function(.g) if(!is.null(getGrob(.g,"axis.title.y.text",grep=TRUE)))
-		editGrob(getGrob(.g,"axis.title.y.text",grep=TRUE), vp=NULL) else ggplot2:::.zeroGrob)   
+	xlabels <- lapply(dots, function(.g) {
+				#.g <- ggplotGrob(.g)
+				if(!is.null(getGrob(.g, "axis.text.x.text",grep=TRUE)))
+					editGrob(getGrob(.g,"axis.text.x.text",grep=TRUE), vp=NULL) 
+				else ggplot2:::.zeroGrob
+				})  
 	
-	ylabels <- lapply(dots, function(.g) if(!is.null(getGrob(.g,"axis.text.y.text",grep=TRUE)))
-		editGrob(getGrob(.g,"axis.text.y.text",grep=TRUE), vp=NULL) else ggplot2:::.zeroGrob)  
+	ytitles <- lapply(dots, function(.g) {
+				#.g <- ggplotGrob(.g)
+				if(!is.null(getGrob(.g,"axis.title.y.text",grep=TRUE)))
+					editGrob(getGrob(.g,"axis.title.y.text",grep=TRUE), vp=NULL) 
+				else ggplot2:::.zeroGrob
+				})
 	
-	legends <- lapply(dots, function(.g) if(!is.null(.g$children$legends))
-		editGrob(.g$children$legends, vp=NULL) else ggplot2:::.zeroGrob)
+	ylabels <- lapply(dots, function(.g) {
+				#.g <- ggplotGrob(.g)
+				if(!is.null(getGrob(.g,"axis.text.y.text",grep=TRUE)))
+					editGrob(getGrob(.g,"axis.text.y.text",grep=TRUE), vp=NULL) 
+				else ggplot2:::.zeroGrob
+				})
+	
+	legends <- lapply(dots, function(.g) {
+				if(!is.null(.g$children$legends))
+					editGrob(.g$children$legends, vp=NULL) 
+				else ggplot2:::.zeroGrob
+				})
 	
 	widths.left <- mapply(`+`, e1=lapply(ytitles, grobWidth),
 						  e2= lapply(ylabels, grobWidth), SIMPLIFY=FALSE)
 	widths.right <- lapply(legends, grobWidth)
 	#  heights.top <- lapply(plottitles, grobHeight)
 	heights.top <- lapply( plottitles, function(x) unit(0,"cm") )
-	heights.bottom <- mapply(`+`, e1=lapply(xtitles, grobHeight), e2= lapply(xlabels, grobHeight), SIMPLIFY=FALSE)
+	heights.bottom <- mapply(`+`, e1=lapply(xtitles, grobHeight), 
+							 e2=lapply(xlabels, grobHeight), SIMPLIFY=FALSE)
 	
 	for ( i in seq_along( lstAll ) ) {
 		lstCur <- lstAll[[i]]
@@ -49,25 +114,29 @@ align.plots <- function(gl, ...) {
 		valNew <- widths.left[[ i ]]
 		valOld <- stats.col[[ min(lstCur[[3]]) ]]$widths.left.max
 		if ( is.null( valOld ) ) valOld <- unit( 0, "cm" )
-		stats.col[[ min(lstCur[[3]]) ]]$widths.left.max <- max( do.call( unit.c, list(valOld, valNew) ) )
+		stats.col[[ min(lstCur[[3]]) ]]$widths.left.max <- 
+			max( do.call( unit.c, list(valOld, valNew) ) )
 		
 		# Right
 		valNew <- widths.right[[ i ]]
 		valOld <- stats.col[[ max(lstCur[[3]]) ]]$widths.right.max
 		if ( is.null( valOld ) ) valOld <- unit( 0, "cm" )
-		stats.col[[ max(lstCur[[3]]) ]]$widths.right.max <- max( do.call( unit.c, list(valOld, valNew) ) )
+		stats.col[[ max(lstCur[[3]]) ]]$widths.right.max <- 
+			max( do.call( unit.c, list(valOld, valNew) ) )
 		
 		# Top
 		valNew <- heights.top[[ i ]]
 		valOld <- stats.row[[ min(lstCur[[2]]) ]]$heights.top.max
 		if ( is.null( valOld ) ) valOld <- unit( 0, "cm" )
-		stats.row[[ min(lstCur[[2]]) ]]$heights.top.max <- max( do.call( unit.c, list(valOld, valNew) ) )
+		stats.row[[ min(lstCur[[2]]) ]]$heights.top.max <- 
+			max( do.call( unit.c, list(valOld, valNew) ) )
 		
 		# Bottom
 		valNew <- heights.bottom[[ i ]]
 		valOld <- stats.row[[ max(lstCur[[2]]) ]]$heights.bottom.max
 		if ( is.null( valOld ) ) valOld <- unit( 0, "cm" )
-		stats.row[[ max(lstCur[[2]]) ]]$heights.bottom.max <- max( do.call( unit.c, list(valOld, valNew) ) )
+		stats.row[[ max(lstCur[[2]]) ]]$heights.bottom.max <- 
+			max( do.call( unit.c, list(valOld, valNew) ) )
 	}
 	
 	for(i in seq_along(dots)){

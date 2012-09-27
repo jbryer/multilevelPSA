@@ -18,14 +18,14 @@ plot.mlpsa <- function(x, ratio=c(1,2), plotExtra=NULL, ...) {
 	mlpsa = x
 	
 	pcirc = plot.mlpsa.circ(mlpsa, legendlab=FALSE, ...) + 
-				opts(legend.position='none') +
+				theme(legend.position='none') +
 				xlab(NULL) + ylab(NULL)
 	px = plot.mlpsa.distribution(mlpsa, treat=names(mlpsa$level2.summary)[4],
 						flip=TRUE, label=names(mlpsa$level2.summary)[4], ...) +
-				opts(legend.position='none', axis.text.x=theme_blank())
+				theme(legend.position='none')#, axis.text.x=element_blank())
 	py = plot.mlpsa.distribution(mlpsa, treat=names(mlpsa$level2.summary)[5],
 						flip=FALSE, label=names(mlpsa$level2.summary)[5], ...) +
-				opts(legend.position='none', axis.text.y=theme_blank())
+				theme(legend.position='none')#, axis.text.y=element_blank())
 	
 	grid_layout = grid.layout(nrow=2, ncol=2, widths=c(ratio[1:2]), heights=ratio[2:1], respect=TRUE)
 	grid.newpage()

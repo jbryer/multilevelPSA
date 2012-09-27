@@ -5,6 +5,7 @@ require(devtools)
 require(roxygen2)
 require(ggplot2)
 require(PSAgraphics)
+require(proto)
 
 setwd("~/Dropbox/Projects") #Mac
 getwd()

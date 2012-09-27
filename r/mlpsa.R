@@ -32,7 +32,7 @@ mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL, minN=5) {
 	thedata$level2 = as.factor(as.character(thedata$level2))
 	
 	#Summary statistics by each stratum
-	d = describe.by(thedata$response, list(thedata$treatment, thedata$strata2), mat=TRUE)
+	d = describeBy(thedata$response, list(thedata$treatment, thedata$strata2), mat=TRUE)
 	d = d[,c('group1', 'group2', 'n', 'mean', 'se')]
 	names(d) = c('treatment', 'strata2', 'n', 'Mean', 'se')
 	d = cbind(cast(d, strata2 ~ treatment, value='n'), cast(d, strata2 ~ treatment, value='Mean')[,2:3], cast(d, strata2 ~ treatment, value='se')[,2:3])
@@ -131,7 +131,7 @@ mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL, minN=5) {
 	multilevelPSA$overall.ci = c(ci.diff - qt(0.975, df) * se.wtd, ci.diff + qt(0.975, df) * se.wtd)
 	
 	#Unweighted means
-	d2 = describe.by(thedata$response, list(thedata$level2, thedata$treatment), mat=TRUE)
+	d2 = describeBy(thedata$response, list(thedata$level2, thedata$treatment), mat=TRUE)
 	d2 = d2[,c('group1', 'group2', 'mean')]
 	names(d2) = c('level2', 'treatment', 'Mean')
 	d2 = cast(d2, level2 ~ treatment, value='Mean')

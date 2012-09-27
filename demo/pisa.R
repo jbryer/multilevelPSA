@@ -19,6 +19,7 @@ student = ddply(student, 'CNT', recodePISA, .progress='text')
 student = merge(student, school, by=c('CNT', 'SCHOOLID'), all.x=TRUE)
 student = student[!is.na(student$PUBPRIV),] #Remove rows with missing PUBPRRIV
 table(student$CNT, student$PUBPRIV, useNA='ifany')
+prop.table(table(student$CNT, student$PUBPRIV, useNA='ifany'), 1) * 100
 
 #Use conditional inference trees from the party package
 mlctree = mlpsa.ctree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')
@@ -30,8 +31,6 @@ plot.tree(mlctree, colNames=names(student[,c(1,5:48,68)]), level2Col=student$CNT
 student.party$mathscore = apply(student.party[,c('PV1MATH','PV2MATH','PV3MATH','PV4MATH','PV5MATH')], 1, sum) / 5
 student.party$readscore = apply(student.party[,c('PV1READ','PV2READ','PV3READ','PV4READ','PV5READ')], 1, sum) / 5
 student.party$sciescore = apply(student.party[,c('PV1SCIE','PV2SCIE','PV3SCIE','PV4SCIE','PV5SCIE')], 1, sum) / 5
-
-#plot.tree(mlctree, psa.cols[c(4:48)], student.party$level2, colLabels=psa.cols.names)
 
 results.psa.math = mlpsa(response=student.party$mathscore, treatment=student.party$PUBPRIV, strata=student.party$strata, level2=student.party$CNT, minN=5)
 summary(results.psa.math)

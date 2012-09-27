@@ -30,7 +30,8 @@ summary.mlpsa <- function(object, ...) {
 	#TODO: Create a better summary function.
 	cat(paste("Multilevel PSA Model of ", nrow(object$level1.summary), ' strata for ',
 			  nrow(object$level2.summary), ' levels.\n',
-		object$approx.t,
+		'Approx t: ', round(object$approx.t, digits=2), '\n',
+		'Confidence Interval: ', round(object$overall.ci[1], digits=2), ', ', round(object$overall.ci[2], digits=2),
 	sep=''))
 }
 

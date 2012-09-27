@@ -71,9 +71,9 @@ plot.tree <- function(x, colNames, level2Col, colLabels=NULL, ...) {
 					  aes(y=Desc, x='', label=Var.Freq), size=2, hjust=.5) +
 			geom_tile(aes(fill = value)) +
 			scale_fill_gradient("Depth", high = "lightgrey", low = "steelblue") + 
-			opts(axis.text.y=theme_text(size=6, hjust=0, vjust=.5), 
-				 axis.text.x=theme_text(size=6, angle=-90, hjust=0, vjust=.5), 
-				 axis.ticks=theme_blank()) + 
+			theme(axis.text.y=element_text(size=6, hjust=0, vjust=.5), 
+				 axis.text.x=element_text(size=6, angle=-90, hjust=0, vjust=.5), 
+				 axis.ticks=element_blank()) + 
 			xlab(NULL) + ylab(NULL)
 	return(p)
 }
