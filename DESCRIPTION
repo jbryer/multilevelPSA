@@ -36,3 +36,4 @@ Collate:
     'plot.difftable.R'
     'plot.mlpsa.circ.R'
     'mlpsa.logistic.R'
+    'plot.loess.R'
