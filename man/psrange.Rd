@@ -1,0 +1,32 @@
+\name{psrange}
+\alias{psrange}
+\title{Estimates models with increasing number of comparision subjects increasing from
+1:1 to using all comparison groups.}
+\usage{
+  psrange(df, treatvar, formula, nsteps = 10, nboot = 10)
+}
+\arguments{
+  \item{df}{data frame with variables to pass to glm}
+
+  \item{treatvar}{vector representing treatment placement.
+  Should be coded as 0s (for control) and 1s (for
+  treatment).}
+
+  \item{formula}{formula for logistic regression model}
+
+  \item{nsteps}{number of steps to estimate from 1:1 to
+  using all control records.}
+
+  \item{nboot}{number of models to execute for each step.}
+}
+\value{
+  a class of psrange that contains a summary data frame, a
+  details data frame, and a list of each individual result
+  from glm.
+}
+\description{
+  Estimates models with increasing number of comparision
+  subjects increasing from 1:1 to using all comparison
+  groups.
+}
+

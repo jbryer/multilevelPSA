@@ -1,1 +1,2 @@
 pisa	 This demo will demonstrate using the multilevelPSA functions with the Programme of International Student Assessment (PISA) for the North American countries. The comparison will be of private and public schools.
+pisa.loess	 This demo will demonstrate the use of the loess regression methods for the estimation of single level propensity score models.

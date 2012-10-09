@@ -37,3 +37,4 @@ Collate:
     'plot.mlpsa.circ.R'
     'mlpsa.logistic.R'
     'plot.loess.R'
+    'psrange.r'
