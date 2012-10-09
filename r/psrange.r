@@ -25,8 +25,8 @@ psrange <- function(df, treatvar, formula, nsteps=10, nboot=10) {
 		tosample <- i * ndiff + ntreat
 		models[[(i*nsteps + 1)]] <- list()
 		for(j in 1:nboot) {
-			rows <- c(which(df[,treatvar] == 1),
-					 sample(which(student.complete$PUBPRIV == 0), tosample))
+			rows <- c(which(treatvar == 1),
+					 sample(which(treatvar == 0), tosample))
 			lr.results <- glm(formula, data=df[rows,], family='binomial')
 			dfrange <- rbind(dfrange, data.frame(ind=i, p=i*100, i=j,
 												ntreat=ntreat, ncontrol=tosample, 
