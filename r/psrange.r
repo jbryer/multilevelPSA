@@ -79,7 +79,7 @@ plot.psrange <- function(x,
 		geom_jitter(data=x$details, aes(x=p, y=psmin), alpha=.6) +
 		geom_jitter(data=x$details, aes(x=p, y=psmax), alpha=.6) +
 		geom_text(aes(label=paste('ncontrol = ', prettyNum(floor(ncontrol), big.mark=','), sep='')), 
-					  y=max(dfrange$min.max)+.01, size=3, hjust=0, vjust=text.vjust) +
+					  y=max(x$min.max)+.01, size=3, hjust=0, vjust=text.vjust) +
 		geom_text(aes(label=paste('1:', round(ratio, digits=1), sep=''), 
 					  y=((max.mean-min.mean)/2)), size=5, vjust=text.vjust) +
 	  	coord_flip() + ylim(c(0,1)) +
