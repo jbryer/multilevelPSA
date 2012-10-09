@@ -10,33 +10,35 @@
 #' @return a class of psrange that contains a summary data frame, a details data
 #'         frame, and a list of each individual result from glm.
 #' @export
-psrange <- function(df, treatvar, formula, nsteps=10, nboot=10) {
+psrange <- function(df, treatvar, formula, nsteps=10, nboot=10,
+					samples=(seq(0,1,1/nsteps) * 
+						(length(which(treatvar==0)) - 2*length(which(treatvar==1))) + 
+						length(which(treatvar==1))) ) {
 	results <- list()
 	
 	ncontrol <- length(which(treatvar == 0))
 	ntreat <- length(which(treatvar == 1))
-	ndiff <- ncontrol - ntreat
+	#ndiff <- ncontrol - ntreat
 	dfrange <- data.frame(p=integer(), i=integer(),
 						 ntreat=integer(), ncontrol=integer(), 
 						 psmin=numeric(), psmax=numeric())
-	models <- list()
-	pb <- txtProgressBar(min=0, max=((nsteps+1)*nboot), style=3)
-	for(i in seq(0,1,1/nsteps)) {
-		tosample <- i * ndiff + ntreat
-		models[[(i*nsteps + 1)]] <- list()
+	pb <- txtProgressBar(min=1, max=(length(samples)*nboot), style=3)
+	for(i in 1:length(samples)) {
+		tosample <- samples[i]
+		#models[[i]] <- list()
 		for(j in 1:nboot) {
 			rows <- c(which(treatvar == 1),
 					 sample(which(treatvar == 0), tosample))
 			lr.results <- glm(formula, data=df[rows,], family='binomial')
-			dfrange <- rbind(dfrange, data.frame(ind=i, p=i*100, i=j,
+			dfrange <- rbind(dfrange, data.frame(ind=i, p=tosample/ncontrol*100, i=j,
 												ntreat=ntreat, ncontrol=tosample, 
 												psmin=range(fitted(lr.results))[1],
 												psmax=range(fitted(lr.results))[2]))
-			models[[(i*nsteps + 1)]][[j]] <- lr.results
-			setTxtProgressBar(pb, ((i*nsteps) + (i*nsteps*nboot) + j))
+			#models[[i]][j] <- lr.results
+			setTxtProgressBar(pb, (((i-1)*nboot) + j))
 		}
 	}
-	results$models <- models
+	#results$models <- models
 	dfrange$ratio <- dfrange$ncontrol / dfrange$ntreat
 	results$details <- dfrange
 	smin <- describeBy(dfrange$psmin, group=dfrange$p, mat=TRUE)[,
@@ -69,20 +71,24 @@ summary.psrange <- function(object, ...) {
 #' @param ... currently unused.
 #' @export
 plot.psrange <- function(x, 
-						 xlab='Percent of Control Group',
+						 xlab='Percentage of Control Group',
 						 ylab=paste('Propensity Score Range (ntreat = ', 
 									prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
+						 text.ratio.size=5,
+						 text.ncontrol.size=3,
+						 point.size=1, point.alpha=.6,
 						 ...) {
 	text.vjust <- -.4
 	p <- ggplot(x$summary, aes(x=p)) + 
 		geom_errorbar(aes(ymin=min.mean, ymax=max.mean), colour='blue') + 
-		geom_jitter(data=x$details, aes(x=p, y=psmin), alpha=.6) +
-		geom_jitter(data=x$details, aes(x=p, y=psmax), alpha=.6) +
-		geom_text(aes(label=paste('ncontrol = ', prettyNum(floor(ncontrol), big.mark=','), sep='')), 
-					  y=max(x$min.max)+.01, size=3, hjust=0, vjust=text.vjust) +
+		geom_jitter(data=x$details, aes(x=p, y=psmin), size=point.size, alpha=point.alpha) +
+		geom_jitter(data=x$details, aes(x=p, y=psmax), size=point.size, alpha=point.alpha) +
+		geom_text(aes(label=paste(prettyNum(floor(ncontrol), big.mark=','), sep='')), 
+					  y=min(x$summary$min.min)-.01, size=text.ncontrol.size, hjust=1.1, vjust=.5) +
 		geom_text(aes(label=paste('1:', round(ratio, digits=1), sep=''), 
-					  y=((max.mean-min.mean)/2)), size=5, vjust=text.vjust) +
-	  	coord_flip() + ylim(c(0,1)) +
+					  y=((max.mean-min.mean)/2)), size=text.ratio.size, vjust=text.vjust) +
+	  	coord_flip() + ylim(c(-.05,1)) + 
+	  	#geom_hline(yintercept=0) + geom_hline(yintercept=1) +
 	  	ylab(ylab) + xlab(xlab)
 	return(p)
 }

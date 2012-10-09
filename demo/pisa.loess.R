@@ -43,3 +43,9 @@ student.complete$PUBPRIV = as.integer(student.complete$PUBPRIV) - 1
 psranges <- psrange(student.complete, student.complete$PUBPRIV, PUBPRIV ~ ., nsteps=10, nboot=5)
 plot(psranges) + labs(title=paste('Propensity Score Ranges for ', cnt, sep=''))
 
+ntreat <- length(which(student.complete$PUBPRIV == 1))
+ncontrol <- length(which(student.complete$PUBPRIV == 0))
+samples <- seq(ntreat, ncontrol, by=ntreat)
+psranges2 <- psrange(student.complete, student.complete$PUBPRIV, PUBPRIV ~ ., samples=samples)
+plot(psranges2)
+
