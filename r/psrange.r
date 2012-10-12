@@ -77,16 +77,23 @@ plot.psrange <- function(x,
 						 text.ratio.size=5,
 						 text.ncontrol.size=3,
 						 point.size=1, point.alpha=.6,
+						 line.width = 6,
 						 ...) {
 	text.vjust <- -.4
+	bar.factor = 1
+	#min(x$summary$min.min)-.01
 	p <- ggplot(x$summary, aes(x=p)) + 
-		geom_errorbar(aes(ymin=min.mean, ymax=max.mean), colour='blue') + 
-		geom_jitter(data=x$details, aes(x=p, y=psmin), size=point.size, alpha=point.alpha) +
-		geom_jitter(data=x$details, aes(x=p, y=psmax), size=point.size, alpha=point.alpha) +
+		geom_crossbar(aes(group=p, y=min.mean, ymin=min.min, ymax=min.max), 
+					  colour='white', fill='green', alpha=.1, width=line.width*bar.factor) +
+	  	geom_crossbar(aes(group=p, y=max.mean, ymin=max.min, ymax=max.max), 
+	  				  colour='white', fill='orange', alpha=.1, width=line.width*bar.factor) +
+	  	geom_errorbar(aes(ymin=min.mean, ymax=max.mean), colour='black', width=line.width) + 
+		geom_jitter(data=x$details, aes(x=p, y=psmin), size=point.size, alpha=point.alpha, shape=23) +
+		geom_jitter(data=x$details, aes(x=p, y=psmax), size=point.size, alpha=point.alpha, shape=22) +
 		geom_text(aes(label=paste(prettyNum(floor(ncontrol), big.mark=','), sep='')), 
-					  y=min(x$summary$min.min)-.01, size=text.ncontrol.size, hjust=1.1, vjust=.5) +
+					  y=0, size=text.ncontrol.size, hjust=1.1, vjust=.5) +
 		geom_text(aes(label=paste('1:', round(ratio, digits=1), sep=''), 
-					  y=((max.mean-min.mean)/2)), size=text.ratio.size, vjust=text.vjust) +
+					  y=(min.mean + (max.mean-min.mean)/2)), size=text.ratio.size, vjust=text.vjust) +
 	  	coord_flip() + ylim(c(-.05,1)) + 
 	  	#geom_hline(yintercept=0) + geom_hline(yintercept=1) +
 	  	ylab(ylab) + xlab(xlab)
