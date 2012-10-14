@@ -77,8 +77,7 @@ summary.psrange <- function(object, ...) {
 #' @param xlab label for the x axis
 #' @param ylab label for the y axis
 #' @param ... currently unused.
-#' @export
-plot.psrange <- function(x, 
+plot.psrange2 <- function(x, 
 						 xlab='Percentage of Control Group',
 						 ylab=paste('Propensity Score Range (ntreat = ', 
 									prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
@@ -92,16 +91,16 @@ plot.psrange <- function(x,
 	#min(x$summary$min.min)-.01
 	p <- ggplot(x$summary, aes(x=p)) + 
 		geom_crossbar(aes(group=p, y=min.mean, ymin=min.min, ymax=min.max), 
-					  colour='white', fill='green', alpha=.1, width=line.width*bar.factor) +
+				colour='white', fill='green', alpha=.1, width=line.width*bar.factor) +
 	  	geom_crossbar(aes(group=p, y=max.mean, ymin=max.min, ymax=max.max), 
-	  				  colour='white', fill='orange', alpha=.1, width=line.width*bar.factor) +
+	  			colour='white', fill='orange', alpha=.1, width=line.width*bar.factor) +
 	  	geom_errorbar(aes(ymin=min.mean, ymax=max.mean), colour='black', width=line.width) + 
 		geom_jitter(data=x$details, aes(x=p, y=psmin), size=point.size, alpha=point.alpha, shape=23) +
 		geom_jitter(data=x$details, aes(x=p, y=psmax), size=point.size, alpha=point.alpha, shape=22) +
 		geom_text(aes(label=paste(prettyNum(floor(ncontrol), big.mark=','), sep='')), 
-					  y=0, size=text.ncontrol.size, hjust=1.1, vjust=.5) +
+				y=0, size=text.ncontrol.size, hjust=1.1, vjust=.5) +
 		geom_text(aes(label=paste('1:', round(ratio, digits=1), sep=''), 
-					  y=(min.mean + (max.mean-min.mean)/2)), size=text.ratio.size, vjust=text.vjust) +
+				y=(min.mean + (max.mean-min.mean)/2)), size=text.ratio.size, vjust=text.vjust) +
 	  	coord_flip() + ylim(c(-.05,1)) + 
 	  	#geom_hline(yintercept=0) + geom_hline(yintercept=1) +
 	  	ylab(ylab) + xlab(xlab)
@@ -110,27 +109,61 @@ plot.psrange <- function(x,
 
 #' Plots densities for the propensity scores.
 #' 
-#' @param psranges the result of psrange
+#' @param x the result of psrange
 #' @return a ggplot2 object
 #' @export
-plot.densities <- function(psranges) {
+plot.psrange <- function(x,
+						 xlab=paste('Propensity Score Range (ntreat = ', 
+						   		   prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
+						 text.ratio.size = 5,
+						 text.ncontrol.size = 3,
+						 point.size = 1, 
+						 point.alpha = .6,
+						 line.width = 6,
+						 density.alpha = .2,
+						 rect.color = 'green',
+						 rect.alpha = .2,
+						 ...
+) {
 	densities.df <- data.frame(p=numeric(), treat=integer(), ps=numeric())
-	for(i in seq_len(length(psranges$densities))) {
-		densities.df <- rbind(densities.df, cbind(p=psranges$summary[i,'p'], 
-												  psranges$densities[[i]]))
+	for(i in seq_len(length(x$densities))) {
+		densities.df <- rbind(densities.df, cbind(p=x$summary[i,'p'], 
+												  x$densities[[i]]))
 	}
 	densities.df$treat = factor(densities.df$treat)
 	
-	p <- ggplot() + xlim(c(0,1)) + ylim(c(-1,1)) +
+	text.vjust = -.4
+	bar.factor = 1
+
+	p <- ggplot() + xlim(c(-.05,1.05)) + ylim(c(-1,1)) +
 			stat_density(data=densities.df[densities.df$treat==1,], 
-					 aes(x=ps, ymax=+..scaled.., fill=treat, ymin = 0),
-					 geom = "ribbon", position = "identity") +
+				aes(x=ps, ymax=-..scaled.., fill=treat, ymin = 0),
+				geom = "ribbon", position = "identity", alpha=density.alpha) +
 			stat_density(data=densities.df[densities.df$treat==0,], 
-					 aes(x=ps, ymax=-..scaled.., fill=treat, ymin = 0),
-					 geom = "ribbon", position = "identity") +
-			facet_grid(p ~ ., as.table=FALSE) +
+				aes(x=ps, ymax=..scaled.., fill=treat, ymin = 0),
+				geom = "ribbon", position = "identity", alpha=density.alpha) +
+			geom_rect(data=x$summary, aes(group=p, xmin=max.min-.005, xmax=(max.max+.005), 
+				ymin=0.25, ymax=.75), fill=rect.color, alpha=rect.alpha) +
+			geom_rect(data=x$summary, aes(group=p, xmin=(min.min-.005), xmax=min.max+.005, 
+				ymin=-.75, ymax=-0.25), fill=rect.color, alpha=rect.alpha) +
+			geom_point(data=x$details, 
+  		  		aes(y=-.5, x=psmin), size=point.size, alpha=point.alpha, shape=23) +
+  		  	geom_point(data=x$details, 
+  		  		aes(y=.5, x=psmax), size=point.size, alpha=point.alpha, shape=22) +
+			geom_errorbarh(data=x$summary, 
+				aes(y=0, x=min.mean + (max.mean-min.mean)/ 2, xmin=min.mean, xmax=max.mean), 
+				colour='black', width=line.width) + 
+		   	geom_text(data=x$summary,
+		   		aes(label=paste(prettyNum(floor(ncontrol), big.mark=','), sep='')), 
+		   		x=0, y=0, size=text.ncontrol.size, hjust=1.1, vjust=-0.2) +
+   		  	geom_text(data=x$summary,
+   		  		aes(label=paste('1:', round(ratio, digits=1), sep=''), 
+   		  		x=(min.mean + (max.mean-min.mean)/2)), y=0, 
+   		  		size=text.ratio.size, vjust=text.vjust) +
+		  	facet_grid(p ~ ., as.table=FALSE) +
 			theme(axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
-			ylab(NULL) + xlab('Propensity Scores')
+			ylab(NULL) + xlab(xlab) +
+			scale_fill_hue('', limits=c(0,1), labels=c('Comparison','Treatment'))
 	
 	return(p)
 }
