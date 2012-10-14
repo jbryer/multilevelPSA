@@ -23,9 +23,12 @@ psrange <- function(df, treatvar, formula, nsteps=10, nboot=10,
 						 ntreat=integer(), ncontrol=integer(), 
 						 psmin=numeric(), psmax=numeric())
 	pb <- txtProgressBar(min=1, max=(length(samples)*nboot), style=3)
+	densities <- list()
+	models <- list()
 	for(i in 1:length(samples)) {
 		tosample <- samples[i]
-		#models[[i]] <- list()
+		models[[i]] <- list()
+		density.df <- data.frame(treat=integer(), ps=numeric())
 		for(j in 1:nboot) {
 			rows <- c(which(treatvar == 1),
 					 sample(which(treatvar == 0), tosample))
@@ -34,11 +37,16 @@ psrange <- function(df, treatvar, formula, nsteps=10, nboot=10,
 												ntreat=ntreat, ncontrol=tosample, 
 												psmin=range(fitted(lr.results))[1],
 												psmax=range(fitted(lr.results))[2]))
-			#models[[i]][j] <- lr.results
+			density.df <- rbind(density.df, 
+								data.frame(treat=treatvar[rows], ps=fitted(lr.results)))
+			models[[i]][[j]] <- lr.results
 			setTxtProgressBar(pb, (((i-1)*nboot) + j))
 		}
+		densities[[i]] <- density.df
 	}
-	#results$models <- models
+	
+	results$densities <- densities
+	results$models <- models
 	dfrange$ratio <- dfrange$ncontrol / dfrange$ntreat
 	results$details <- dfrange
 	smin <- describeBy(dfrange$psmin, group=dfrange$p, mat=TRUE)[,
@@ -99,3 +107,31 @@ plot.psrange <- function(x,
 	  	ylab(ylab) + xlab(xlab)
 	return(p)
 }
+
+#' Plots densities for the propensity scores.
+#' 
+#' @param psranges the result of psrange
+#' @return a ggplot2 object
+#' @export
+plot.densities <- function(psranges) {
+	densities.df <- data.frame(p=numeric(), treat=integer(), ps=numeric())
+	for(i in seq_len(length(psranges$densities))) {
+		densities.df <- rbind(densities.df, cbind(p=psranges$summary[i,'p'], 
+												  psranges$densities[[i]]))
+	}
+	densities.df$treat = factor(densities.df$treat)
+	
+	p <- ggplot() + xlim(c(0,1)) + ylim(c(-1,1)) +
+			stat_density(data=densities.df[densities.df$treat==1,], 
+					 aes(x=ps, ymax=+..scaled.., fill=treat, ymin = 0),
+					 geom = "ribbon", position = "identity") +
+			stat_density(data=densities.df[densities.df$treat==0,], 
+					 aes(x=ps, ymax=-..scaled.., fill=treat, ymin = 0),
+					 geom = "ribbon", position = "identity") +
+			facet_grid(p ~ ., as.table=FALSE) +
+			theme(axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
+			ylab(NULL) + xlab('Propensity Scores')
+	
+	return(p)
+}
+
