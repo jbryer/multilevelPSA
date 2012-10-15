@@ -11,9 +11,11 @@
 #'         frame, and a list of each individual result from glm.
 #' @export
 psrange <- function(df, treatvar, formula, nsteps=10, nboot=10,
-					samples=(seq(0,1,1/nsteps) * 
-						(length(which(treatvar==0)) - 2*length(which(treatvar==1))) + 
-						length(which(treatvar==1))) ) {
+					samples=seq(length(which(treatvar==1)), 
+								 length(which(treatvar==0)),
+								 (length(which(treatvar==0)) - length(which(treatvar==1))) / nsteps 
+								 )
+) {
 	results <- list()
 	
 	ncontrol <- length(which(treatvar == 0))
@@ -81,7 +83,7 @@ plot.psrange2 <- function(x,
 						 xlab='Percentage of Control Group',
 						 ylab=paste('Propensity Score Range (ntreat = ', 
 									prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
-						 text.ratio.size=5,
+						 text.ratio.size=4,
 						 text.ncontrol.size=3,
 						 point.size=1, point.alpha=.6,
 						 line.width = 6,
@@ -94,7 +96,7 @@ plot.psrange2 <- function(x,
 				colour='white', fill='green', alpha=.1, width=line.width*bar.factor) +
 	  	geom_crossbar(aes(group=p, y=max.mean, ymin=max.min, ymax=max.max), 
 	  			colour='white', fill='orange', alpha=.1, width=line.width*bar.factor) +
-	  	geom_errorbar(aes(ymin=min.mean, ymax=max.mean), colour='black', width=line.width) + 
+	  	geom_errorbar(aes(ymin=min.median, ymax=max.median), colour='black', width=line.width) + 
 		geom_jitter(data=x$details, aes(x=p, y=psmin), size=point.size, alpha=point.alpha, shape=23) +
 		geom_jitter(data=x$details, aes(x=p, y=psmax), size=point.size, alpha=point.alpha, shape=22) +
 		geom_text(aes(label=paste(prettyNum(floor(ncontrol), big.mark=','), sep='')), 
@@ -115,7 +117,7 @@ plot.psrange2 <- function(x,
 plot.psrange <- function(x,
 						 xlab=paste('Propensity Score Range (ntreat = ', 
 						   		   prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
-						 text.ratio.size = 5,
+						 text.ratio.size = 4,
 						 text.ncontrol.size = 3,
 						 point.size = 1, 
 						 point.alpha = .6,
