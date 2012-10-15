@@ -117,6 +117,7 @@ plot.psrange2 <- function(x,
 plot.psrange <- function(x,
 						 xlab=paste('Propensity Score Range (ntreat = ', 
 						   		   prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
+						 ylab=NULL,
 						 text.ratio.size = 4,
 						 text.ncontrol.size = 3,
 						 point.size = 1, 
@@ -137,6 +138,14 @@ plot.psrange <- function(x,
 	text.vjust = -.4
 	bar.factor = 1
 
+	psrange_labeller <- function(variable, value) {
+		if(variable == 'p') {
+			return(paste(round(as.numeric(as.character(value))), '%', sep=''))
+		} else {
+			return(value)
+		}
+	}
+	
 	p <- ggplot() + xlim(c(-.05,1.05)) + ylim(c(-1,1)) +
 			stat_density(data=densities.df[densities.df$treat==1,], 
 				aes(x=ps, ymax=-..scaled.., fill=treat, ymin = 0),
@@ -162,9 +171,10 @@ plot.psrange <- function(x,
    		  		aes(label=paste('1:', round(ratio, digits=1), sep=''), 
    		  		x=(min.mean + (max.mean-min.mean)/2)), y=0, 
    		  		size=text.ratio.size, vjust=text.vjust) +
-		  	facet_grid(p ~ ., as.table=FALSE) +
-			theme(axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
-			ylab(NULL) + xlab(xlab) +
+		  	facet_grid(p ~ ., as.table=FALSE, labeller=psrange_labeller) +
+			theme(axis.text.y=element_blank(), axis.ticks.y=element_blank(),
+				  strip.text.y=element_text(angle=360)) +
+			ylab(ylab) + xlab(xlab) +
 			scale_fill_hue('', limits=c(0,1), labels=c('Comparison','Treatment'))
 	
 	return(p)
