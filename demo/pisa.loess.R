@@ -42,10 +42,23 @@ student.complete$PUBPRIV = as.integer(student.complete$PUBPRIV) - 1
 
 psranges <- psrange(student.complete, student.complete$PUBPRIV, PUBPRIV ~ ., nsteps=10, nboot=5)
 plot(psranges) + labs(title=paste('Propensity Score Ranges for ', cnt, sep=''))
+summary(psranges)
 
 ntreat <- length(which(student.complete$PUBPRIV == 1))
 ncontrol <- length(which(student.complete$PUBPRIV == 0))
 samples <- seq(ntreat, ncontrol, by=ntreat)
 psranges2 <- psrange(student.complete, student.complete$PUBPRIV, PUBPRIV ~ ., samples=samples)
 plot(psranges2)
+
+rows <- c(which(student.complete$PUBPRIV == 1),
+		  sample(which(student.complete$PUBPRIV == 0), 
+		  	   3 * length(which(student.complete$PUBPRIV == 1)) ) )
+lr.results <- glm(PUBPRIV ~ ., data=student.complete[rows,], family='binomial')
+st = data.frame(ps=fitted(lr.results), 
+				math=apply(student2[rows,paste('PV', 1:5, 'MATH', sep='')], 1, mean), 
+				pubpriv=student.complete[rows,]$PUBPRIV)
+st$treat = as.logical(st$pubpriv)
+table(st$treat)
+plot.loess(st$ps, response=st$math, treatment=st$treat, 
+		   percentPoints.control = 0.4, percentPoints.treat=0.4)
 
