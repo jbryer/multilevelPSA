@@ -1,9 +1,11 @@
 \name{psrange}
 \alias{psrange}
-\title{Estimates models with increasing number of comparision subjects increasing from
-1:1 to using all comparison groups.}
+\title{Estimates models with increasing number of comparision subjects starting from
+1:1 to using all available comparison group subjects.}
 \usage{
-  psrange(df, treatvar, formula, nsteps = 10, nboot = 10)
+  psrange(df, treatvar, formula, nsteps = 10, nboot = 10,
+    samples = seq(length(which(treatvar == 1)), length(which(treatvar == 0)), (length(which(treatvar == 0)) - length(which(treatvar == 1)))/nsteps),
+    ...)
 }
 \arguments{
   \item{df}{data frame with variables to pass to glm}
@@ -18,6 +20,11 @@
   using all control records.}
 
   \item{nboot}{number of models to execute for each step.}
+
+  \item{samples}{the sample sizes to draw from control
+  group for each step.}
+
+  \item{...}{other parameters passed to glm.}
 }
 \value{
   a class of psrange that contains a summary data frame, a
@@ -26,7 +33,7 @@
 }
 \description{
   Estimates models with increasing number of comparision
-  subjects increasing from 1:1 to using all comparison
-  groups.
+  subjects starting from 1:1 to using all available
+  comparison group subjects.
 }
 

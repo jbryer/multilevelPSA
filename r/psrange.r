@@ -1,5 +1,5 @@
-#' Estimates models with increasing number of comparision subjects increasing from
-#' 1:1 to using all comparison groups.
+#' Estimates models with increasing number of comparision subjects starting from
+#' 1:1 to using all available comparison group subjects.
 #' 
 #' @param df data frame with variables to pass to glm
 #' @param treatvar vector representing treatment placement. Should be coded as
@@ -7,47 +7,46 @@
 #' @param formula formula for logistic regression model
 #' @param nsteps number of steps to estimate from 1:1 to using all control records.
 #' @param nboot number of models to execute for each step.
+#' @param samples the sample sizes to draw from control group for each step.
+#' @param ... other parameters passed to glm.
 #' @return a class of psrange that contains a summary data frame, a details data
 #'         frame, and a list of each individual result from glm.
 #' @export
 psrange <- function(df, treatvar, formula, nsteps=10, nboot=10,
-					samples=seq(length(which(treatvar==1)), 
-								 length(which(treatvar==0)),
-								 (length(which(treatvar==0)) - length(which(treatvar==1))) / nsteps 
-								 )
-) {
+		samples=seq(length(which(treatvar==1)), length(which(treatvar==0)),
+				 (length(which(treatvar==0)) - length(which(treatvar==1))) / nsteps ),
+		... ) {
 	results <- list()
 	
 	ncontrol <- length(which(treatvar == 0))
 	ntreat <- length(which(treatvar == 1))
-	#ndiff <- ncontrol - ntreat
 	dfrange <- data.frame(p=integer(), i=integer(),
 						 ntreat=integer(), ncontrol=integer(), 
 						 psmin=numeric(), psmax=numeric())
 	pb <- txtProgressBar(min=1, max=(length(samples)*nboot), style=3)
-	densities <- list()
+	fittedValues <- list()
 	models <- list()
 	for(i in 1:length(samples)) {
 		tosample <- samples[i]
 		models[[i]] <- list()
-		density.df <- data.frame(treat=integer(), ps=numeric())
+		density.df <- data.frame(iter=integer(), treat=integer(), ps=numeric())
 		for(j in 1:nboot) {
 			rows <- c(which(treatvar == 1),
 					 sample(which(treatvar == 0), tosample))
-			lr.results <- glm(formula, data=df[rows,], family='binomial')
+			lr.results <- glm(formula, data=df[rows,], family='binomial', ...)
 			dfrange <- rbind(dfrange, data.frame(ind=i, p=tosample/ncontrol*100, i=j,
 												ntreat=ntreat, ncontrol=tosample, 
 												psmin=range(fitted(lr.results))[1],
 												psmax=range(fitted(lr.results))[2]))
 			density.df <- rbind(density.df, 
-								data.frame(treat=treatvar[rows], ps=fitted(lr.results)))
+					data.frame(iter=j, treat=treatvar[rows], ps=fitted(lr.results)))
 			models[[i]][[j]] <- lr.results
 			setTxtProgressBar(pb, (((i-1)*nboot) + j))
 		}
-		densities[[i]] <- density.df
+		fittedValues[[i]] <- density.df
 	}
 	
-	results$densities <- densities
+	results$fittedValues <- fittedValues
 	results$models <- models
 	dfrange$ratio <- dfrange$ncontrol / dfrange$ntreat
 	results$details <- dfrange
@@ -57,8 +56,8 @@ psrange <- function(df, treatvar, formula, nsteps=10, nboot=10,
 	smax <- describeBy(dfrange$psmax, group=dfrange$p, mat=TRUE)[,
 							c('mean','sd','median','se','min','max')]
 	names(smax) <- paste('max', names(smax), sep='.')
-	results$summary <- cbind(dfrange[!duplicated(dfrange$p),c('p','ntreat','ncontrol','ratio')],
-							 smin, smax)
+	results$summary <- cbind(dfrange[!duplicated(dfrange$p),
+					c('p','ntreat','ncontrol','ratio')], smin, smax)
 	class(results) <- c('psrange')
 	return(results)
 }
@@ -67,71 +66,60 @@ psrange <- function(df, treatvar, formula, nsteps=10, nboot=10,
 #' 
 #' @param object psrange to print summary of.
 #' @param ... currently unused.
-#' @export
 summary.psrange <- function(object, ...) {
 	return(object$summary)
 }
 
-#' Plots the results of psrange call with ggplot2 displaying the range of fitted
-#' values (i.e. propensity scores).
+#' Prints information about a psrange result.
 #' 
-#' @param x a psrange object
-#' @param xlab label for the x axis
-#' @param ylab label for the y axis
-#' @param ... currently unused.
-plot.psrange2 <- function(x, 
-						 xlab='Percentage of Control Group',
-						 ylab=paste('Propensity Score Range (ntreat = ', 
-									prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
-						 text.ratio.size=4,
-						 text.ncontrol.size=3,
-						 point.size=1, point.alpha=.6,
-						 line.width = 6,
-						 ...) {
-	text.vjust <- -.4
-	bar.factor = 1
-	#min(x$summary$min.min)-.01
-	p <- ggplot(x$summary, aes(x=p)) + 
-		geom_crossbar(aes(group=p, y=min.mean, ymin=min.min, ymax=min.max), 
-				colour='white', fill='green', alpha=.1, width=line.width*bar.factor) +
-	  	geom_crossbar(aes(group=p, y=max.mean, ymin=max.min, ymax=max.max), 
-	  			colour='white', fill='orange', alpha=.1, width=line.width*bar.factor) +
-	  	geom_errorbar(aes(ymin=min.median, ymax=max.median), colour='black', width=line.width) + 
-		geom_jitter(data=x$details, aes(x=p, y=psmin), size=point.size, alpha=point.alpha, shape=23) +
-		geom_jitter(data=x$details, aes(x=p, y=psmax), size=point.size, alpha=point.alpha, shape=22) +
-		geom_text(aes(label=paste(prettyNum(floor(ncontrol), big.mark=','), sep='')), 
-				y=0, size=text.ncontrol.size, hjust=1.1, vjust=.5) +
-		geom_text(aes(label=paste('1:', round(ratio, digits=1), sep=''), 
-				y=(min.mean + (max.mean-min.mean)/2)), size=text.ratio.size, vjust=text.vjust) +
-	  	coord_flip() + ylim(c(-.05,1)) + 
-	  	#geom_hline(yintercept=0) + geom_hline(yintercept=1) +
-	  	ylab(ylab) + xlab(xlab)
-	return(p)
+#' @param x psrange to print info about.
+#' @param ... currently unused
+print.psrange <- function(x, ...) {
+	cat(paste('Executed ', length(x$models[[1]]), ' for ', length(x$models), 
+		  ' ranging from 1:', min(x$summary$ratio), ' to 1:', max(x$summary$ratio),
+		  '\n', sep=''))
+	print(x$summary[,c('ntreat','ncontrol','ratio','p','min.mean','max.mean')])
 }
 
-#' Plots densities for the propensity scores.
+#' Plots densities and ranges for the propensity scores.
 #' 
-#' @param x the result of psrange
+#' @param x the result of psrange.
+#' @param xlab label for x-axis.
+#' @param ylab label for y-axis.
+#' @param labels labels for the comparison and treatment legend.
+#' @param text.ratio.size size of the text for the ratio.
+#' @param text.ncontrol.size size of the text for the number of control units.
+#' @param point.size size of the points for the minimum and maximum ranges for
+#'        each model.
+#' @param point.alpha the alpha (transparency) level for the points.
+#' @param line.width the width of the line between the median of the minimum
+#'        and maximum ranges.
+#' @param density.alpha the alpha (transparency) level of the density curves.
+#' @param rect.color the color of the rectangle surrounding the range of minimum
+#'        and maximum ranges.
+#' @param rect.alpha the alpha (transparency) level of the rectangle.
+#' @param ... currently unused.
 #' @return a ggplot2 object
 #' @export
 plot.psrange <- function(x,
-						 xlab=paste('Propensity Score Range (ntreat = ', 
-						   		   prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
-						 ylab=NULL,
-						 text.ratio.size = 4,
-						 text.ncontrol.size = 3,
-						 point.size = 1, 
-						 point.alpha = .6,
-						 line.width = 6,
-						 density.alpha = .2,
-						 rect.color = 'green',
-						 rect.alpha = .2,
-						 ...
+		 xlab=paste('Propensity Score Range (ntreat = ', 
+		   		   prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
+		 ylab=NULL,
+		 labels=c('Comparison','Treatment'),
+		 text.ratio.size = 4,
+		 text.ncontrol.size = 3,
+		 point.size = 1, 
+		 point.alpha = .6,
+		 line.width = 6,
+		 density.alpha = .2,
+		 rect.color = 'green',
+		 rect.alpha = .2,
+		 ...
 ) {
 	densities.df <- data.frame(p=numeric(), treat=integer(), ps=numeric())
-	for(i in seq_len(length(x$densities))) {
+	for(i in seq_len(length(x$fittedValues))) {
 		densities.df <- rbind(densities.df, cbind(p=x$summary[i,'p'], 
-												  x$densities[[i]]))
+												  x$fittedValues[[i]]))
 	}
 	densities.df$treat = factor(densities.df$treat)
 	
@@ -149,18 +137,18 @@ plot.psrange <- function(x,
 	p <- ggplot() + xlim(c(-.05,1.05)) + ylim(c(-1,1)) +
 			stat_density(data=densities.df[densities.df$treat==1,], 
 				aes(x=ps, ymax=-..scaled.., fill=treat, ymin = 0),
-				geom = "ribbon", position = "identity", alpha=density.alpha) +
+				geom="ribbon", position="identity", alpha=density.alpha) +
 			stat_density(data=densities.df[densities.df$treat==0,], 
 				aes(x=ps, ymax=..scaled.., fill=treat, ymin = 0),
-				geom = "ribbon", position = "identity", alpha=density.alpha) +
+				geom="ribbon", position="identity", alpha=density.alpha) +
 			geom_rect(data=x$summary, aes(group=p, xmin=max.min-.005, xmax=(max.max+.005), 
 				ymin=0.25, ymax=.75), fill=rect.color, alpha=rect.alpha) +
 			geom_rect(data=x$summary, aes(group=p, xmin=(min.min-.005), xmax=min.max+.005, 
 				ymin=-.75, ymax=-0.25), fill=rect.color, alpha=rect.alpha) +
-			geom_point(data=x$details, 
-  		  		aes(y=-.5, x=psmin), size=point.size, alpha=point.alpha, shape=23) +
-  		  	geom_point(data=x$details, 
-  		  		aes(y=.5, x=psmax), size=point.size, alpha=point.alpha, shape=22) +
+			geom_point(data=x$details, aes(y=-.5, x=psmin), 
+				size=point.size, alpha=point.alpha, shape=23) +
+  		  	geom_point(data=x$details, aes(y=.5, x=psmax), 
+  		  		size=point.size, alpha=point.alpha, shape=22) +
 			geom_errorbarh(data=x$summary, 
 				aes(y=0, x=min.mean + (max.mean-min.mean)/ 2, xmin=min.mean, xmax=max.mean), 
 				colour='black', width=line.width) + 
@@ -173,9 +161,10 @@ plot.psrange <- function(x,
    		  		size=text.ratio.size, vjust=text.vjust) +
 		  	facet_grid(p ~ ., as.table=FALSE, labeller=psrange_labeller) +
 			theme(axis.text.y=element_blank(), axis.ticks.y=element_blank(),
+				  strip.background=element_rect(fill='#EFEFEF'),
 				  strip.text.y=element_text(angle=360)) +
 			ylab(ylab) + xlab(xlab) +
-			scale_fill_hue('', limits=c(0,1), labels=c('Comparison','Treatment'))
+			scale_fill_hue('', limits=c(0,1), labels=labels)
 	
 	return(p)
 }
