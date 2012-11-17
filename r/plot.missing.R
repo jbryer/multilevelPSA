@@ -13,33 +13,44 @@
 plot.missing <- function(x, grouping, grid=FALSE, ...) {
 	vars = x
 	empty <- plyr::empty
-	
-	Layout <- grid.layout(nrow = 1, ncol = 2)
-	vplayout <- function(...) {
-		grid.newpage()
-		pushViewport(viewport(layout = Layout))
-	}
-	subplot <- function(x, y) { viewport(layout.pos.row = x, layout.pos.col = y) }
-	mplot <- function(p1, p2, p3, p4) {
-		vplayout()
-		print(p2, vp = subplot(1, 2))
-		print(p1, vp = subplot(1, 1))
-		#print(p3, vp = subplot(3, 1))
-		#print(p4, vp = subplot(4, 1))
-	}
-	
+		
 	colMissing = apply(vars, 2, function(x) sum(is.na(x))) / nrow(vars)
 	colMissing = 100 * colMissing
 	colMissing = data.frame(x=names(colMissing), y=as.numeric(colMissing))
-	phist = ggplot(colMissing, aes(x=x, y=y, fill=y)) + geom_bar() + coord_flip()
-	phist = phist + xlab(NULL) + ylab(NULL)
-	phist = phist + opts(axis.text.x=theme_text(size=6, angle=-90, hjust=0, vjust=.5), 
-						axis.text.y=theme_blank(), axis.ticks=theme_blank())
-	phist = phist + scale_fill_gradient('Missingness', low='white', high='red', 
+	
+	phist.right = ggplot(colMissing, aes(x=x, y=y, fill=y)) + 
+						geom_bar() + coord_flip()
+	phist.right = phist.right + xlab(NULL) + ylab(NULL)
+	phist.right = phist.right + scale_fill_gradient('Missingness', low='white', high='red', 
 						limits=c(0,100), breaks=seq(0, 100, 10), 
 						labels=paste(seq(0,100,10), '%', sep=''))
-	phist = phist + geom_text(aes(label=round(y, digits=0)), size=2)
-	phist = phist + scale_x_discrete(expand=c(0,0)) + scale_y_continuous(expand=c(0,5))
+	phist.right = phist.right + geom_text(aes(label=round(y, digits=0)), size=2)
+	phist.right = phist.right + ylim(c(0,100))
+	phist.right = phist.right + theme(legend.position='none', 
+						axis.text.y=element_text(size=6, angle=0, hjust=.5, vjust=.5),
+						axis.text.x=element_blank(), 
+						axis.ticks=element_blank())
+	
+	for(g in unique(grouping)) {
+		tmp = apply(vars[grouping == g,], 2, function(x) sum(is.na(x))) / 
+			nrow(vars[grouping == g,])
+		tmp = 100 * tmp
+		tmp = as.numeric(tmp)
+		colMissing = cbind(colMissing, tmp)
+		names(colMissing)[ncol(colMissing)] = g
+	}
+	rowMissing = apply(colMissing[,3:ncol(colMissing),], 2, mean)
+	rowMissing = data.frame(x=names(rowMissing), y=as.numeric(rowMissing))
+	phist.top = ggplot(rowMissing, aes(x=x, y=y, fill=y)) + 
+					geom_bar() + ylim(c(0,100))
+	phist.top = phist.top + scale_fill_gradient('Missingness', low='white', high='red', 
+					limits=c(0,100), breaks=seq(0, 100, 10), 
+					labels=paste(seq(0,100,10), '%', sep=''))
+	phist.top = phist.top + xlab(NULL) + ylab(NULL)
+	phist.top = phist.top + theme(axis.text.x=element_text(size=6, angle=-90, hjust=.5, vjust=.5), 
+					axis.text.x=element_blank(), axis.ticks=element_blank())
+	phist.top = phist.top + geom_text(aes(label=round(y, digits=0)), size=2)
+	phist.top = phist.top + theme(legend.position='none', axis.text.y=element_blank())
 	
 	grouping = as.character(grouping)
 	grouping[is.na(grouping)] = 'Unknown'
@@ -58,22 +69,19 @@ plot.missing <- function(x, grouping, grid=FALSE, ...) {
 		p = p + geom_tile()
 	}
 	p = p + xlab(NULL) + ylab(NULL)
-	p = p + opts(axis.ticks=theme_blank(), axis.text.y=theme_text(size=6, hjust=1, vjust=.5), 
-				 axis.text.x=theme_text(size=6, angle=-90, hjust=0, vjust=.5))
-	p = p + scale_fill_gradient('Missingness', legend=FALSE, low='white', high='red', 
+	p = p + theme(axis.ticks=element_blank(), 
+				 axis.text.y=element_text(size=6, hjust=1, vjust=.5), 
+				 axis.text.x=element_text(size=6, angle=-90, hjust=0, vjust=.5))
+	p = p + scale_fill_gradient('Missingness', low='white', high='red', 
 				 breaks=seq(0, 100, 10), labels=paste(seq(0,100,10), '%', sep=''))
 	p = p + geom_text(aes(label=round(value, digits=0)), size=2, colour='black')
-	p = p + scale_x_discrete(expand=c(0,0)) + scale_y_discrete(expand=c(0,0))
-	p = p + opts(legend.position='none')
-	p = p + opts(plot.margin=unit(c(0, -13, 0, 0), "lines"))
-	phist = phist + geom_hline(yintercept=0) + opts(plot.margin=unit(c(0.05,0,2.6,12), "lines"))
-	
-	#TODO: use align.plots instead. Using the above configuration doesn't seem to work though
-# 	phist = phist + opts(legend.position='none')
-# 	grid_layout = grid.layout(nrow=1, ncol=2, widths=c(1,1), heights=c(2))
-# 	grid.newpage()
-# 	pushViewport( viewport( layout=grid_layout ) )
-# 	multilevelPSA:::align.plots(grid_layout, list(p, 1, 1), list(phist, 1, 2))
+	p = p + theme(legend.position='none', 
+				  axis.text.x=element_blank(), 
+				  axis.text.y=element_blank())
 
-	mplot(p, phist)
+	grid_layout = grid.layout(nrow=2, ncol=2, widths=c(3,1), heights=c(1,3))
+ 	grid.newpage()
+ 	pushViewport( viewport( layout=grid_layout ) )
+ 	multilevelPSA:::align.plots(grid_layout, list(p, 2, 1), 
+ 							list(phist.right, 2, 2), list(phist.top,1,1))
 }
