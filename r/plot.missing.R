@@ -7,10 +7,13 @@
 #' @param x a data frame containing the variables to visualize missingness
 #' @param grouping a vector of length nrow(vars) corresponding to how missing will be grouped by
 #' @param grid whether to draw a grid between tiles
+#' @param widths the ratio of the widths of the heatmap and histogram.
+#' @param heights the ratio of the heights of the heatmap and histogram.
 #' @param ... currently unused.
 #' @return a ggplot2 expression
 #' @export
-plot.missing <- function(x, grouping, grid=FALSE, ...) {
+plot.missing <- function(x, grouping, grid=FALSE, widths=c(3,1), heights=c(1,3),
+						 ...) {
 	vars = x
 	empty <- plyr::empty
 		
@@ -79,7 +82,7 @@ plot.missing <- function(x, grouping, grid=FALSE, ...) {
 				  axis.text.x=element_blank(), 
 				  axis.text.y=element_blank())
 
-	grid_layout = grid.layout(nrow=2, ncol=2, widths=c(3,1), heights=c(1,3))
+	grid_layout = grid.layout(nrow=2, ncol=2, widths=width, heights=heights)
  	grid.newpage()
  	pushViewport( viewport( layout=grid_layout ) )
  	multilevelPSA:::align.plots(grid_layout, list(p, 2, 1), 
