@@ -3,7 +3,10 @@
 \title{Returns a heat map graphic representing missinging of variables grouped by
 the given grouping vector.}
 \usage{
-  plot.missing(x, grouping, grid = FALSE, ...)
+  plot.missing(x, grouping, grid = FALSE,
+    widths = c(unit(3, "null"), unit(1, "inches")),
+    heights = c(unit(1, "inches"), unit(3, "null")),
+    color = "red", ...)
 }
 \arguments{
   \item{x}{a data frame containing the variables to
@@ -13,6 +16,14 @@ the given grouping vector.}
   corresponding to how missing will be grouped by}
 
   \item{grid}{whether to draw a grid between tiles}
+
+  \item{widths}{the ratio of the widths of the heatmap and
+  histogram.}
+
+  \item{heights}{the ratio of the heights of the heatmap
+  and histogram.}
+
+  \item{color}{the color used for indicating missingness.}
 
   \item{...}{currently unused.}
 }

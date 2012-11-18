@@ -39,3 +39,4 @@ Collate:
     'mlpsa.logistic.R'
     'plot.loess.R'
     'psrange.r'
+    'xtable.mlpsa.r'
