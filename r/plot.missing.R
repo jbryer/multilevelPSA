@@ -9,10 +9,14 @@
 #' @param grid whether to draw a grid between tiles
 #' @param widths the ratio of the widths of the heatmap and histogram.
 #' @param heights the ratio of the heights of the heatmap and histogram.
+#' @param color the color used for indicating missingness.
 #' @param ... currently unused.
 #' @return a ggplot2 expression
 #' @export
-plot.missing <- function(x, grouping, grid=FALSE, widths=c(3,1), heights=c(1,3),
+plot.missing <- function(x, grouping, grid=FALSE, 
+						 widths=c(unit(3, 'null'),unit(1,'inches')), 
+						 heights=c(unit(1,'inches'),unit(3, 'null')),
+						 color='red',
 						 ...) {
 	vars = x
 	empty <- plyr::empty
@@ -24,7 +28,7 @@ plot.missing <- function(x, grouping, grid=FALSE, widths=c(3,1), heights=c(1,3),
 	phist.right = ggplot(colMissing, aes(x=x, y=y, fill=y)) + 
 						geom_bar() + coord_flip()
 	phist.right = phist.right + xlab(NULL) + ylab(NULL)
-	phist.right = phist.right + scale_fill_gradient('Missingness', low='white', high='red', 
+	phist.right = phist.right + scale_fill_gradient('Missingness', low='white', high=color, 
 						limits=c(0,100), breaks=seq(0, 100, 10), 
 						labels=paste(seq(0,100,10), '%', sep=''))
 	phist.right = phist.right + geom_text(aes(label=round(y, digits=0)), size=2)
@@ -46,7 +50,7 @@ plot.missing <- function(x, grouping, grid=FALSE, widths=c(3,1), heights=c(1,3),
 	rowMissing = data.frame(x=names(rowMissing), y=as.numeric(rowMissing))
 	phist.top = ggplot(rowMissing, aes(x=x, y=y, fill=y)) + 
 					geom_bar() + ylim(c(0,100))
-	phist.top = phist.top + scale_fill_gradient('Missingness', low='white', high='red', 
+	phist.top = phist.top + scale_fill_gradient('Missingness', low='white', high=color, 
 					limits=c(0,100), breaks=seq(0, 100, 10), 
 					labels=paste(seq(0,100,10), '%', sep=''))
 	phist.top = phist.top + xlab(NULL) + ylab(NULL)
@@ -75,8 +79,9 @@ plot.missing <- function(x, grouping, grid=FALSE, widths=c(3,1), heights=c(1,3),
 	p = p + theme(axis.ticks=element_blank(), 
 				 axis.text.y=element_text(size=6, hjust=1, vjust=.5), 
 				 axis.text.x=element_text(size=6, angle=-90, hjust=0, vjust=.5))
-	p = p + scale_fill_gradient('Missingness', low='white', high='red', 
-				 breaks=seq(0, 100, 10), labels=paste(seq(0,100,10), '%', sep=''))
+	p = p + scale_fill_gradient('Missingness', low='white', high=color, 
+				 limits=c(0,100), breaks=seq(0, 100, 10), 
+				 labels=paste(seq(0,100,10), '%', sep=''))
 	p = p + geom_text(aes(label=round(value, digits=0)), size=2, colour='black')
 	p = p + theme(legend.position='none', 
 				  axis.text.x=element_blank(), 
