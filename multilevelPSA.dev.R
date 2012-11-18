@@ -10,7 +10,6 @@ setwd("~/Dropbox/Projects") #Mac
 getwd()
 
 #Package building
-document("multilevelPSA", clean=TRUE)
 document("multilevelPSA")
 check_doc("multilevelPSA")
 run_examples("multilevelPSA")
@@ -31,4 +30,3 @@ test_file('multilevelPSA/inst/tests/test-pisa.R')
 #Load included data
 data(pisana)
 data(pisanaschool)
-
