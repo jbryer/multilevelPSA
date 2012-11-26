@@ -6,22 +6,31 @@ data(pisanaschool)
 pkgdir = system.file(package='multilevelPSA')
 source(paste(pkgdir, '/pisa/pisa.setup.R', sep=''))
 
-school = pisanaschool[,c('COUNTRY', "CNT", "SCHOOLID",
-						"SC02Q01", #Public (1) or private (2)
-						"STRATIO" #Student-teacher ratio 
-						 )]
-names(school) = c('COUNTRY', 'CNT', 'SCHOOLID', 'PUBPRIV', 'STRATIO')
-school$SCHOOLID = as.integer(school$SCHOOLID)
 
 student <- NULL
+school <- NULL
 if(require(pisa, quietly=TRUE)) {
 	data(pisa.student)
+	data(pisa.school)
 	student = pisa.student[,psa.cols]
+	school = pisa.school[,c('COUNTRY', "CNT", "SCHOOLID",
+							"SC02Q01", #Public (1) or private (2)
+							"STRATIO" #Student-teacher ratio 
+	)]
 } else {
 	data(pisana)
 	student = pisana[,psa.cols]
+	school = pisanaschool[,c('COUNTRY', "CNT", "SCHOOLID",
+							 "SC02Q01", #Public (1) or private (2)
+							 "STRATIO" #Student-teacher ratio 
+	)]
 }
 
+names(school) = c('COUNTRY', 'CNT', 'SCHOOLID', 'PUBPRIV', 'STRATIO')
+school$SCHOOLID = as.integer(school$SCHOOLID)
+school$CNT = as.character(school$CNT)
+
+student$SCHOOLID = as.integer(student$SCHOOLID)
 student$CNT = as.character(student$CNT)
 student = ddply(student, 'CNT', recodePISA, .progress='text')
 student = merge(student, school, by=c('CNT', 'SCHOOLID'), all.x=TRUE)
