@@ -27,6 +27,9 @@ plot.tree <- function(x, colNames, level2Col, colLabels=NULL,
 					  ...) {
 	trees = x
 	
+	if(missing(colNames)) {
+		colNames = names(trees[[1]]@data@env$input)
+	}
 	ncol = length(colNames) + 1
 	tree.df <- as.data.frame(matrix(nrow=length(unique(level2Col)), ncol=ncol))
 	names(tree.df) = c('level2', colNames)
