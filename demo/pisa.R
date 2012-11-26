@@ -6,7 +6,6 @@ data(pisanaschool)
 pkgdir = system.file(package='multilevelPSA')
 source(paste(pkgdir, '/pisa/pisa.setup.R', sep=''))
 
-
 student <- NULL
 school <- NULL
 if(require(pisa, quietly=TRUE)) {
@@ -24,6 +23,7 @@ if(require(pisa, quietly=TRUE)) {
 							 "SC02Q01", #Public (1) or private (2)
 							 "STRATIO" #Student-teacher ratio 
 	)]
+	student = ddply(student, 'CNT', recodePISA, .progress='text')
 }
 
 names(school) = c('COUNTRY', 'CNT', 'SCHOOLID', 'PUBPRIV', 'STRATIO')
@@ -32,19 +32,23 @@ school$CNT = as.character(school$CNT)
 
 student$SCHOOLID = as.integer(student$SCHOOLID)
 student$CNT = as.character(student$CNT)
-student = ddply(student, 'CNT', recodePISA, .progress='text')
 student = merge(student, school, by=c('CNT', 'SCHOOLID'), all.x=TRUE)
 student = student[!is.na(student$PUBPRIV),] #Remove rows with missing PUBPRRIV
 table(student$CNT, student$PUBPRIV, useNA='ifany')
 prop.table(table(student$CNT, student$PUBPRIV, useNA='ifany'), 1) * 100
 
 #Use conditional inference trees from the party package
-mlctree = mlpsa.ctree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')
+#For North America
+#mlctree = mlpsa.ctree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')
+#For full dataset
+mlctree = mlpsa.ctree(student[,c(1,5:48,65)], formula=PUBPRIV ~ ., level2='CNT')
 student.party = getStrata(mlctree, student, level2='CNT')
 
 #Tree heat map showing relative importance of covariates used in each tree.
-plot.tree(mlctree, colNames=names(student[,c(1,5:48,68)]), level2Col=student$CNT)
+plot.tree(mlctree, level2Col=student$CNT)
 
+#NOTE: This is not entirely correct but is sufficient for visualization purposes.
+#See mitools package for combining multiple plausible values.
 student.party$mathscore = apply(student.party[,c('PV1MATH','PV2MATH','PV3MATH','PV4MATH','PV5MATH')], 1, sum) / 5
 student.party$readscore = apply(student.party[,c('PV1READ','PV2READ','PV3READ','PV4READ','PV5READ')], 1, sum) / 5
 student.party$sciescore = apply(student.party[,c('PV1SCIE','PV2SCIE','PV3SCIE','PV4SCIE','PV5SCIE')], 1, sum) / 5
