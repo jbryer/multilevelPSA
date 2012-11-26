@@ -14,10 +14,17 @@
 #' @param colLabels column labels to use. This is a data frame with two columns, the
 #'        first column should match the values in \code{trees} and the second column
 #'        the description that will be used for labeling the variables.
+#' @param color.low color for variables with greater relative importance as determined
+#'        by occurring sooner in the tree (closer to the root split).
+#' @param color.high color for variables with less relative importance as determined
+#'        by occurring later in the tree (further from the root split).
+#' @param color.na color for variables that do not occur in the tree.
 #' @param ... currently unused.
 #' @return a ggplot2 expression
 #' @export
-plot.tree <- function(x, colNames, level2Col, colLabels=NULL, ...) {
+plot.tree <- function(x, colNames, level2Col, colLabels=NULL, 
+					  color.high="azure", color.low='steelblue', color.na='white',
+					  ...) {
 	trees = x
 	
 	ncol = length(colNames) + 1
@@ -70,7 +77,7 @@ plot.tree <- function(x, colNames, level2Col, colLabels=NULL, ...) {
 			geom_text(data=tree.df.m[!duplicated(tree.df.m$variable),], 
 					  aes(y=Desc, x='', label=Var.Freq), size=2, hjust=.5) +
 			geom_tile(aes(fill = value)) +
-			scale_fill_gradient("Depth", high = "lightgrey", low = "steelblue") + 
+			scale_fill_gradient("Depth", high=color.high, low=color.low, na.value=color.na) + 
 			theme(axis.text.y=element_text(size=6, hjust=0, vjust=.5), 
 				 axis.text.x=element_text(size=6, angle=-90, hjust=0, vjust=.5), 
 				 axis.ticks=element_blank()) + 

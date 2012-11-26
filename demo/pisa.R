@@ -13,7 +13,15 @@ school = pisanaschool[,c('COUNTRY', "CNT", "SCHOOLID",
 names(school) = c('COUNTRY', 'CNT', 'SCHOOLID', 'PUBPRIV', 'STRATIO')
 school$SCHOOLID = as.integer(school$SCHOOLID)
 
-student = pisana[,psa.cols]
+student <- NULL
+if(require(pisa, quietly=TRUE)) {
+	data(pisa.student)
+	student = pisa.student[,psa.cols]
+} else {
+	data(pisana)
+	student = pisana[,psa.cols]
+}
+
 student$CNT = as.character(student$CNT)
 student = ddply(student, 'CNT', recodePISA, .progress='text')
 student = merge(student, school, by=c('CNT', 'SCHOOLID'), all.x=TRUE)

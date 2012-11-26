@@ -1,4 +1,5 @@
 require(multilevelPSA)
+student <- NULL
 if(require(pisa, quietly=TRUE)) {
 	data(pisa.student)
 	student = pisa.student[,psa.cols]
