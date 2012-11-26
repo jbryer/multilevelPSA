@@ -2,7 +2,9 @@
 \alias{plot.tree}
 \title{Heat map representing variables used in a conditional inference tree across level 2 variables.}
 \usage{
-  plot.tree(x, colNames, level2Col, colLabels = NULL, ...)
+  plot.tree(x, colNames, level2Col, colLabels = NULL,
+    color.high = "azure", color.low = "steelblue",
+    color.na = "white", ...)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa.ctree}}}
@@ -16,6 +18,17 @@
   values in \code{trees} and the second column the
   description that will be used for labeling the
   variables.}
+
+  \item{color.low}{color for variables with greater
+  relative importance as determined by occurring sooner in
+  the tree (closer to the root split).}
+
+  \item{color.high}{color for variables with less relative
+  importance as determined by occurring later in the tree
+  (further from the root split).}
+
+  \item{color.na}{color for variables that do not occur in
+  the tree.}
 
   \item{...}{currently unused.}
 }
