@@ -41,7 +41,8 @@ prop.table(table(student$CNT, student$PUBPRIV, useNA='ifany'), 1) * 100
 #For North America
 #mlctree = mlpsa.ctree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')
 #For full dataset
-mlctree = mlpsa.ctree(student[,c(1,5:48,65)], formula=PUBPRIV ~ ., level2='CNT')
+mlctree = mlpsa.ctree(student[,c(1,5:48,65)], 
+					  formula=PUBPRIV ~ ., level2='CNT')
 student.party = getStrata(mlctree, student, level2='CNT')
 
 #Tree heat map showing relative importance of covariates used in each tree.
@@ -53,16 +54,22 @@ student.party$mathscore = apply(student.party[,c('PV1MATH','PV2MATH','PV3MATH','
 student.party$readscore = apply(student.party[,c('PV1READ','PV2READ','PV3READ','PV4READ','PV5READ')], 1, sum) / 5
 student.party$sciescore = apply(student.party[,c('PV1SCIE','PV2SCIE','PV3SCIE','PV4SCIE','PV5SCIE')], 1, sum) / 5
 
-results.psa.math = mlpsa(response=student.party$mathscore, treatment=student.party$PUBPRIV, strata=student.party$strata, level2=student.party$CNT, minN=5)
+results.psa.math = mlpsa(response=student.party$mathscore, 
+						 treatment=student.party$PUBPRIV, 
+						 strata=student.party$strata, 
+						 level2=student.party$CNT, minN=5)
 summary(results.psa.math)
 ls(results.psa.math)
 
+results.psa.math$overall.ci
+
 results.psa.math$level1.summary
-results.psa.math$level2.summary
+viewData(results.psa.math$level2.summary)
 
 # These are the two main plots
 plot(results.psa.math)
-plot.mlpsa.difference(results.psa.math, sd=mean(student$mathscore, na.rm=TRUE))
+plot.mlpsa.difference(results.psa.math,
+					  sd=mean(student.party$mathscore, na.rm=TRUE))
 
 # Or the individual components of the main plot separately
 plot.mlpsa.circ(results.psa.math, legendlab=FALSE) #+ opts(legend.position='none')
