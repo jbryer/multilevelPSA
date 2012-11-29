@@ -14,6 +14,6 @@ The following example demonstrates how to get started the multilevelPSA package 
 	ls('package:multilevelPSA')
 
 
-![How often do you read these materials because you want to?](https://github.com/jbryer/multilevelPSA/blob/master/Figures/Math-CircPSA.png?raw=true)
+![MultilevelPSA Plot](http://jason.bryer.org/multilevelPSA/pisaMath.png)
 
 More documentation to come.
