@@ -21,6 +21,8 @@
 #' @param color.na color for variables that do not occur in the tree.
 #' @param ... currently unused.
 #' @return a ggplot2 expression
+#' @usage plot(x)
+#' @seealso plot.mlpsa
 #' @export
 plot.tree <- function(x, colNames, level2Col, colLabels=NULL, 
 					  color.high="azure", color.low='steelblue', color.na='white',

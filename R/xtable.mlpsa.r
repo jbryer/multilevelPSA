@@ -1,11 +1,19 @@
 #' Prints the results of \code{\link{mlpsa}} as a LaTeX table.
 #' 
+#' This function implements the \code{\link{xtable}} method for \code{\link{mlpsa}}.
+#' 
 #' @param x results of \code{\link{mlpsa}}
 #' @param digits number of digits to print.
 #' @param include.note include a table note indicating how many rows were removed
 #'        due to insufficient data within a strata.
+#' @param caption passed through to \code{\link{xtable}}.
+#' @param label passed through to \code{\link{xtable}}.
+#' @param align Not used. 
+#' @param display passed through to \code{\link{xtable}}.
+#' @param ... other parameters passed to \code{\link{summary.mlpsa}}
+#' @usage xtable(x)
 #' @export
-xtable.mlpsa <- function(x, digits=2, include.note=TRUE, ...) {
+xtable.mlpsa <- function(x, caption, label, align, digits=2, display, include.note=TRUE, ...) {
 	xdf <- suppressMessages(summary(x, ...))
 	
 	xdf$ci = NA
@@ -17,7 +25,7 @@ xtable.mlpsa <- function(x, digits=2, include.note=TRUE, ...) {
 	xdf$ci.max <- NULL
 	xdf$Treat.n <- as.integer(xdf$Treat.n)
 	xdf$Control.n <- as.integer(xdf$Control.n)
-	xtab <- xtable(xdf, digits=digits,
+	xtab <- xtable(xdf, digits=digits, caption=caption, label=label, display=display,
 			align=c('l','l','r','r','r@{\\extracolsep{.25cm}}','r','r','c'), ...)
 	class(xtab) <- c('xmlpsa', class(xtab))
 	attr(xtab, 'treat.name') <- x$x.label
@@ -32,10 +40,13 @@ xtable.mlpsa <- function(x, digits=2, include.note=TRUE, ...) {
 
 #' Prints the results of \code{\link{mlpsa}} and \code{\link{xtable.mlpsa}}.
 #' 
+#' Print method for \code{\link{xtable.mlpsa}}.
+#' 
 #' @param x result of \code{\link{xtable.mlpsa}}
 #' @param tabular.environment see \code{\link{print.xtable}}.
 #' @param floating see \code{\link{print.xtable}}.
 #' @param ... other parameters passed to \code{\link{print.xtable}}
+#' @usage print(x)
 #' @export
 print.xmlpsa <- function(x, tabular.environment='longtable', floating=FALSE, ...) {
 	xdf <- as.data.frame(x)
@@ -44,10 +55,14 @@ print.xmlpsa <- function(x, tabular.environment='longtable', floating=FALSE, ...
 	addtorow$pos = list()
 	addtorow$pos[[1]] = c(0)
 	addtorow$command = c(paste(
-		'\\hline & & \\multicolumn{2}{c}{', attr(x, 'treat.name'), '} & \\multicolumn{2}{c}{', attr(x, 'control.name'), '} & \\\\ \\cline{3-4} \\cline{5-6} ',
+		'\\hline & & \\multicolumn{2}{c}{', 
+		attr(x, 'treat.name'), '} & \\multicolumn{2}{c}{', 
+		attr(x, 'control.name'), '} & \\\\ \\cline{3-4} \\cline{5-6} ',
 		'Level & Strata & Mean & n & Mean & n & Confidence Interval \\\\ \\hline', 
 		'\\endfirsthead \\multicolumn{7}{l}{{...continued from previous page}}\\\\ \\hline ',
-		' & & \\multicolumn{2}{c}{', attr(x, 'treat.name'), '} & \\multicolumn{2}{c}{', attr(x, 'control.name'), '} & \\\\ \\cline{3-4} \\cline{5-6} ',
+		' & & \\multicolumn{2}{c}{', 
+		attr(x, 'treat.name'), '} & \\multicolumn{2}{c}{', 
+		attr(x, 'control.name'), '} & \\\\ \\cline{3-4} \\cline{5-6} ',
 		'Level & Strata & Mean & n & Mean & n & Confidence Interval \\\\ \\hline', 
 		' \\endhead \\endfoot \\endlastfoot ',
 		sep=''))

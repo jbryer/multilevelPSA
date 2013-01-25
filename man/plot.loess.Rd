@@ -3,13 +3,10 @@
 \title{Loess plot with density distributions for propensity scores and outcomes on
 top and right, respectively.}
 \usage{
-  plot.loess(ps, response, treatment, responseTitle = "",
-    treatmentTitle = "Treatment",
-    percentPoints.treat = 0.1,
-    percentPoints.control = 0.01)
+  plot(x)
 }
 \arguments{
-  \item{ps}{vector of propensity scores.}
+  \item{x}{vector of propensity scores.}
 
   \item{response}{the response variable.}
 
@@ -34,5 +31,8 @@ top and right, respectively.}
 \description{
   Loess plot with density distributions for propensity
   scores and outcomes on top and right, respectively.
+}
+\seealso{
+  plot.mlpsa
 }
 

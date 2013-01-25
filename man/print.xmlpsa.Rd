@@ -2,8 +2,7 @@
 \alias{print.xmlpsa}
 \title{Prints the results of \code{\link{mlpsa}} and \code{\link{xtable.mlpsa}}.}
 \usage{
-  print.xmlpsa(x, tabular.environment = "longtable",
-    floating = FALSE, ...)
+  print(x)
 }
 \arguments{
   \item{x}{result of \code{\link{xtable.mlpsa}}}
@@ -17,7 +16,6 @@
   \code{\link{print.xtable}}}
 }
 \description{
-  Prints the results of \code{\link{mlpsa}} and
-  \code{\link{xtable.mlpsa}}.
+  Print method for \code{\link{xtable.mlpsa}}.
 }
 

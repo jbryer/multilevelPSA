@@ -2,9 +2,7 @@
 \alias{plot.mlpsa.distribution}
 \title{Plots distribution for either the treatment or comparison group.}
 \usage{
-  plot.mlpsa.distribution(x, treat, fill.colours = NULL,
-    flip = TRUE, label = treat, level2.label = NULL,
-    legendlab = NULL, axis.text.size = 8, ...)
+  plot(x)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa}}.}
@@ -34,5 +32,8 @@
 \description{
   Plots distribution for either the treatment or comparison
   group.
+}
+\seealso{
+  plot.mlpsa
 }
 

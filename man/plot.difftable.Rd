@@ -3,8 +3,7 @@
 \title{This function produces a ggplot2 figure contianing the mean differences for
 each level two, or cluster.}
 \usage{
-  plot.difftable(x, fill.colours = NULL, legendlab = NULL,
-    ...)
+  plot(x)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa}}.}

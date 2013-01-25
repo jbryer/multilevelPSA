@@ -1,2 +1,11 @@
 ^\.Rproj\.user$
 ^.*\.Rproj$
+.gitignore
+Exclude
+multilevelPSA.dev.R
+pisa.dataprep.R
+Poster
+Tables
+Figures
+Paper
+R/new

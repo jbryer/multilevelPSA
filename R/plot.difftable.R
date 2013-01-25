@@ -5,6 +5,7 @@
 #' @param fill.colours the colours to use for each level two.
 #' @param legendlab the label to use for the legend, or NULL to exclude.
 #' @param ... currently unused.
+#' @usage plot(x)
 #' @export
 plot.difftable <- function(x, 
 						   fill.colours=NULL, 

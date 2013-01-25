@@ -21,6 +21,8 @@
 #' @param sd If specified, effect sizes will be plotted instead of difference in the
 #'        native unit.
 #' @param ... currently unused.
+#' @usage plot(x)
+#' @seealso plot.mlpsa
 #' @export
 plot.mlpsa.difference <- function(x,
 		xlab='Difference Score', 

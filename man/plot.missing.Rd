@@ -3,10 +3,7 @@
 \title{Returns a heat map graphic representing missinging of variables grouped by
 the given grouping vector.}
 \usage{
-  plot.missing(x, grouping, grid = FALSE,
-    widths = c(unit(3, "null"), unit(1, "inches")),
-    heights = c(unit(1, "inches"), unit(3, "null")),
-    color = "red", ...)
+  plot(x)
 }
 \arguments{
   \item{x}{a data frame containing the variables to
@@ -33,5 +30,8 @@ the given grouping vector.}
 \description{
   NOTE: This is an experimental function and the results
   may vary depending on the nature of the dataset.
+}
+\seealso{
+  plot.mlpsa
 }
 

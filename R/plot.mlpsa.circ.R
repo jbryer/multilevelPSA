@@ -33,6 +33,8 @@
 #'        lines are drawn representing the weighted means for each level 2, or cluster.
 #' @param fill.colours if specified, the colors to use for level 2 points.
 #' @param ... currently unused.
+#' @usage plot(x)
+#' @seealso plot.mlpsa
 #' @export
 plot.mlpsa.circ <- function(x,
 		xlab=names(multilevelPSA$level2.summary)[4], 

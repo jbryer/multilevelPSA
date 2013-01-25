@@ -1,7 +1,7 @@
 #' Loess plot with density distributions for propensity scores and outcomes on
 #' top and right, respectively.
 #'
-#' @param ps vector of propensity scores.
+#' @param x vector of propensity scores.
 #' @param response the response variable.
 #' @param treatment the treatment varaible as a logical type.
 #' @param percentPoints.treat the percentage of treatment points to randomly plot.
@@ -9,13 +9,15 @@
 #' @param responseTitle the label to use for the y-axis (i.e. the name of the response variable)
 #' @param treatmentTitle the label to use for the treatment legend.
 #' @return a ggplot2 figure
+#' @usage plot(x)
+#' @seealso plot.mlpsa
 #' @export
-plot.loess <- function(ps, response, treatment, 
+plot.loess <- function(x, response, treatment, 
 					   responseTitle='', 
 					   treatmentTitle='Treatment',
 					   percentPoints.treat=.1, 
 					   percentPoints.control=.01) {
-	df = data.frame(ps=ps, response=response, treatment=treatment)
+	df = data.frame(ps=x, response=response, treatment=treatment)
 	df.points.treat = df[sample(which(df$treatment), 
 					round(percentPoints.treat * length(which(df$treatment))), replace=FALSE),]
 	df.points.control =  df[sample(which(!df$treatment), 

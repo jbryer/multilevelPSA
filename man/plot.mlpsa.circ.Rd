@@ -2,19 +2,7 @@
 \alias{plot.mlpsa.circ}
 \title{Plots the results of a multilevel propensity score model.}
 \usage{
-  plot.mlpsa.circ(x,
-    xlab = names(multilevelPSA$level2.summary)[4],
-    ylab = names(multilevelPSA$level2.summary)[5],
-    legendlab = "Level 2", title = NULL,
-    overall.col = "blue", overall.ci.col = "green",
-    level1.plot = FALSE, level1.point.size = NULL,
-    level1.rug.plot = NULL,
-    level1.projection.lines = FALSE, level2.plot = TRUE,
-    level2.point.size = NULL,
-    level2.rug.plot = geom_rug_alt,
-    level2.projection.lines = TRUE, level2.label = FALSE,
-    unweighted.means = FALSE, weighted.means = FALSE,
-    fill.colours = NULL, ...)
+  plot(x)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa}}.}
@@ -84,5 +72,8 @@
   such, additional modificaitons can be made. This plot is
   an extension of the \code{circ.psa} function in the
   \code{PSAgraphics} package for multilevel models.
+}
+\seealso{
+  plot.mlpsa
 }
 
