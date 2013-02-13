@@ -1,3 +1,5 @@
+utils::globalVariables(c('Desc','level2.Freq','Var.Freq','value'))
+
 #' Heat map representing variables used in a conditional inference tree across level 2 variables.
 #' 
 #' This figure provides a summary of the covariates used within each level two cluster
@@ -24,6 +26,7 @@
 #' @seealso plot.mlpsa
 #' @export
 #' @examples
+#' \dontrun{
 #' require(party)
 #' data(pisana)
 #' data(pisa.colnames)
@@ -31,6 +34,7 @@
 #' mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
 #' student.party = getStrata(mlctree, pisana, level2='CNT')
 #' tree.plot(mlctree, level2Col=pisana$CNT)
+#' }
 tree.plot <- function(x, colNames, level2Col, colLabels=NULL, 
 					  color.high="azure", color.low='steelblue', color.na='white',
 					  ...) {

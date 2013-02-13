@@ -14,6 +14,7 @@
 #' @method plot mlpsa
 #' @export
 #' @examples
+#' \dontrun{
 #' require(multilevelPSA)
 #' require(party)
 #' data(pisana)
@@ -27,6 +28,7 @@
 #'        strata=student.party$strata, 
 #'        level2=student.party$CNT, minN=5)
 #' plot(results.psa.math)
+#' }
 plot.mlpsa <- function(x, ratio=c(1,2), plotExtra=NULL, ...) {
 	stopifnot(is.mlpsa(x))
 	mlpsa = x

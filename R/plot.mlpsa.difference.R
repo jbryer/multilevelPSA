@@ -1,3 +1,5 @@
+utils::globalVariables(c('Diff','ci.min','ci.max','n'))
+
 #' Creates a graphic summarizing the differences between treatment and comparison
 #' groups within and across level two clusters.
 #'
@@ -24,6 +26,7 @@
 #' @seealso plot.mlpsa
 #' @export
 #' @examples
+#' \dontrun{
 #' data(pisana)
 #' data(pisa.colnames)
 #' data(pisa.psa.cols)
@@ -35,6 +38,7 @@
 #'        strata=student.party$strata, 
 #'        level2=student.party$CNT, minN=5)
 #' mlpsa.difference.plot(results.psa.math, sd=mean(student.party$mathscore, na.rm=TRUE))
+#' }
 mlpsa.difference.plot <- function(x,
 		xlab='Difference Score', 
 		ylab=NULL,

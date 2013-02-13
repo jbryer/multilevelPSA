@@ -58,6 +58,7 @@ groups within and across level two clusters.}
   two clusters.
 }
 \examples{
+\dontrun{
 data(pisana)
 data(pisa.colnames)
 data(pisa.psa.cols)
@@ -69,6 +70,7 @@ results.psa.math = mlpsa(response=student.party$mathscore,
        strata=student.party$strata,
        level2=student.party$CNT, minN=5)
 mlpsa.difference.plot(results.psa.math, sd=mean(student.party$mathscore, na.rm=TRUE))
+}
 }
 \seealso{
   plot.mlpsa

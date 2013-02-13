@@ -25,6 +25,7 @@
   \code{PSAgraphics} package for multilevel models.
 }
 \examples{
+\dontrun{
 require(multilevelPSA)
 require(party)
 data(pisana)
@@ -38,5 +39,6 @@ results.psa.math = mlpsa(response=student.party$mathscore,
        strata=student.party$strata,
        level2=student.party$CNT, minN=5)
 plot(results.psa.math)
+}
 }
 

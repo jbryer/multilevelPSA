@@ -1,3 +1,5 @@
+utils::globalVariables(c('level2','diffwtd'))
+
 #' This function produces a ggplot2 figure contianing the mean differences for
 #' each level two, or cluster.
 #'

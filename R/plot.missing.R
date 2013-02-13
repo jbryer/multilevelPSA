@@ -1,3 +1,5 @@
+utils::globalVariables(c('y','X2','X1','value'))
+
 #' Returns a heat map graphic representing missinging of variables grouped by
 #' the given grouping vector.
 #'

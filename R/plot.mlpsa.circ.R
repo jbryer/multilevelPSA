@@ -1,3 +1,5 @@
+utils::globalVariables(c('mnx','mny','Diff','strata2','xmark','ymark','n','y'))
+
 #' Plots the results of a multilevel propensity score model.
 #'
 #' The plot created uses the \code{ggplot2} framework. As such, additional modificaitons
@@ -36,6 +38,7 @@
 #' @seealso plot.mlpsa
 #' @export
 #' @examples
+#' \dontrun{
 #' data(pisana)
 #' data(pisa.colnames)
 #' data(pisa.psa.cols)
@@ -46,7 +49,8 @@
 #'        treatment=student.party$PUBPRIV, 
 #'        strata=student.party$strata, 
 #'        level2=student.party$CNT, minN=5)
-#' mlpsa.circ.plot(results.psa.math, legendlab=FALSE) #+ opts(legend.position='none')
+#' mlpsa.circ.plot(results.psa.math, legendlab=FALSE)
+#' }
 mlpsa.circ.plot <- function(x,
 		xlab=names(multilevelPSA$level2.summary)[4], 
 		ylab=names(multilevelPSA$level2.summary)[5], 

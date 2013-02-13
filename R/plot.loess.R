@@ -1,3 +1,5 @@
+utils::globalVariables(c('ps','y'))
+
 #' Loess plot with density distributions for propensity scores and outcomes on
 #' top and right, respectively.
 #'

@@ -85,6 +85,9 @@ print.psrange <- function(x, ...) {
 	print(x$summary[,c('ntreat','ncontrol','ratio','p','min.mean','max.mean')])
 }
 
+utils::globalVariables(c('ps', '..scaled..','treat','max.min','max.max','min.min','min.max',
+						 'psmin','psmax','min.mean','max.mean','ncontrol','ratio'))
+
 #' Plots densities and ranges for the propensity scores.
 #' 
 #' @param x the result of psrange.

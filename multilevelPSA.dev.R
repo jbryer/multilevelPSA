@@ -15,6 +15,7 @@ ls('package:multilevelPSA')
 #Discussion of the Notes generated with ggplot2
 #http://stackoverflow.com/questions/9439256/
 #     how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
+#Told that the package will not pass with these NOTEs, using utils::globalVariables
 
 ##### Rd2markdown ##############################################################
 require(Rd2markdown)

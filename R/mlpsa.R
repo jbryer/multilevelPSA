@@ -11,6 +11,7 @@
 #' @seealso \code{\link{mlpsa.ctree}} \code{\link{mlpsa.logistic}}
 #' @export
 #' @examples
+#' \dontrun{
 #' require(multilevelPSA)
 #' require(party)
 #' data(pisana)
@@ -25,6 +26,7 @@
 #'        level2=student.party$CNT, minN=5)
 #' results.psa.math
 #' summary(results.psa.math)
+#' }
 mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL, minN=5) {
 	stopifnot(length(response) == length(treatment)  & 
 		length(treatment) == length(strata) & length(strata) == length(level2))

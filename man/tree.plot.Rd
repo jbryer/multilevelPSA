@@ -48,6 +48,7 @@
   split.
 }
 \examples{
+\dontrun{
 require(party)
 data(pisana)
 data(pisa.colnames)
@@ -55,6 +56,7 @@ data(pisa.psa.cols)
 mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
 student.party = getStrata(mlctree, pisana, level2='CNT')
 tree.plot(mlctree, level2Col=pisana$CNT)
+}
 }
 \seealso{
   plot.mlpsa

@@ -27,6 +27,7 @@
   TODO: Need more details
 }
 \examples{
+\dontrun{
 require(multilevelPSA)
 require(party)
 data(pisana)
@@ -41,6 +42,7 @@ results.psa.math = mlpsa(response=student.party$mathscore,
        level2=student.party$CNT, minN=5)
 results.psa.math
 summary(results.psa.math)
+}
 }
 \seealso{
   \code{\link{mlpsa.ctree}} \code{\link{mlpsa.logistic}}

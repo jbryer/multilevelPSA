@@ -86,6 +86,7 @@
   \code{PSAgraphics} package for multilevel models.
 }
 \examples{
+\dontrun{
 data(pisana)
 data(pisa.colnames)
 data(pisa.psa.cols)
@@ -96,7 +97,8 @@ results.psa.math = mlpsa(response=student.party$mathscore,
        treatment=student.party$PUBPRIV,
        strata=student.party$strata,
        level2=student.party$CNT, minN=5)
-mlpsa.circ.plot(results.psa.math, legendlab=FALSE) #+ opts(legend.position='none')
+mlpsa.circ.plot(results.psa.math, legendlab=FALSE)
+}
 }
 \seealso{
   plot.mlpsa
