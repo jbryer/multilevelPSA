@@ -1,8 +1,10 @@
-\name{plot.tree}
-\alias{plot.tree}
+\name{tree.plot}
+\alias{tree.plot}
 \title{Heat map representing variables used in a conditional inference tree across level 2 variables.}
 \usage{
-  plot(x)
+  tree.plot(x, colNames, level2Col, colLabels = NULL,
+    color.high = "azure", color.low = "steelblue",
+    color.na = "white", ...)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa.ctree}}}
@@ -44,6 +46,15 @@
   That is, the darkest color, or depth 1, corresponds to
   the covariate used at the root of the tree, or the first
   split.
+}
+\examples{
+require(party)
+data(pisana)
+data(pisa.colnames)
+data(pisa.psa.cols)
+mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
+student.party = getStrata(mlctree, pisana, level2='CNT')
+tree.plot(mlctree, level2Col=pisana$CNT)
 }
 \seealso{
   plot.mlpsa

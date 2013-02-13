@@ -15,13 +15,28 @@
   corner.}
 
   \item{...}{parameters passed to
-  \code{\link{plot.mlpsa.circ}} and
-  \code{\link{plot.mlpsa.distribution}}}
+  \code{\link{mlpsa.circ.plot}} and
+  \code{\link{mlpsa.distribution.plot}}}
 }
 \description{
   The plot created uses the \code{ggplot2} framework. As
   such, additional modificaitons can be made. This plot is
   an extension of the \code{circ.psa} function in the
   \code{PSAgraphics} package for multilevel models.
+}
+\examples{
+require(multilevelPSA)
+require(party)
+data(pisana)
+data(pisa.colnames)
+data(pisa.psa.cols)
+mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
+student.party = getStrata(mlctree, pisana, level2='CNT')
+student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5
+results.psa.math = mlpsa(response=student.party$mathscore,
+       treatment=student.party$PUBPRIV,
+       strata=student.party$strata,
+       level2=student.party$CNT, minN=5)
+plot(results.psa.math)
 }
 

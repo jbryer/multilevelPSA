@@ -2,7 +2,7 @@
 \alias{summary.psrange}
 \title{Prints the summary results of psrange.}
 \usage{
-  summary.psrange(object, ...)
+  \method{summary}{psrange} (object, ...)
 }
 \arguments{
   \item{object}{psrange to print summary of.}

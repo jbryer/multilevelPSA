@@ -9,10 +9,26 @@
 #' @param responseTitle the label to use for the y-axis (i.e. the name of the response variable)
 #' @param treatmentTitle the label to use for the treatment legend.
 #' @return a ggplot2 figure
-#' @usage plot(x)
 #' @seealso plot.mlpsa
 #' @export
-plot.loess <- function(x, response, treatment, 
+#' @examples
+#' \dontrun{
+#' require(multilevelPSA)
+#' require(party)
+#' data(pisana)
+#' data(pisa.psa.cols)
+#' cnt = 'USA' #Can change this to USA, MEX, or CAN
+#' pisana2 = pisana[pisana$CNT == cnt,]
+#' pisana2$treat <- as.integer(pisana2$PUBPRIV) %% 2
+#' lr.results <- glm(treat ~ ., data=pisana2[,c('treat',pisa.psa.cols)], family='binomial')
+#' st = data.frame(ps=fitted(lr.results), 
+#' 				math=apply(pisana2[,paste('PV', 1:5, 'MATH', sep='')], 1, mean), 
+#' 				pubpriv=pisana2$treat)
+#' 				st$treat = as.logical(st$pubpriv)
+#' loess.plot(st$ps, response=st$math, treatment=st$treat, percentPoints.control = 0.4, 
+#'            percentPoints.treat=0.4)
+#' }
+loess.plot <- function(x, response, treatment, 
 					   responseTitle='', 
 					   treatmentTitle='Treatment',
 					   percentPoints.treat=.1, 

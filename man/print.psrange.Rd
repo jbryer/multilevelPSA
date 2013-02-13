@@ -2,7 +2,7 @@
 \alias{print.psrange}
 \title{Prints information about a psrange result.}
 \usage{
-  print.psrange(x, ...)
+  \method{print}{psrange} (x, ...)
 }
 \arguments{
   \item{x}{psrange to print info about.}

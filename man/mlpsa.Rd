@@ -27,7 +27,20 @@
   TODO: Need more details
 }
 \examples{
-\dontrun{party.results = multilevelCtree(student[,c(1,5:48,68)], formula=PUBPRIV ~ ., level2='CNT')}
+require(multilevelPSA)
+require(party)
+data(pisana)
+data(pisa.colnames)
+data(pisa.psa.cols)
+mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
+student.party = getStrata(mlctree, pisana, level2='CNT')
+student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5
+results.psa.math = mlpsa(response=student.party$mathscore,
+       treatment=student.party$PUBPRIV,
+       strata=student.party$strata,
+       level2=student.party$CNT, minN=5)
+results.psa.math
+summary(results.psa.math)
 }
 \seealso{
   \code{\link{mlpsa.ctree}} \code{\link{mlpsa.logistic}}

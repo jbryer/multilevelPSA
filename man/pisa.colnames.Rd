@@ -1,0 +1,15 @@
+\docType{data}
+\name{pisa.colnames}
+\alias{pisa.colnames}
+\title{Mapping of variables in \code{\link{pisana}} with full descriptions.}
+\format{a data frame with 50 rows of 3 variables.}
+\description{
+  This data frame provides three variables, \code{Variable}
+  corresponding to the column names in
+  \code{\link{pisana}}, \code{ShortDesc} providing a short
+  description of the variable as a valid R object name, and
+  \code{Desc} providing a longer description of the
+  variable.
+}
+\keyword{datasets}
+

@@ -19,6 +19,8 @@ Depends:
     grid,
     xtable,
     R (>= 2.14)
+Imports:
+    xtable
 Suggests:
     testthat,
     party,

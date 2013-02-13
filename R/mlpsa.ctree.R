@@ -16,6 +16,7 @@
 #'             of Computational and Graphical Statistics, 15(3), 651--674.
 #' @return a list of BinaryTree-class classes for each level 2
 #' @seealso \code{\link{getStrata}}
+#' @seealso \code{\link{tree.plot}}
 #' @export
 mlpsa.ctree <- function(vars, formula, level2, ...) {
 	require(party)

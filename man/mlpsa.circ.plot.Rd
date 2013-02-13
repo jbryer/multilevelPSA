@@ -1,8 +1,20 @@
-\name{plot.mlpsa.circ}
-\alias{plot.mlpsa.circ}
+\name{mlpsa.circ.plot}
+\alias{mlpsa.circ.plot}
 \title{Plots the results of a multilevel propensity score model.}
 \usage{
-  plot(x)
+  mlpsa.circ.plot(x,
+    xlab = names(multilevelPSA$level2.summary)[4],
+    ylab = names(multilevelPSA$level2.summary)[5],
+    legendlab = "Level 2", title = NULL,
+    overall.col = "blue", overall.ci.col = "green",
+    level1.plot = FALSE, level1.point.size = NULL,
+    level1.rug.plot = NULL,
+    level1.projection.lines = FALSE, level2.plot = TRUE,
+    level2.point.size = NULL,
+    level2.rug.plot = geom_rug_alt,
+    level2.projection.lines = TRUE, level2.label = FALSE,
+    unweighted.means = FALSE, weighted.means = FALSE,
+    fill.colours = NULL, ...)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa}}.}
@@ -72,6 +84,19 @@
   such, additional modificaitons can be made. This plot is
   an extension of the \code{circ.psa} function in the
   \code{PSAgraphics} package for multilevel models.
+}
+\examples{
+data(pisana)
+data(pisa.colnames)
+data(pisa.psa.cols)
+mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
+student.party = getStrata(mlctree, pisana, level2='CNT')
+student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5
+results.psa.math = mlpsa(response=student.party$mathscore,
+       treatment=student.party$PUBPRIV,
+       strata=student.party$strata,
+       level2=student.party$CNT, minN=5)
+mlpsa.circ.plot(results.psa.math, legendlab=FALSE) #+ opts(legend.position='none')
 }
 \seealso{
   plot.mlpsa

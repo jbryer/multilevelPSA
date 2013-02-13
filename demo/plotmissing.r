@@ -1,13 +1,10 @@
 require(multilevelPSA)
-student <- NULL
 if(require(pisa, quietly=TRUE)) {
 	data(pisa.student)
-	student = pisa.student[,psa.cols]
+	data(pisa.psa.cols)
+	student = pisa.student[,c('CNT', pisa.psa.cols)]
+	student$CNT = as.character(student$CNT)
+	missing.plot(student, student$CNT)
 } else {
-	data(pisana)
-	student = pisana[,psa.cols]
+	message("pisa package not loaded. Try\nrequire(devtools)\ninstall_github('pisa','jbryer')")
 }
-pkgdir = system.file(package='multilevelPSA')
-source(paste(pkgdir, '/pisa/pisa.setup.R', sep=''))
-student$CNT = as.character(student$CNT)
-plot.missing(student[,c(5:48)], student$CNT)

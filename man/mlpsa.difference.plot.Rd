@@ -1,9 +1,14 @@
-\name{plot.mlpsa.difference}
-\alias{plot.mlpsa.difference}
+\name{mlpsa.difference.plot}
+\alias{mlpsa.difference.plot}
 \title{Creates a graphic summarizing the differences between treatment and comparison
 groups within and across level two clusters.}
 \usage{
-  plot(x)
+  mlpsa.difference.plot(x, xlab = "Difference Score",
+    ylab = NULL, title = NULL, overall.col = "blue",
+    overall.ci.col = "green", level2.point.size = NULL,
+    level1.points = TRUE, errorbars = TRUE,
+    level2.rug.plot = TRUE, jitter = TRUE, reorder = TRUE,
+    labelLevel2 = TRUE, sd = NULL, ...)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa}}.}
@@ -51,6 +56,19 @@ groups within and across level two clusters.}
   Creates a graphic summarizing the differences between
   treatment and comparison groups within and across level
   two clusters.
+}
+\examples{
+data(pisana)
+data(pisa.colnames)
+data(pisa.psa.cols)
+mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
+student.party = getStrata(mlctree, pisana, level2='CNT')
+student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5
+results.psa.math = mlpsa(response=student.party$mathscore,
+       treatment=student.party$PUBPRIV,
+       strata=student.party$strata,
+       level2=student.party$CNT, minN=5)
+mlpsa.difference.plot(results.psa.math, sd=mean(student.party$mathscore, na.rm=TRUE))
 }
 \seealso{
   plot.mlpsa

@@ -90,42 +90,16 @@ summary(psranges6)
 require(party)
 require(mice)
 data(pisana)
-data(pisanaschool)
-
-pkgdir = system.file(package='multilevelPSA')
-source(paste(pkgdir, '/pisa/pisa.setup.R', sep=''))
-
-school = pisanaschool[,c('COUNTRY', "CNT", "SCHOOLID",
-						 "SC02Q01", #Public (1) or private (2)
-						 "STRATIO" #Student-teacher ratio 
-)]
-names(school) = c('COUNTRY', 'CNT', 'SCHOOLID', 'PUBPRIV', 'STRATIO')
-school$SCHOOLID = as.integer(school$SCHOOLID)
-
-student = pisana[,psa.cols]
-student$CNT = as.character(student$CNT)
-student = ddply(student, 'CNT', recodePISA, .progress='text')
-student = merge(student, school, by=c('CNT', 'SCHOOLID'), all.x=TRUE)
-student = student[!is.na(student$PUBPRIV),] #Remove rows with missing PUBPRRIV
-table(student$CNT, student$PUBPRIV, useNA='ifany')
-prop.table(table(student$CNT, student$PUBPRIV, useNA='ifany'), 1) * 100
+data(pisa.psa.cols)
 
 cnt = 'USA' #Can change this to USA, MEX, or CAN
-student2 = student[student$CNT == cnt,]
+student2 = pisana[student$CNT == cnt,]
 prop.table(table(student2$PUBPRIV, useNA='ifany')) * 100
 
-#NOTE: For reporting final results the number of multiple imputations should be
-#      at least 5 and the number of iterations also about 5. Values of 1 are used
-#      for the sake of execuation time and to demonstrate how to use the psrange
-#      function.
-student.toimpute = student2[,c(5:48)]
-student.mice = mice(student.toimpute, m=1, maxit=1)
-student.complete = complete(student.mice)
-student.complete$PUBPRIV = student2$PUBPRIV
-student.complete$PUBPRIV = as.integer(student.complete$PUBPRIV) - 1
-
-psranges.pisa <- psrange(student.complete, student.complete$PUBPRIV, 
-						 PUBPRIV ~ ., nsteps=10, nboot=5)
+student2$treat <- as.integer(student2$PUBPRIV) %% 2
+psranges.pisa <- psrange(student2[,c(pisa.psa.cols, 'treat')], 
+						 student2$treat, 
+						 treat ~ ., nsteps=10, nboot=5)
 plot(psranges.pisa) + labs(title=paste('Propensity Score Ranges for ', cnt, sep=''))
-summary(psranges)
+summary(psranges.pisa)
 

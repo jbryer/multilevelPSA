@@ -12,10 +12,9 @@
 #' @param color the color used for indicating missingness.
 #' @param ... currently unused.
 #' @return a ggplot2 expression
-#' @usage plot(x)
 #' @seealso plot.mlpsa
 #' @export
-plot.missing <- function(x, grouping, grid=FALSE, 
+missing.plot <- function(x, grouping, grid=FALSE, 
 						 widths=c(unit(3, 'null'),unit(1,'inches')), 
 						 heights=c(unit(1,'inches'),unit(3, 'null')),
 						 color='red',

@@ -5,9 +5,9 @@
 #' @param fill.colours the colours to use for each level two.
 #' @param legendlab the label to use for the legend, or NULL to exclude.
 #' @param ... currently unused.
-#' @usage plot(x)
+#' @return a ggplot2 figure
 #' @export
-plot.difftable <- function(x, 
+difftable.plot <- function(x, 
 						   fill.colours=NULL, 
 						   legendlab=NULL, ...) {
 	stopifnot(is.mlpsa(x))

@@ -10,10 +10,9 @@
 #' @param legendlab the label for the legend, or NULL to exclude a legend.
 #' @param axis.text.size the size of the axis text
 #' @param ... currently unused.
-#' @usage plot(x)
 #' @seealso plot.mlpsa
 #' @export 
-plot.mlpsa.distribution <- function(x, 
+mlpsa.distribution.plot <- function(x, 
 									treat, 
 									fill.colours=NULL, 
 									flip=TRUE, 

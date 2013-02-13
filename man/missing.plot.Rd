@@ -1,9 +1,12 @@
-\name{plot.missing}
-\alias{plot.missing}
+\name{missing.plot}
+\alias{missing.plot}
 \title{Returns a heat map graphic representing missinging of variables grouped by
 the given grouping vector.}
 \usage{
-  plot(x)
+  missing.plot(x, grouping, grid = FALSE,
+    widths = c(unit(3, "null"), unit(1, "inches")),
+    heights = c(unit(1, "inches"), unit(3, "null")),
+    color = "red", ...)
 }
 \arguments{
   \item{x}{a data frame containing the variables to

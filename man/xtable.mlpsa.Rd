@@ -2,7 +2,8 @@
 \alias{xtable.mlpsa}
 \title{Prints the results of \code{\link{mlpsa}} as a LaTeX table.}
 \usage{
-  xtable(x)
+  \method{xtable}{mlpsa} (x, caption, label, align,
+    digits = 2, display, include.note = TRUE, ...)
 }
 \arguments{
   \item{x}{results of \code{\link{mlpsa}}}

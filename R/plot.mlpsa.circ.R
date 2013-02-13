@@ -33,10 +33,21 @@
 #'        lines are drawn representing the weighted means for each level 2, or cluster.
 #' @param fill.colours if specified, the colors to use for level 2 points.
 #' @param ... currently unused.
-#' @usage plot(x)
 #' @seealso plot.mlpsa
 #' @export
-plot.mlpsa.circ <- function(x,
+#' @examples
+#' data(pisana)
+#' data(pisa.colnames)
+#' data(pisa.psa.cols)
+#' mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
+#' student.party = getStrata(mlctree, pisana, level2='CNT')
+#' student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5
+#' results.psa.math = mlpsa(response=student.party$mathscore, 
+#'        treatment=student.party$PUBPRIV, 
+#'        strata=student.party$strata, 
+#'        level2=student.party$CNT, minN=5)
+#' mlpsa.circ.plot(results.psa.math, legendlab=FALSE) #+ opts(legend.position='none')
+mlpsa.circ.plot <- function(x,
 		xlab=names(multilevelPSA$level2.summary)[4], 
 		ylab=names(multilevelPSA$level2.summary)[5], 
 		legendlab='Level 2', 

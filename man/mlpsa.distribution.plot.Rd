@@ -1,8 +1,10 @@
-\name{plot.mlpsa.distribution}
-\alias{plot.mlpsa.distribution}
+\name{mlpsa.distribution.plot}
+\alias{mlpsa.distribution.plot}
 \title{Plots distribution for either the treatment or comparison group.}
 \usage{
-  plot(x)
+  mlpsa.distribution.plot(x, treat, fill.colours = NULL,
+    flip = TRUE, label = treat, level2.label = NULL,
+    legendlab = NULL, axis.text.size = 8, ...)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa}}.}

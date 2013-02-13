@@ -36,5 +36,7 @@
 }
 \seealso{
   \code{\link{getStrata}}
+
+  \code{\link{tree.plot}}
 }
 
