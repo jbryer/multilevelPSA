@@ -6,7 +6,7 @@ top and right, respectively.}
   loess.plot(x, response, treatment, responseTitle = "",
     treatmentTitle = "Treatment",
     percentPoints.treat = 0.1,
-    percentPoints.control = 0.01)
+    percentPoints.control = 0.01, ...)
 }
 \arguments{
   \item{x}{vector of propensity scores.}

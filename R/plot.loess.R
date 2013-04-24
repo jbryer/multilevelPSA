@@ -36,7 +36,8 @@ loess.plot <- function(x, response, treatment,
 					   responseTitle='', 
 					   treatmentTitle='Treatment',
 					   percentPoints.treat=.1, 
-					   percentPoints.control=.01) {
+					   percentPoints.control=.01, 
+					   ...) {
 	df = data.frame(ps=x, response=response, treatment=treatment)
 	df.points.treat = df
 	df.points.control =  df
