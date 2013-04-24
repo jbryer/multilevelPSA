@@ -10,6 +10,8 @@ utils::globalVariables(c('ps','y'))
 #' @param percentPoints.control the percentage of control points to randomly plot.
 #' @param responseTitle the label to use for the y-axis (i.e. the name of the response variable)
 #' @param treatmentTitle the label to use for the treatment legend.
+#' @param ... other parameters passed to \code{\link{geom_smooth}} and
+#'        \code{\link{stat_smooth}}.
 #' @return a ggplot2 figure
 #' @seealso plot.mlpsa
 #' @export
@@ -36,16 +38,14 @@ loess.plot <- function(x, response, treatment,
 					   percentPoints.treat=.1, 
 					   percentPoints.control=.01) {
 	df = data.frame(ps=x, response=response, treatment=treatment)
-	df.points.treat = df[sample(which(df$treatment), 
-					round(percentPoints.treat * length(which(df$treatment))), replace=FALSE),]
-	df.points.control =  df[sample(which(!df$treatment), 
-					round(percentPoints.control * length(which(!df$treatment))), replace=FALSE),]
+	df.points.treat = df
+	df.points.control =  df
 	pmain = ggplot(df, aes(x=ps, y=response, colour=treatment))
 	pmain = pmain + geom_point(data=df.points.control, 
 							   aes(x=ps, y=response, colour=treatment), alpha=.2)
 	pmain = pmain + geom_point(data=df.points.treat, 
 							   aes(x=ps, y=response, colour=treatment), alpha=.2)
-	pmain = pmain + geom_smooth() + ylab(responseTitle) + xlab("Propensity Score") + 
+	pmain = pmain + geom_smooth(...) + ylab(responseTitle) + xlab("Propensity Score") + 
 				theme(legend.position='none', legend.justification='left') + 
 				scale_colour_hue(treatmentTitle) + 
 				xlim(range(df$ps)) + ylim(range(df$response))

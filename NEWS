@@ -4,6 +4,7 @@ multilevelPSA 1.1
 * Updated pisa demo for use with the full PISA dataset using the pisa package available
   at http://github.com/jbryer/pisa.
 * Added pisa.countries data frame.
+* Can now pass parameters through to geom_smooth and stat_smooth from loess.plot.
 
 multilevelPSA 1.0
 =========

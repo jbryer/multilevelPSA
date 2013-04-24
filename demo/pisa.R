@@ -1,6 +1,5 @@
 require(multilevelPSA)
 require(party)
-data(pisana)
 data(pisa.colnames)
 data(pisa.psa.cols)
 
@@ -53,13 +52,10 @@ student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, su
 student.party$readscore = apply(student.party[,paste0('PV', 1:5, 'READ')], 1, sum) / 5
 student.party$sciescore = apply(student.party[,paste0('PV', 1:5, 'SCIE')], 1, sum) / 5
 
-data(pisa.countries)
-student.party <- merge(student.party, pisa.countries, by.x='CNT', by.y='Country', all.x=TRUE)
-
 results.psa.math = mlpsa(response=student.party$mathscore, 
 						 treatment=student.party$PUBPRIV, 
 						 strata=student.party$strata, 
-						 level2=student.party$CNT3, minN=5)
+						 level2=student.party$CNT, minN=5)
 summary(results.psa.math)
 ls(results.psa.math)
 

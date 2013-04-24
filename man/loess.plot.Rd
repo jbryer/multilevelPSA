@@ -27,6 +27,9 @@ top and right, respectively.}
 
   \item{treatmentTitle}{the label to use for the treatment
   legend.}
+
+  \item{...}{other parameters passed to
+  \code{\link{geom_smooth}} and \code{\link{stat_smooth}}.}
 }
 \value{
   a ggplot2 figure
