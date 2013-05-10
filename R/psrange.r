@@ -12,10 +12,12 @@
 #' @return a class of psrange that contains a summary data frame, a details data
 #'         frame, and a list of each individual result from glm.
 #' @export
-psrange <- function(df, treatvar, formula, nsteps=10, nboot=10,
-		samples=seq(length(which(treatvar==1)), length(which(treatvar==0)),
-				 (length(which(treatvar==0)) - length(which(treatvar==1))) / nsteps ),
-		... ) {
+psrange <- function(df, treatvar, formula, nsteps=10, nboot=10, samples, ... ) {
+	if(missing(samples)) {
+		samples <- seq(length(which(treatvar==1)), length(which(treatvar==0)),
+					   (length(which(treatvar==0)) - length(which(treatvar==1))) / nsteps )
+	}
+	
 	results <- list()
 	
 	ncontrol <- length(which(treatvar == 0))
@@ -111,8 +113,7 @@ utils::globalVariables(c('ps', '..scaled..','treat','max.min','max.max','min.min
 #' @method plot psrange
 #' @export
 plot.psrange <- function(x,
-		 xlab=paste('Propensity Score Range (ntreat = ', 
-		   		   prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep=''),
+		 xlab=NULL,
 		 ylab=NULL,
 		 labels=c('Comparison','Treatment'),
 		 text.ratio.size = 4,
@@ -125,6 +126,11 @@ plot.psrange <- function(x,
 		 rect.alpha = .2,
 		 ...
 ) {
+	if(missing(xlab)) {
+		xlab <- paste('Propensity Score Range (ntreat = ', 
+				   prettyNum(x$summary[1,'ntreat'], big.mark=','), ')', sep='')
+	}
+	
 	densities.df <- data.frame(p=numeric(), treat=integer(), ps=numeric())
 	for(i in seq_len(length(x$fittedValues))) {
 		densities.df <- rbind(densities.df, cbind(p=x$summary[i,'p'], 

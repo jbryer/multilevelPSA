@@ -2,9 +2,8 @@
 \alias{plot.psrange}
 \title{Plots densities and ranges for the propensity scores.}
 \usage{
-  \method{plot}{psrange} (x,
-    xlab = paste("Propensity Score Range (ntreat = ", prettyNum(x$summary[1, "ntreat"], big.mark = ","), ")", sep = ""),
-    ylab = NULL, labels = c("Comparison", "Treatment"),
+  \method{plot}{psrange} (x, xlab = NULL, ylab = NULL,
+    labels = c("Comparison", "Treatment"),
     text.ratio.size = 4, text.ncontrol.size = 3,
     point.size = 1, point.alpha = 0.6, line.width = 6,
     density.alpha = 0.2, rect.color = "green",

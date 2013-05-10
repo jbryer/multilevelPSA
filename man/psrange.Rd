@@ -4,8 +4,7 @@
 1:1 to using all available comparison group subjects.}
 \usage{
   psrange(df, treatvar, formula, nsteps = 10, nboot = 10,
-    samples = seq(length(which(treatvar == 1)), length(which(treatvar == 0)), (length(which(treatvar == 0)) - length(which(treatvar == 1)))/nsteps),
-    ...)
+    samples, ...)
 }
 \arguments{
   \item{df}{data frame with variables to pass to glm}

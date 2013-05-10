@@ -1,3 +1,8 @@
+multilevelPSA 1.2
+=========
+
+* Changed minimum R requirement to 3.0 since some dependent packages require 3.0 (e.g. ggplot2)
+
 multilevelPSA 1.1
 =========
 
