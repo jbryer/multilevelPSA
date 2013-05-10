@@ -6,5 +6,9 @@ citEntry(entry = "article",
 	year = "2011",
 	number = "46",
 	pages = "1010--1011",
-	journal = "Multivariate Behavior Research"
+	journal = "Multivariate Behavior Research",
+	textVersion = paste0("Bryer, J.M. & Pruzek, R.M. (2011). ",
+		"An international comparison of private and public schools using multilevel ",
+		"propensity score methods and graphics (Abstract). ",
+		"Multivariate Behavior Research 46, 1011-1011")
 )

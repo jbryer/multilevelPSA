@@ -74,10 +74,19 @@ NULL
 #' Character vector representing the list of covariates used for estimating
 #' propensity scores.
 #' 
-#' 
-#' 
 #' @name pisa.psa.cols
 #' @docType data
 #' @format a character vector with covariate names for estimating propensity scores.
+#' @keywords datasets
+NULL
+
+#' Data frame mapping PISA countries to their three letter abbreviation.
+#' 
+#' This data frame has two columns, \code{CNT3} for the three letter abbreviation
+#' of each country and \code{Country} that provides the full country name in English.
+#' 
+#' @name pisa.countries
+#' @docType data
+#' @format data frame with 65 rows of 2 variables.
 #' @keywords datasets
 NULL
