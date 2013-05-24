@@ -8,6 +8,8 @@ utils::globalVariables(c('ps','y'))
 #' @param treatment the treatment varaible as a logical type.
 #' @param percentPoints.treat the percentage of treatment points to randomly plot.
 #' @param percentPoints.control the percentage of control points to randomly plot.
+#' @param points.treat.alpha the transparency level for treatment points.
+#' @param points.control.alpha the transparency level for control points.
 #' @param responseTitle the label to use for the y-axis (i.e. the name of the response variable)
 #' @param treatmentTitle the label to use for the treatment legend.
 #' @param ... other parameters passed to \code{\link{geom_smooth}} and
@@ -37,15 +39,25 @@ loess.plot <- function(x, response, treatment,
 					   treatmentTitle='Treatment',
 					   percentPoints.treat=.1, 
 					   percentPoints.control=.01, 
+					   points.treat.alpha=.1,
+					   points.control.alpha=.1,
 					   ...) {
 	df = data.frame(ps=x, response=response, treatment=treatment)
-	df.points.treat = df
-	df.points.control =  df
+	df.points.treat <- df[treatment,]
+	df.points.control <-  df[!treatment,]
+	df.points.treat <- df.points.treat[sample(nrow(df.points.treat), 
+											  nrow(df.points.treat) * percentPoints.treat),]
+	df.points.control <- df.points.control[sample(nrow(df.points.control),
+											      nrow(df.points.control) * percentPoints.control),]
 	pmain = ggplot(df, aes(x=ps, y=response, colour=treatment))
-	pmain = pmain + geom_point(data=df.points.control, 
-							   aes(x=ps, y=response, colour=treatment), alpha=.2)
-	pmain = pmain + geom_point(data=df.points.treat, 
-							   aes(x=ps, y=response, colour=treatment), alpha=.2)
+	if(nrow(df.points.control) > 0) {
+		pmain = pmain + geom_point(data=df.points.control, 
+								   aes(x=ps, y=response, colour=treatment), alpha=points.control.alpha)
+	}
+	if(nrow(df.points.treat) > 0) {
+		pmain = pmain + geom_point(data=df.points.treat, 
+								   aes(x=ps, y=response, colour=treatment), alpha=points.treat.alpha)
+	}
 	pmain = pmain + geom_smooth(...) + ylab(responseTitle) + xlab("Propensity Score") + 
 				theme(legend.position='none', legend.justification='left') + 
 				scale_colour_hue(treatmentTitle) + 
