@@ -41,13 +41,36 @@ mlpsa.logistic <- function(vars, formula, level2, stepAIC=FALSE, ...) {
 #' 
 #' @seealso mlpsa.logistic
 #' @param lr.results the results of \code{\link{mlpsa.logistic}}
+#' @param nStrata number of strata within each level.
 #' @return a data frame
 #' @export getPropensityScores
-getPropensityScores <- function(lr.results) {
+getPropensityScores <- function(lr.results, nStrata=5) {
 	df = data.frame(level2 = character(), ps=numeric)
 	for(i in names(lr.results)) {
 		ps = fitted(lr.results[i][[1]])
 		df = rbind(df, data.frame(level2 = rep(i, length(ps)), ps=ps))
 	}
+	
+	df$strata <- NA
+	for(l in unique(df$level2)) {
+		rows <- which(df$level2 == l)
+		for(i in 5:1) {
+			if(i == 1) {
+				df[rows,]$strata <- 1
+			} else {
+				tryCatch( {
+					df[rows,]$strata <- cut(df[rows,]$ps, 
+								breaks=quantile(df[rows,]$ps, seq(0,1,1/i), na.rm=TRUE), 
+								labels=1:i, 
+								include.lowest=TRUE);
+					break;
+				},
+				error=function(e) { warning(paste0('Could not use ', i, ' strata for ', l)) }
+				) #end try
+			}
+		}
+	}
+	
+	
 	return(df)
 }

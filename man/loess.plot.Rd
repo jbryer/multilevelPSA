@@ -6,7 +6,8 @@ top and right, respectively.}
   loess.plot(x, response, treatment, responseTitle = "",
     treatmentTitle = "Treatment",
     percentPoints.treat = 0.1,
-    percentPoints.control = 0.01, ...)
+    percentPoints.control = 0.01, points.treat.alpha = 0.1,
+    points.control.alpha = 0.1, ...)
 }
 \arguments{
   \item{x}{vector of propensity scores.}
@@ -21,6 +22,12 @@ top and right, respectively.}
 
   \item{percentPoints.control}{the percentage of control
   points to randomly plot.}
+
+  \item{points.treat.alpha}{the transparency level for
+  treatment points.}
+
+  \item{points.control.alpha}{the transparency level for
+  control points.}
 
   \item{responseTitle}{the label to use for the y-axis
   (i.e. the name of the response variable)}
