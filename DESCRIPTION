@@ -48,3 +48,4 @@ Collate:
     'xtable.mlpsa.r'
     'covariateBalance.R'
     'plot.balance.R'
+    'covariate.balance.R'

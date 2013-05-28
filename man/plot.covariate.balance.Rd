@@ -1,11 +1,11 @@
-\name{balance.plot}
-\alias{balance.plot}
-\title{#' Multiple covariate blance assessment plot.}
+\name{plot.covariate.balance}
+\alias{plot.covariate.balance}
+\title{Multiple covariate blance assessment plot.}
 \usage{
-  balance.plot(mlpsatree, grid = TRUE, ...)
+  \method{plot}{covariate.balance} (x, grid = TRUE, ...)
 }
 \arguments{
-  \item{mlpsatree}{results of \code{\link{mlpsa.ctree}}.}
+  \item{x}{results of \code{\link{covariate.balance}}.}
 
   \item{grid}{should all the levels be plotted together
   (FALSE) or in a grid (TRUE).}

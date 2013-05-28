@@ -30,15 +30,17 @@
 #' @param verbose logical, controls output that is visibly returned.  
 #' @param xlim limits for the x-axis.
 #' @param plot.strata logical indicating whether to print strata.
+#' @param na.rm should missing values be removed.
 #' @param ... currently unused. 
 #' @author Robert M. Pruzek RMPruzek@@yahoo.com
 #' @author James E. Helmreich James.Helmreich@@Marist.edu
 #' @author KuangNan Xiong harryxkn@@yahoo.com
+#' @author Jason Bryer jason@@bryer.org
 covariateBalance <- function(covariates, treatment, propensity, strata = NULL, 
                      int = NULL, tree = FALSE, minsize = 2, universal.psd = TRUE,
 	                  trM = 0, absolute.es = TRUE, trt.value = NULL, 
 	                  use.trt.var = FALSE, verbose = FALSE, xlim = NULL, 
-	                  plot.strata = TRUE, ...) {
+	                  plot.strata = TRUE, na.rm=TRUE, ...) {
 	X <- covariates
 	
 	treat.lev <- sort(unique(treatment))
@@ -99,16 +101,16 @@ covariateBalance <- function(covariates, treatment, propensity, strata = NULL,
 			#ha  is (size ith strata by 2)-matrix that picks off values of jth 
 			#covariate and treatment in ith stratum 
 			ha = XX[XX[, n.cov + 2] == names.strata[i], c(j, n.cov + 1)]
-			mean.diff[j,i] = (mean(ha[ha[, 2] == treat.lev[2], 1], trim = trM) - 
-			                  mean(ha[ha[, 2] == treat.lev[1] , 1], trim = trM)) 
+			mean.diff[j,i] = (mean(ha[ha[, 2] == treat.lev[2], 1], trim = trM, na.rm=na.rm) - 
+			                  mean(ha[ha[, 2] == treat.lev[1] , 1], trim = trM, na.rm=na.rm)) 
 			mean.diff.adj[j,i] = mean.diff[j,i] * som[3, i]/sum(som[3, ])
 			if(use.trt.var) {
-				var.cov.by.strattreat[j, i] = var(ha[ha[, 2] == treat.lev[2], 1] )
-				var.cov.by.strattreat[j, i + n.strata] = var(ha[ha[, 2] == treat.lev[2],1] ) 
-				sd.adj[j,i]=sd( ha[ha[,2]==treat.lev[2],1] )  
+				var.cov.by.strattreat[j, i] = var(ha[ha[, 2] == treat.lev[2], 1], na.rm=na.rm )
+				var.cov.by.strattreat[j, i + n.strata] = var(ha[ha[, 2] == treat.lev[2],1], na.rm=na.rm ) 
+				sd.adj[j,i]=sd( ha[ha[,2]==treat.lev[2],1], na.rm=na.rm )  
 			} else {
-				var.cov.by.strattreat[j,i] = var( ha[ha[,2]==treat.lev[1],1]) 
-				var.cov.by.strattreat[j, i + n.strata] = var( ha[ha[,2]==treat.lev[2],1] ) 
+				var.cov.by.strattreat[j,i] = var( ha[ha[,2]==treat.lev[1],1], na.rm=na.rm) 
+				var.cov.by.strattreat[j, i + n.strata] = var( ha[ha[,2]==treat.lev[2],1], na.rm=na.rm ) 
 				sd.adj[j,i] = sqrt((var.cov.by.strattreat[j, i] + 
 										var.cov.by.strattreat[j, i + n.strata])/2)
 			} 
@@ -116,13 +118,13 @@ covariateBalance <- function(covariates, treatment, propensity, strata = NULL,
 		# uess[j,1] contains unadjusted ES for jth covariate by direct calculation 
 		# mean.diff.unadj and sd.un are mean.diff and sd.adj for each covariate without 
 		# propensity score adjustment. 
-		mean.diff.unadj[j] = (mean(XX[XX[, n.cov+1] == treat.lev[2], j], trim = trM) - 
-		                      mean(XX[XX[, n.cov+1] == treat.lev[1], j], trim = trM)) 
+		mean.diff.unadj[j] = (mean(XX[XX[, n.cov+1] == treat.lev[2], j], trim = trM, na.rm=na.rm) - 
+		                      mean(XX[XX[, n.cov+1] == treat.lev[1], j], trim = trM, na.rm=na.rm)) 
 		if (use.trt.var) {
-			sd.un[j] = sd(XX[XX[, n.cov + 1] == treat.lev[2] ,j ])
+			sd.un[j] = sd(XX[XX[, n.cov + 1] == treat.lev[2] ,j ], na.rm=na.rm)
 		} else {
-			sd.un[j] = sqrt((var(XX[XX[, n.cov+1] == treat.lev[1],j]) + 
-		                     var(XX[XX[, n.cov+1] == treat.lev[2], j]))/2) 
+			sd.un[j] = sqrt((var(XX[XX[, n.cov+1] == treat.lev[1],j], na.rm=na.rm) + 
+		                     var(XX[XX[, n.cov+1] == treat.lev[2], j], na.rm=na.rm))/2) 
 		}
 		uess[j,1] = if(sd.un[j] > 0){ mean.diff.unadj[j] / sd.un[j] } else { 0 } 
 	   

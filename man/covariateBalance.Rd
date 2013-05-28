@@ -6,7 +6,7 @@
     strata = NULL, int = NULL, tree = FALSE, minsize = 2,
     universal.psd = TRUE, trM = 0, absolute.es = TRUE,
     trt.value = NULL, use.trt.var = FALSE, verbose = FALSE,
-    xlim = NULL, plot.strata = TRUE, ...)
+    xlim = NULL, plot.strata = TRUE, na.rm = TRUE, ...)
 }
 \arguments{
   \item{covariates}{dataframe of interest}
@@ -60,6 +60,8 @@
   \item{plot.strata}{logical indicating whether to print
   strata.}
 
+  \item{na.rm}{should missing values be removed.}
+
   \item{...}{currently unused.}
 }
 \description{
@@ -77,5 +79,7 @@
   James E. Helmreich James.Helmreich@Marist.edu
 
   KuangNan Xiong harryxkn@yahoo.com
+
+  Jason Bryer jason@bryer.org
 }
 
