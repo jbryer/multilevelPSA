@@ -46,6 +46,13 @@ student.party = getStrata(mlctree, student, level2='CNT')
 #Tree heat map showing relative importance of covariates used in each tree.
 tree.plot(mlctree, level2Col=student$CNT, colLabels=pisa.colnames[,c('Variable','ShortDesc')])
 
+#Balance plot
+cv.bal <- covariate.balance(covariates=student[,pisa.psa.cols],
+							treatment=student$PUBPRIV,
+							level2=student$CNT,
+							strata=student.party$strata)
+plot(cv.bal)
+
 #NOTE: This is not entirely correct but is sufficient for visualization purposes.
 #See mitools package for combining multiple plausible values.
 student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5

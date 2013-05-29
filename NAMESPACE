@@ -1,6 +1,8 @@
+S3method(as.data.frame,covariate.balance)
 S3method(plot,covariate.balance)
 S3method(plot,mlpsa)
 S3method(plot,psrange)
+S3method(print,covariate.balance)
 S3method(print,mlpsa)
 S3method(print,psrange)
 S3method(print,xmlpsa)

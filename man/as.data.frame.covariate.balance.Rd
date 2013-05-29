@@ -1,0 +1,24 @@
+\name{as.data.frame.covariate.balance}
+\alias{as.data.frame.covariate.balance}
+\title{Returns the overall effects as a data frame.}
+\usage{
+  \method{as.data.frame}{covariate.balance} (x,
+    row.names = NULL, optional = FALSE, ...)
+}
+\arguments{
+  \item{x}{results of \code{\link{covariate.balance}}.}
+
+  \item{row.names}{unused.}
+
+  \item{optional}{unused.}
+
+  \item{...}{unused}
+}
+\value{
+  a data frame with overall covariate effects before and
+  after adjustment.
+}
+\description{
+  Returns the overall effects as a data frame.
+}
+

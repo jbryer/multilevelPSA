@@ -2,16 +2,20 @@
 \alias{covariate.balance}
 \title{Estimate covariate effect sizes before and after propensity score adjustment.}
 \usage{
-  covariate.balance(covs, treat, level2, strata)
+  covariate.balance(covariates, treatment, level2, strata,
+    abs = TRUE)
 }
 \arguments{
-  \item{covs}{frame or matrix of covariates.}
+  \item{covariates}{frame or matrix of covariates.}
 
-  \item{treat}{vector of treatment indicators.}
+  \item{treatment}{vector of treatment indicators.}
 
   \item{level2}{vector indicating level 2 membership.}
 
   \item{strata}{strata indicators.}
+
+  \item{abs}{if TRUE absolute values of effect sizes will
+  be plotted.}
 }
 \description{
   Estimate covariate effect sizes before and after

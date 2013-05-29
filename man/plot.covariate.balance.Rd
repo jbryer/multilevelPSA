@@ -2,13 +2,33 @@
 \alias{plot.covariate.balance}
 \title{Multiple covariate blance assessment plot.}
 \usage{
-  \method{plot}{covariate.balance} (x, grid = TRUE, ...)
+  \method{plot}{covariate.balance} (x, plot.strata = FALSE,
+    strata.size = 3, strata.legend.guide = "none",
+    point.size = 3, point.alpha = 1, line.color = "black",
+    line.alpha = 0.2, ...)
 }
 \arguments{
   \item{x}{results of \code{\link{covariate.balance}}.}
 
-  \item{grid}{should all the levels be plotted together
-  (FALSE) or in a grid (TRUE).}
+  \item{plot.strata}{whether individual strata should be
+  plotted.}
+
+  \item{strata.size}{text size for strata if plotted.}
+
+  \item{strata.legend.guide}{guide for legend placement for
+  strata.}
+
+  \item{point.size}{size of the overall effect size
+  points.}
+
+  \item{point.alpha}{transparency level of the overall
+  effect size points.}
+
+  \item{line.color}{the color of the line connecting the
+  overall effect size ponts.}
+
+  \item{line.alpha}{transparency level of the line
+  connecting the overall effect size points.}
 
   \item{...}{currently unused.}
 }
