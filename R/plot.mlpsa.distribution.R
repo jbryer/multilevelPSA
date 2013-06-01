@@ -49,8 +49,8 @@ mlpsa.distribution.plot <- function(x,
 		p = ggplot(level1.summary, aes_string(x=xname, y=yname))
 		#This is a bit of a hack. I renamed the mnx and mny columns in the mlpsa
 		#function to use the treatment levels. This will duplicate those columns.
-		level2.summary$mnx = multilevelPSA$level2.summary[,5]
-		level2.summary$mny = multilevelPSA$level2.summary[,4]
+		level2.summary$mnx = multilevelPSA$level2.summary[,multilevelPSA$x.lab]
+		level2.summary$mny = multilevelPSA$level2.summary[,multilevelPSA$y.lab]
 		p = p + scale_x_continuous(limits=plot.range)
 		p = p + theme(legend.position='none', 
 					 axis.text.y=element_text(size=axis.text.size, angle=0, hjust=.5))
@@ -73,11 +73,11 @@ mlpsa.distribution.plot <- function(x,
 	
 	p = p + geom_point(stat='identity', alpha=.3, size=1.3)
 	if(!is.null(fill.colours)) {
-		p = p + scale_colour_manual(legend=FALSE, values=fill.colours) + 
-			scale_fill_manual(legend=FALSE, values=fill.colours)
+		p = p + scale_colour_manual(guide='none', values=fill.colours) + 
+			scale_fill_manual(guide='none', values=fill.colours)
 	} else if(length(unique(level2.summary$level2)) > 20) {
 		#No legend since the legend would be bigger than the plot
-		p = p + scale_colour_hue(legend=FALSE) + scale_fill_hue(legend=FALSE)
+		p = p + scale_colour_hue(guide='none') + scale_fill_hue(guide='none')
 	} else if(length(unique(level1.summary$level2)) > 8) {
 		p = p + scale_colour_hue(legendlab) + scale_fill_hue(legendlab)
 	} else {

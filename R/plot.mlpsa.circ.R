@@ -224,11 +224,11 @@ mlpsa.circ.plot <- function(x,
 					   label='x', stat='identity', size=2, shape=3, alpha=.5)
 	#Set colour scheme and legend
 	if(!is.null(fill.colours)) {
-		p = p + scale_colour_manual(legend=FALSE, values=fill.colours) + 
-			scale_fill_manual(legend=FALSE, values=fill.colours)
+		p = p + scale_colour_manual(guide='none', values=fill.colours) + 
+			scale_fill_manual(guide='none', values=fill.colours)
 	} else if(length(unique(level2.summary$level2)) > 20) {
 		#No legend since the legend would be bigger than the plot
-		p = p + scale_colour_hue(legend=FALSE) + scale_fill_hue(legend=FALSE)
+		p = p + scale_colour_hue(guide='none') + scale_fill_hue(guide='none')
 	} else if(length(unique(level1.summary$level2)) > 8) {
 		p = p + scale_colour_hue(legendlab) + scale_fill_hue(legendlab)
 	} else {
