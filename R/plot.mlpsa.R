@@ -36,11 +36,11 @@ plot.mlpsa <- function(x, ratio=c(1,2), plotExtra=NULL, ...) {
 	pcirc = mlpsa.circ.plot(mlpsa, legendlab=FALSE, ...) + 
 				theme(legend.position='none') +
 				xlab(NULL) + ylab(NULL)
-	px = mlpsa.distribution.plot(mlpsa, treat=names(mlpsa$level2.summary)[4],
-						flip=TRUE, label=names(mlpsa$level2.summary)[4], ...) +
+	px = mlpsa.distribution.plot(mlpsa, treat=mlpsa$x.lab,
+						flip=TRUE, label=mlpsa$xlab, ...) +
 				theme(legend.position='none')#, axis.text.x=element_blank())
-	py = mlpsa.distribution.plot(mlpsa, treat=names(mlpsa$level2.summary)[5],
-						flip=FALSE, label=names(mlpsa$level2.summary)[5], ...) +
+	py = mlpsa.distribution.plot(mlpsa, treat=mlpsa$y.lab,
+						flip=FALSE, label=mlpsa$y.lab, ...) +
 				theme(legend.position='none')#, axis.text.y=element_blank())
 	
 	grid_layout = grid.layout(nrow=2, ncol=2, widths=c(ratio[1:2]), heights=ratio[2:1], respect=TRUE)
