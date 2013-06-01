@@ -28,9 +28,6 @@ covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 	strata.es <- list()
 	for(i in names(covariates)) {
 		rows <- !is.na(covariates[,i])
-# 		as.data.frame(tapply(covariates[rows,i], 
-# 					list(level2[rows], treatment[rows], strata[rows]), mean), simplify=FALSE)
- 		
 		adj <- data.frame()
 		for(l in unique(level2)) {
 			lvl.rows <- rows & level2 == l
@@ -50,7 +47,10 @@ covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 		adj <- na.omit(adj)
 		adj$diff <- adj[,1] - adj[,2]
 		adj$es <- adj$diff / adj$sd
-		adj[is.nan(adj$es),]$es <- 0 # If there is perfect balance then the st dev will be 0
+		nans <- is.nan(adj$es)
+		if(any(nans)) {
+			adj[is.nan(adj$es),]$es <- 0 # If there is perfect balance then the st dev will be 0
+		}
 		es.wtd <- adj$es * adj$n
 		results[i,]$es.adj <- mean(adj$es)
 		results[i,]$es.adj.wtd <- mean(es.wtd) / sum(adj$n)
