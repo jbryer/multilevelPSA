@@ -22,14 +22,15 @@ covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 	
 	results <- data.frame(row.names=names(covariates), 
 						  es.adj=rep(as.numeric(NA), ncol(covariates)), 
+						  es.adj.wtd=rep(as.numeric(NA), ncol(covariates)),
 						  es.unadj=rep(as.numeric(NA), ncol(covariates)),
 						  stringsAsFactors=FALSE)
 	strata.es <- list()
 	for(i in names(covariates)) {
 		rows <- !is.na(covariates[,i])
-		as.data.frame(tapply(covariates[rows,i], 
-					list(level2[rows], treatment[rows], strata[rows]), mean), simplify=FALSE)
-		
+# 		as.data.frame(tapply(covariates[rows,i], 
+# 					list(level2[rows], treatment[rows], strata[rows]), mean), simplify=FALSE)
+ 		
 		adj <- data.frame()
 		for(l in unique(level2)) {
 			lvl.rows <- rows & level2 == l
@@ -37,22 +38,26 @@ covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 				as.data.frame(tapply(covariates[lvl.rows,i], 
 									 list(strata[lvl.rows], treatment[lvl.rows]), mean)),
 				as.data.frame(tapply(covariates[lvl.rows,i], 
-									 list(strata[lvl.rows], treatment[lvl.rows]), length))[,1:2]
+									 list(strata[lvl.rows]), length)),
+				as.data.frame(tapply(covariates[lvl.rows,i],
+									 list(strata[lvl.rows]), sd))
 			)
+			names(tab)[3:4] <- c('n','sd')
 			tab$level2 <- l
 			tab$strata <- row.names(tab)
 			adj <- rbind(adj, tab)
 		}
-		names(adj)[3:4] <- paste0(names(adj)[3:4], '.n')
 		adj <- na.omit(adj)
 		adj$diff <- adj[,1] - adj[,2]
-		adj$es <- adj$diff / sd(covariates[,i], na.rm=TRUE)
-		adj$es.wtd <- adj$es * (adj[,3] + adj[,4])
-		results[i,]$es.adj <- mean(adj$es.wtd) / sum(adj[,3:4])
+		adj$es <- adj$diff / adj$sd
+		adj[is.nan(adj$es),]$es <- 0 # If there is perfect balance then the st dev will be 0
+		es.wtd <- adj$es * adj$n
+		results[i,]$es.adj <- mean(adj$es)
+		results[i,]$es.adj.wtd <- mean(es.wtd) / sum(adj$n)
 		results[i,]$es.unadj <- ( mean(covariates[treatment == names(adj)[1],i], na.rm=TRUE) - 
 								  mean(covariates[treatment == names(adj)[2],i], na.rm=TRUE) ) / 
 			                      sd(covariates[,i], na.rm=TRUE)
-		strata.es[[i]] <- adj[,1:8]
+		strata.es[[i]] <- adj
 	}
 	if(abs) {
 		results$es.adj <- abs(results$es.adj)

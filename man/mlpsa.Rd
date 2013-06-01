@@ -3,7 +3,7 @@
 \title{This function will perform phase II of the multilevel propensity score analysis.}
 \usage{
   mlpsa(response, treatment = NULL, strata = NULL,
-    level2 = NULL, minN = 5)
+    level2 = NULL, minN = 5, reverse = FALSE)
 }
 \arguments{
   \item{response}{vector containing the response values}
@@ -19,6 +19,9 @@
 
   \item{minN}{the minimum number of subjects per strata for
   that strata to be included in the analysis.}
+
+  \item{reverse}{reverse the order of treatment and control
+  for the difference calculation.}
 }
 \value{
   a mlpsa class

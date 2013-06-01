@@ -3,15 +3,19 @@
 \title{Multiple covariate blance assessment plot.}
 \usage{
   \method{plot}{covariate.balance} (x, plot.strata = FALSE,
-    strata.size = 3, strata.legend.guide = "none",
-    point.size = 3, point.alpha = 1, line.color = "black",
-    line.alpha = 0.2, ...)
+    order = c("unadjusted", "adjusted"), strata.size = 3,
+    strata.legend.guide = "none", point.size = 3,
+    point.alpha = 1, line.color = "black",
+    line.alpha = 0.2, legend.position = c(0.8, 0.2), ...)
 }
 \arguments{
   \item{x}{results of \code{\link{covariate.balance}}.}
 
   \item{plot.strata}{whether individual strata should be
   plotted.}
+
+  \item{order}{how to order the y-axis. Possible values are
+  adjusted, unadjusted, or NULL (don't reorder).}
 
   \item{strata.size}{text size for strata if plotted.}
 
@@ -29,6 +33,8 @@
 
   \item{line.alpha}{transparency level of the line
   connecting the overall effect size points.}
+
+  \item{legend.position}{where to position the legend.}
 
   \item{...}{currently unused.}
 }

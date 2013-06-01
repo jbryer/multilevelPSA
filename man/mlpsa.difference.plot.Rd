@@ -3,12 +3,12 @@
 \title{Creates a graphic summarizing the differences between treatment and comparison
 groups within and across level two clusters.}
 \usage{
-  mlpsa.difference.plot(x, xlab = "Difference Score",
-    ylab = NULL, title = NULL, overall.col = "blue",
-    overall.ci.col = "green", level2.point.size = NULL,
-    level1.points = TRUE, errorbars = TRUE,
-    level2.rug.plot = TRUE, jitter = TRUE, reorder = TRUE,
-    labelLevel2 = TRUE, sd = NULL, ...)
+  mlpsa.difference.plot(x, xlab, ylab = NULL, title = NULL,
+    overall.col = "blue", overall.ci.col = "green",
+    level2.point.size = NULL, level1.points = TRUE,
+    errorbars = TRUE, level2.rug.plot = TRUE,
+    jitter = TRUE, reorder = TRUE, labelLevel2 = TRUE,
+    sd = NULL, ...)
 }
 \arguments{
   \item{x}{the results of \code{\link{mlpsa}}.}
