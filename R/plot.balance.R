@@ -35,6 +35,10 @@ plot.covariate.balance <- function(x,
 								   legend.position=c(.8,.2),
 								   ...) {
 	plot.weighted <- FALSE
+	if('plot.weighted' %in% names(list(...))) {
+		plot.weighted <- list(...)[['plot.weighted']]
+	}
+	
 	bal <- x$effects[,c('covariate',ifelse(plot.weighted, 'es.adj.wtd','es.adj'),'es.unadj')]
 	strata <- x$strata.effects
 	diff <- bal$es.unadj - bal$es.adj
