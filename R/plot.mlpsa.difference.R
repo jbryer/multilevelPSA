@@ -40,7 +40,7 @@ utils::globalVariables(c('Diff','ci.min','ci.max','n'))
 #' mlpsa.difference.plot(results.psa.math, sd=mean(student.party$mathscore, na.rm=TRUE))
 #' }
 mlpsa.difference.plot <- function(x,
-		xlab='Difference Score', 
+		xlab,
 		ylab=NULL,
 		title=NULL,
 		overall.col="blue",
@@ -59,10 +59,6 @@ mlpsa.difference.plot <- function(x,
 	multilevelPSA = x
 	#ggplot.alpha <- function(...) get("alpha", grep("package:ggplot2$", search()))(...)
 
-	if(missing(multilevelPSA)) {
-		stop('Must provide multilevelPSA from multilevel.psa')
-	}
-	
 	if(reorder) {
 		multilevelPSA$level2.summary = multilevelPSA$level2.summary[
 			order(multilevelPSA$level2.summary$diffwtd),]
@@ -74,6 +70,25 @@ mlpsa.difference.plot <- function(x,
 													 levels=ord.level2)
 	}
 
+	if(missing(xlab)) {
+		if(is.null(sd)) {
+			xlab <- 'Difference'
+		} else {
+			xlab <- 'Effect Size'
+		}
+		if(TRUE == all.equal( (multilevelPSA$overall.mnx - multilevelPSA$overall.mny),
+					 multilevelPSA$overall.wtd)) {
+			xlab <- paste0('Difference Score (', multilevelPSA$x.label, ' - ',
+						   multilevelPSA$y.label, ')')
+		} else if(TRUE == all.equal( (multilevelPSA$overall.mny - multilevelPSA$overall.mnx),
+							 multilevelPSA$overall.wtd)) {
+			xlab <- paste0('Difference Score (', multilevelPSA$y.label, ' - ',
+						   multilevelPSA$x.label, ')')
+		} else {
+			warning('Cannot determine subtraction order.')
+		}
+	}
+	
 	if(!is.null(sd)) {
 		multilevelPSA$level1.summary$Diff = multilevelPSA$level1.summary$Diff / sd
 		multilevelPSA$level2.summary$diffwtd = multilevelPSA$level2.summary$diffwtd / sd
