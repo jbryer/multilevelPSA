@@ -7,6 +7,10 @@ multilevelPSA 1.2
   configurable through a function parameter.
 * Added parameters to loess.plot to control the number of points to plot (as a sampling percentage) 
   as well as the transparency level.
+* Added reverse parameter to mlpsa to control the order of the difference calculation
+  so that control is subtracted from treatment. Under certain codings, the defaul
+  may end up subtracting treatment from control. The plotting functions are also
+  updated to reflect this change.
 * Changed minimum R requirement to 3.0 since some dependent packages require 3.0 (e.g. ggplot2)
 
 multilevelPSA 1.1
