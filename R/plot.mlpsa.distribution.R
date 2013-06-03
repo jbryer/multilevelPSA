@@ -29,9 +29,7 @@ mlpsa.distribution.plot <- function(x,
 				   names(multilevelPSA$level2.summary)[4], ' or ',
 				   names(multilevelPSA$level2.summary)[4], sep=''))
 	}
-	xname = 'level2'
-	yname = treat
-	fillname = 'level2'
+	
 	level1.summary = multilevelPSA$level1.summary
 	level2.summary = multilevelPSA$level2.summary
 	unweighted.summary = multilevelPSA$unweighted.summary
@@ -42,6 +40,20 @@ mlpsa.distribution.plot <- function(x,
 	}  else {
 		overall = multilevelPSA$overall.mny
 	}
+	
+	if(treat == 'TRUE') {
+		names(level1.summary)[names(level1.summary) == 'TRUE'] <- 'Treatment'
+		names(level2.summary)[names(level2.summary) == 'TRUE'] <- 'Treatment'
+		treat <- 'Treatment'
+	} else if(treat == 'FALSE') {
+		names(level1.summary)[names(level1.summary) == 'FALSE'] <- 'Control'
+		names(level2.summary)[names(level2.summary) == 'FALSE'] <- 'Control'
+		treat <- 'Control'
+	}
+	
+	xname = 'level2'
+	yname = treat
+	fillname = 'level2'
 	
 	if(flip) {
 		xname = treat
@@ -60,8 +72,8 @@ mlpsa.distribution.plot <- function(x,
 		p = p + geom_vline(xintercept=overall, colour='blue', size=.6)
 	} else {
 		p = ggplot(level1.summary, aes_string(x=xname, y=yname))
-		level2.summary$mnx = multilevelPSA$level2.summary[,4]
-		level2.summary$mny = multilevelPSA$level2.summary[,5]
+		level2.summary$mnx = multilevelPSA$level2.summary[,multilevelPSA$x.lab]
+		level2.summary$mny = multilevelPSA$level2.summary[,multilevelPSA$y.lab]
 		p = p + scale_y_continuous(limits=plot.range)
 		p = p + theme(legend.position=c(-1,-1), 
 					 axis.text.x=element_text(size=axis.text.size, angle=-90, hjust=0, vjust=.5))
@@ -90,13 +102,13 @@ mlpsa.distribution.plot <- function(x,
 		names(labeling) = c('yname', 'label')
 		p = p + geom_text(data=labeling, x=plot.range[1], 
 						  aes(y=yname, label=prettyNum(label, digits=3, drop0trailing=FALSE)), 
-						  size=3, hjust=0)
+						  size=2.5, hjust=0)
 	} else {
 		labeling = level2.summary[,c(xname, treat)]
 		names(labeling) = c('xname', 'label')
 		p = p + geom_text(data=labeling, y=plot.range[1], 
 						  aes(x=xname, label=prettyNum(label, digits=3, drop0trailing=FALSE)), 
-						  size=3, hjust=0, angle=-90)
+						  size=2.5, hjust=1, angle=-90)
 	}
 	return(p)
 }

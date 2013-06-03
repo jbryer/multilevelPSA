@@ -11,7 +11,10 @@ multilevelPSA 1.2
   so that control is subtracted from treatment. Under certain codings, the defaul
   may end up subtracting treatment from control. The plotting functions are also
   updated to reflect this change.
-* Changed minimum R requirement to 3.0 since some dependent packages require 3.0 (e.g. ggplot2)
+* Changed minimum R requirement to 3.0 since some dependent packages require 3.0 (e.g. ggplot2).
+* Updates for compatibility with ggplot 0.9.
+* Fixed bug where the mlpsa.distribution.plot, and by extension the plot.mlpsa function,
+  would fail if the treatment/control columns were named TRUE/FALSE.
 
 multilevelPSA 1.1
 =========
