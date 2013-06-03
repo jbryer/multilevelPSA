@@ -41,6 +41,8 @@ mlpsa.distribution.plot <- function(x,
 		overall = multilevelPSA$overall.mny
 	}
 	
+	# This is possibly a bug with ggplot2. Smaller test reveal that ggplot2 has 
+	# problems with column names of TRUE and FALSE.
 	if(treat == 'TRUE') {
 		names(level1.summary)[names(level1.summary) == 'TRUE'] <- 'Treatment'
 		names(level2.summary)[names(level2.summary) == 'TRUE'] <- 'Treatment'
