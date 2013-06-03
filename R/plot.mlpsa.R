@@ -37,7 +37,7 @@ plot.mlpsa <- function(x, ratio=c(1,2), plotExtra=NULL, ...) {
 				theme(legend.position='none') +
 				xlab(NULL) + ylab(NULL)
 	px = mlpsa.distribution.plot(mlpsa, treat=mlpsa$x.lab,
-						flip=TRUE, label=mlpsa$xlab, ...) +
+						flip=TRUE, label=mlpsa$x.lab, ...) +
 				theme(legend.position='none')#, axis.text.x=element_blank())
 	py = mlpsa.distribution.plot(mlpsa, treat=mlpsa$y.lab,
 						flip=FALSE, label=mlpsa$y.lab, ...) +
