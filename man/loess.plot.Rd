@@ -7,7 +7,8 @@ top and right, respectively.}
     treatmentTitle = "Treatment",
     percentPoints.treat = 0.1,
     percentPoints.control = 0.01, points.treat.alpha = 0.1,
-    points.control.alpha = 0.1, ...)
+    points.control.alpha = 0.1, plot.strata,
+    plot.strata.alpha = 0.2, ...)
 }
 \arguments{
   \item{x}{vector of propensity scores.}
@@ -34,6 +35,13 @@ top and right, respectively.}
 
   \item{treatmentTitle}{the label to use for the treatment
   legend.}
+
+  \item{plot.strata}{an integer value greater than 2
+  indicating the number of vertical lines to plot
+  corresponding to quantiles.}
+
+  \item{plot.strata.alpha}{the alpha level for the vertical
+  lines.}
 
   \item{...}{other parameters passed to
   \code{\link{geom_smooth}} and \code{\link{stat_smooth}}.}

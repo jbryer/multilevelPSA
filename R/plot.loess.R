@@ -12,6 +12,9 @@ utils::globalVariables(c('ps','y'))
 #' @param points.control.alpha the transparency level for control points.
 #' @param responseTitle the label to use for the y-axis (i.e. the name of the response variable)
 #' @param treatmentTitle the label to use for the treatment legend.
+#' @param plot.strata an integer value greater than 2 indicating the number of vertical lines to 
+#'        plot corresponding to quantiles.
+#' @param plot.strata.alpha the alpha level for the vertical lines.
 #' @param ... other parameters passed to \code{\link{geom_smooth}} and
 #'        \code{\link{stat_smooth}}.
 #' @return a ggplot2 figure
@@ -41,6 +44,8 @@ loess.plot <- function(x, response, treatment,
 					   percentPoints.control=.01, 
 					   points.treat.alpha=.1,
 					   points.control.alpha=.1,
+					   plot.strata,
+					   plot.strata.alpha=.2,
 					   ...) {
 	df = data.frame(ps=x, response=response, treatment=treatment)
 	df.points.treat <- df[treatment,]
@@ -62,6 +67,12 @@ loess.plot <- function(x, response, treatment,
 				theme(legend.position='none', legend.justification='left') + 
 				scale_colour_hue(treatmentTitle) + 
 				xlim(range(df$ps)) + ylim(range(df$response))
+	
+	if(!missing(plot.strata)) {
+		vlines <- quantile(df$ps, seq(0,1,1/plot.strata), na.rm=TRUE)
+		pmain <- pmain + geom_vline(xintercept=vlines, color='black', alpha=plot.strata.alpha)
+	}
+	
 	ptop = ggplot(df, aes(x=ps, colour=treatment, group=treatment)) + 
 				geom_density() + 
 				theme(legend.position='none') + 
