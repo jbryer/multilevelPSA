@@ -18,5 +18,6 @@ st = data.frame(ps=fitted(lr.results),
 st$treat = as.logical(st$pubpriv)
 
 loess.plot(st$ps, response=st$math, treatment=st$treat, 
-		   percentPoints.control = 0.4, percentPoints.treat=0.4)
+		   percentPoints.control = 0.4, percentPoints.treat=0.4,
+		   plot.strata=10, method='loess')
 

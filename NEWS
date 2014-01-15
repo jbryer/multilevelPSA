@@ -1,3 +1,11 @@
+multilevelPSA 1.2.1
+=========
+
+* Fixed position of overall difference for level 2 on the left margin if strata
+  were much smaller than the overall difference.
+* Added xlim parameter to the mlpsa.diff.plot function.
+* Removed a duplicated column in the pisana data frame.
+
 multilevelPSA 1.2
 =========
 

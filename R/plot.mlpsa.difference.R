@@ -22,6 +22,7 @@ utils::globalVariables(c('Diff','ci.min','ci.max','n'))
 #'        should be labeled.
 #' @param sd If specified, effect sizes will be plotted instead of difference in the
 #'        native unit.
+#' @param xlim the limits of the x-axis.
 #' @param ... currently unused.
 #' @seealso plot.mlpsa
 #' @export
@@ -53,6 +54,7 @@ mlpsa.difference.plot <- function(x,
 		reorder=TRUE,
 		labelLevel2=TRUE,
 		sd=NULL,
+		xlim,
 		...
 ) {
 	stopifnot(is.mlpsa(x))
@@ -94,6 +96,7 @@ mlpsa.difference.plot <- function(x,
 		multilevelPSA$level2.summary$diffwtd = multilevelPSA$level2.summary$diffwtd / sd
 		multilevelPSA$level2.summary$ci.min = multilevelPSA$level2.summary$ci.min / sd
 		multilevelPSA$level2.summary$ci.max = multilevelPSA$level2.summary$ci.max / sd
+		multilevelPSA$level1.summary$Diff = multilevelPSA$level1.summary$Diff / sd
 		multilevelPSA$overall.ci = multilevelPSA$overall.ci / sd
 		multilevelPSA$overall.wtd = multilevelPSA$overall.wtd /sd
 		multilevelPSA$plot.range = multilevelPSA$plot.range / sd
@@ -127,10 +130,23 @@ mlpsa.difference.plot <- function(x,
 		p = p + opts(title=title)
 	}
 	
+	if(!missing(xlim)) {
+		p <- p + ylim(xlim)
+	}
+	
 	if(labelLevel2) {
+		if(!missing(xlim)) {
+			labelPos <- min(c(multilevelPSA$level2.summary$ci.min,
+							  multilevelPSA$level1.summary$Diff,
+							  xlim))
+		} else {
+			labelPos <- min(c(multilevelPSA$level2.summary$ci.min,
+							  multilevelPSA$level1.summary$Diff))
+		}
+			#.1 * (max(multilevelPSA$level2.summary$ci.max) - min(multilevelPSA$level2.summary$ci.min))
 		p = p + geom_text(data=multilevelPSA$level2.summary, aes(x=level2, 
 						label=prettyNum(diffwtd, digits=2, drop0trailing=FALSE)), 
-						y=(min(multilevelPSA$level2.summary$ci.min)), size=3, hjust=1)
+						y=labelPos, size=3, hjust=0)
 	}
 			
 	return(p)
