@@ -93,6 +93,6 @@ missing.plot <- function(x, grouping, grid=FALSE,
 	grid_layout = grid.layout(nrow=2, ncol=2, widths=widths, heights=heights)
  	grid.newpage()
  	pushViewport( viewport( layout=grid_layout ) )
- 	multilevelPSA:::align.plots(grid_layout, list(p, 2, 1), 
+ 	align.plots(grid_layout, list(p, 2, 1), 
  							list(phist.right, 2, 2), list(phist.top,1,1))
 }

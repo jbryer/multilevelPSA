@@ -106,7 +106,7 @@ loess.plot <- function(x, response, treatment,
 	grid_layout <- grid.layout(nrow=2, ncol=2, widths=c(3,1), heights=c(1,3))
 	grid.newpage()
 	pushViewport( viewport( layout=grid_layout ) )
-	multilevelPSA:::align.plots(grid_layout, 
+	align.plots(grid_layout, 
 								list(ptop, 1, 1), 
 								list(pmain, 2, 1), 
 								list(pright, 2, 2),

@@ -45,7 +45,7 @@ plot.mlpsa <- function(x, ratio=c(1,2), plotExtra=NULL, ...) {
 	grid_layout = grid.layout(nrow=2, ncol=2, widths=c(ratio[1:2]), heights=ratio[2:1], respect=TRUE)
 	grid.newpage()
 	pushViewport( viewport( layout=grid_layout ) )
-	multilevelPSA:::align.plots(grid_layout, list(pcirc, 1, 2), list(px, 2, 2), list(py, 1, 1))
+	align.plots(grid_layout, list(pcirc, 1, 2), list(px, 2, 2), list(py, 1, 1))
 	if(!is.null(plotExtra)) {
 		pushViewport(viewport(layout.pos.row=2, layout.pos.col=1, just=c("center", "center")))
 		grid.draw(ggplotGrob(plotExtra))

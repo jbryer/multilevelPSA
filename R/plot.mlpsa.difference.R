@@ -74,17 +74,17 @@ mlpsa.difference.plot <- function(x,
 
 	if(missing(xlab)) {
 		if(is.null(sd)) {
-			xlab <- 'Difference'
+			xlab <- 'Difference Score '
 		} else {
 			xlab <- 'Effect Size'
 		}
 		if(TRUE == all.equal( (multilevelPSA$overall.mnx - multilevelPSA$overall.mny),
 					 multilevelPSA$overall.wtd)) {
-			xlab <- paste0('Difference Score (', multilevelPSA$x.label, ' - ',
+			xlab <- paste0(xlab, ' (', multilevelPSA$x.label, ' - ',
 						   multilevelPSA$y.label, ')')
 		} else if(TRUE == all.equal( (multilevelPSA$overall.mny - multilevelPSA$overall.mnx),
 							 multilevelPSA$overall.wtd)) {
-			xlab <- paste0('Difference Score (', multilevelPSA$y.label, ' - ',
+			xlab <- paste0(xlab, ' (', multilevelPSA$y.label, ' - ',
 						   multilevelPSA$x.label, ')')
 		} else {
 			warning('Cannot determine subtraction order.')

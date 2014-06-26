@@ -34,6 +34,13 @@
 #' 		\url{http://www.jstatsoft.org/v29/i06/}
 #' @keywords propensity score analysis psa multilevel graphics
 #' @seealso \code{PSAgraphics}
+#' @import plyr
+#' @import PSAgraphics
+#' @import grid
+#' @import ggplot2
+#' @importFrom reshape melt
+#' @importFrom reshape cast
+#' @importFrom psych describeBy
 NA
 
 #' North American (i.e. Canada, Mexico, and United States) student results of the 2009

@@ -1,4 +1,4 @@
-utils::globalVariables(c('mnx','mny','Diff','strata2','xmark','ymark','n','y'))
+utils::globalVariables(c('mnx','mny','Diff','strata2','xmark','ymark','n','y','es'))
 
 #' Plots the results of a multilevel propensity score model.
 #'

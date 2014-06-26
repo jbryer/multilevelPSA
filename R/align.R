@@ -1,3 +1,26 @@
+##### START zeroGrob FROM ggplot2 ##############################################
+# Copied from ggplot2. This is a non-exported function. To avoid R CMD CHECK
+# note for use ::: the functions were copied here.
+
+#' The zero grob draws nothing and has zero size.
+#' 
+#' @keywords internal
+#' @author hadley
+#' @references https://github.com/hadley/ggplot2/blob/master/R/grob-null.r
+zeroGrob <- function() .zeroGrob
+
+.zeroGrob <- grob(cl = "zeroGrob", name = "NULL")
+widthDetails.zeroGrob <-
+	heightDetails.zeroGrob <- 
+	grobWidth.zeroGrob <- 
+	grobHeight.zeroGrob <- function(x) unit(0, "cm")
+
+drawDetails.zeroGrob <- function(x, recording) {}
+
+is.zero <- function(x) is.null(x) || inherits(x, "zeroGrob")
+
+##### END zeroGrob FROM ggplot2 ################################################
+
 #' Adapted from ggExtra package which is no longer available. This is related to
 #' an experimental mlpsa plot that will combine the circular plot along with
 #' the two individual distributions.
@@ -62,41 +85,41 @@ align.plots <- function(gl, ...) {
 	plottitles <- lapply(dots, function(.g) {
 				if(!is.null(getGrob(.g, 'plot.title.text', grep=TRUE)))
 					editGrob(getGrob(.g, "plot.title.text", grep=TRUE), vp=NULL) 
-				else ggplot2:::.zeroGrob
+				else .zeroGrob
 				})
 	
 	xtitles <- lapply(dots, function(.g) {
 				#.g <- ggplotGrob(.g)
 				if(!is.null(getGrob(.g, "axis.title.x.text", grep=TRUE)))
 					editGrob(getGrob(.g,"axis.title.x.text",grep=TRUE), vp=NULL) 
-				else ggplot2:::.zeroGrob
+				else .zeroGrob
 				})   
 	
 	xlabels <- lapply(dots, function(.g) {
 				#.g <- ggplotGrob(.g)
 				if(!is.null(getGrob(.g, "axis.text.x.text",grep=TRUE)))
 					editGrob(getGrob(.g,"axis.text.x.text",grep=TRUE), vp=NULL) 
-				else ggplot2:::.zeroGrob
+				else .zeroGrob
 				})  
 	
 	ytitles <- lapply(dots, function(.g) {
 				#.g <- ggplotGrob(.g)
 				if(!is.null(getGrob(.g,"axis.title.y.text",grep=TRUE)))
 					editGrob(getGrob(.g,"axis.title.y.text",grep=TRUE), vp=NULL) 
-				else ggplot2:::.zeroGrob
+				else .zeroGrob
 				})
 	
 	ylabels <- lapply(dots, function(.g) {
 				#.g <- ggplotGrob(.g)
 				if(!is.null(getGrob(.g,"axis.text.y.text",grep=TRUE)))
 					editGrob(getGrob(.g,"axis.text.y.text",grep=TRUE), vp=NULL) 
-				else ggplot2:::.zeroGrob
+				else .zeroGrob
 				})
 	
 	legends <- lapply(dots, function(.g) {
 				if(!is.null(.g$children$legends))
 					editGrob(.g$children$legends, vp=NULL) 
-				else ggplot2:::.zeroGrob
+				else .zeroGrob
 				})
 	
 	widths.left <- mapply(`+`, e1=lapply(ytitles, grobWidth),
