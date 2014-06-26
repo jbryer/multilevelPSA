@@ -20,7 +20,6 @@ utils::globalVariables(c('value','covariate','EffectSize','level2','group'))
 #' @param ... currently unused.
 #' @return a ggplot2 with an attribute, \code{effects}, that is the data frame
 #'        used to create the plot.
-#' @S3method plot covariate.balance
 #' @method plot covariate.balance
 #' @export
 plot.covariate.balance <- function(x, 

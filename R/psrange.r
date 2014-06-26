@@ -68,7 +68,7 @@ psrange <- function(df, treatvar, formula, nsteps=10, nboot=10, samples, ... ) {
 #' 
 #' @param object psrange to print summary of.
 #' @param ... currently unused.
-#' @S3method summary psrange
+#' @export
 #' @method summary psrange
 summary.psrange <- function(object, ...) {
 	return(object$summary)
@@ -78,7 +78,7 @@ summary.psrange <- function(object, ...) {
 #' 
 #' @param x psrange to print info about.
 #' @param ... currently unused
-#' @S3method print psrange
+#' @export
 #' @method print psrange
 print.psrange <- function(x, ...) {
 	cat(paste('Executed ', length(x$models[[1]]), ' for ', length(x$models), 
@@ -109,7 +109,6 @@ utils::globalVariables(c('ps', '..scaled..','treat','max.min','max.max','min.min
 #' @param rect.alpha the alpha (transparency) level of the rectangle.
 #' @param ... currently unused.
 #' @return a ggplot2 object
-#' @S3method plot psrange
 #' @method plot psrange
 #' @export
 plot.psrange <- function(x,

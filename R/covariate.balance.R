@@ -17,7 +17,10 @@ covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 	}
 	if('factor' %in% sapply(covariates, class)) {
 		#Convert remaining factors using cv.trans.psa from PSAgraphics
-		covariates <- cv.trans.psa(covariates)[[1]]
+		#covariates <- cv.trans.psa(covariates)[[1]]
+		tmp <- covariates[,sapply(covariates, class) == 'factor']
+		covariates <- covariates[,sapply(covariates, class) != 'factor']
+		covariates <- rbind(model.matrix(~ ., tmp))
 	}
 	
 	results <- data.frame(row.names=names(covariates), 
@@ -77,7 +80,6 @@ covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 #' @param optional unused.
 #' @param ... unused
 #' @return a data frame with overall covariate effects before and after adjustment.
-#' @S3method as.data.frame covariate.balance
 #' @method as.data.frame covariate.balance
 #' @export
 as.data.frame.covariate.balance <- function(x, row.names=NULL, optional=FALSE, ...) {
@@ -88,7 +90,6 @@ as.data.frame.covariate.balance <- function(x, row.names=NULL, optional=FALSE, .
 #' 
 #' @param x results of \code{\link{covariate.balance}}.
 #' @param ... unused.
-#' @S3method print covariate.balance
 #' @method print covariate.balance
 #' @export
 print.covariate.balance <- function(x, ...) {

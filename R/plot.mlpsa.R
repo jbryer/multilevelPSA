@@ -10,7 +10,6 @@
 #' @param plotExtra a plot to place in the lower left corner.
 #' @param ... parameters passed to \code{\link{mlpsa.circ.plot}} and 
 #'        \code{\link{mlpsa.distribution.plot}}
-#' @S3method plot mlpsa
 #' @method plot mlpsa
 #' @export
 #' @examples

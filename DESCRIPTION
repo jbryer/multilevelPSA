@@ -6,7 +6,7 @@ Author: Jason Bryer <jason@bryer.org>
 Maintainer: Jason Bryer <jason@bryer.org>
 Description: Functions to estimate and visualize propensity
     score analysis for multilevel, or clustered, data.
-Version: 1.2.1
+Version: 1.2.2
 URL: http://jason.bryer.org/multilevelPSA,
     http://github.com/jbryer/multilevelPSA
 BugReports: https://github.com/jbryer/multilevelPSA/issues
@@ -26,26 +26,4 @@ Suggests:
     testthat,
     party,
     MASS
-Date: 2013-01-25
-Collate:
-    'geom_rug_alt.R'
-    'multilevelPSA-package.R'
-    'align.R'
-    'mlpsa.R'
-    'mlpsa.ctree.R'
-    'mlpsa.print.R'
-    'plot.missing.R'
-    'plot.mlpsa.R'
-    'plot.mlpsa.difference.R'
-    'plot.mlpsa.distribution.R'
-    'plot.tree.R'
-    'lsos.R'
-    'plot.difftable.R'
-    'plot.mlpsa.circ.R'
-    'mlpsa.logistic.R'
-    'plot.loess.R'
-    'psrange.r'
-    'xtable.mlpsa.r'
-    'covariateBalance.R'
-    'plot.balance.R'
-    'covariate.balance.R'
+Date: 2014-05-26

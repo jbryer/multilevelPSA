@@ -11,7 +11,6 @@
 #' @param align Not used. 
 #' @param display passed through to \code{\link{xtable}}.
 #' @param ... other parameters passed to \code{\link{summary.mlpsa}}
-#' @S3method xtable mlpsa
 #' @method xtable mlpsa
 #' @import xtable
 #' @export
@@ -48,7 +47,6 @@ xtable.mlpsa <- function(x, caption, label, align, digits=2, display, include.no
 #' @param tabular.environment see \code{\link{print.xtable}}.
 #' @param floating see \code{\link{print.xtable}}.
 #' @param ... other parameters passed to \code{\link{print.xtable}}
-#' @S3method print xmlpsa
 #' @method print xmlpsa
 #' @export
 print.xmlpsa <- function(x, tabular.environment='longtable', floating=FALSE, ...) {

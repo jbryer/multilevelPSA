@@ -11,7 +11,6 @@ is.mlpsa <- function(x) {
 #' @param x the \code{mlpsa} class.
 #' @param ... unused.
 #' @method print mlpsa
-#' @S3method print mlpsa
 #' @export
 print.mlpsa <- function(x, ...) {
 	#TODO: Create a better print function
@@ -25,7 +24,6 @@ print.mlpsa <- function(x, ...) {
 #' @param overall.label the label to place in the strata column for the overall results.
 #' @param ... unused.
 #' @method summary mlpsa
-#' @S3method summary mlpsa
 #' @export
 summary.mlpsa <- function(object, overall.label='Overall', ...) {
 	message(paste("Multilevel PSA Model of ", nrow(object$level1.summary), ' strata for ',
