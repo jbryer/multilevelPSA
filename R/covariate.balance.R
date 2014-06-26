@@ -20,7 +20,7 @@ covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 		#covariates <- cv.trans.psa(covariates)[[1]]
 		tmp <- covariates[,sapply(covariates, class) == 'factor']
 		covariates <- covariates[,sapply(covariates, class) != 'factor']
-		covariates <- rbind(model.matrix(~ ., tmp))
+		covariates <- as.data.frame(rbind(model.matrix(~ ., tmp)))
 	}
 	
 	results <- data.frame(row.names=names(covariates), 

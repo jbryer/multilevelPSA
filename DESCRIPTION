@@ -12,16 +12,15 @@ URL: http://jason.bryer.org/multilevelPSA,
 BugReports: https://github.com/jbryer/multilevelPSA/issues
 Depends:
     ggplot2,
+    xtable,
+    R (>= 3.0)
+Imports:
+    PSAgraphics,
     plyr,
     psych,
     reshape,
     proto,
-    grid,
-    xtable,
-    PSAgraphics,
-    R (>= 3.0)
-Imports:
-    xtable
+    grid
 Suggests:
     testthat,
     party,
