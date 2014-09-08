@@ -4,7 +4,8 @@
 \title{Estimates models with increasing number of comparision subjects starting from
 1:1 to using all available comparison group subjects.}
 \usage{
-psrange(df, treatvar, formula, nsteps = 10, nboot = 10, samples, ...)
+psrange(df, treatvar, formula, nsteps = 10, nboot = 10, samples,
+  type = c("logistic", "ctree"), ...)
 }
 \arguments{
 \item{df}{data frame with variables to pass to glm}
@@ -19,6 +20,10 @@ psrange(df, treatvar, formula, nsteps = 10, nboot = 10, samples, ...)
 \item{nboot}{number of models to execute for each step.}
 
 \item{samples}{the sample sizes to draw from control group for each step.}
+
+\item{type}{either logistic for Logistic regression (using \code{glm}
+function) or ctree for Conditional Inference Trees (using the
+\code{ctree} function).}
 
 \item{...}{other parameters passed to glm.}
 }
