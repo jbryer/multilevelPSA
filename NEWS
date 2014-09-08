@@ -3,6 +3,8 @@ multilevelPSA 1.2.2
 
 * Changed how factors are dummy coded in the balance functions to decrease
   execution time.
+* Updated psranges to add support for classification trees (using ctree in party
+  package).
 * Updated for the newest version of roxygen2
 * Various updates for CRAN check
 
