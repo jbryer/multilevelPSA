@@ -2,3 +2,4 @@ pisa	 This demo will demonstrate using the multilevelPSA functions with the Prog
 pisa.loess	 This demo will demonstrate the use of the loess regression methods for the estimation of single level propensity score models.
 psrange	 This demo will show how to use the psrange function and subsequent plotting function using simulation data as well as PISA comparison of private and public school students.
 plotmissing	 This demo will shows how to use the missing.plot fuction. It requires that the pisa package also be installed.
+psrange-trees	 This demo shows how to simulate propensity score ranges using classification trees and logistic regression using data from PISA.
