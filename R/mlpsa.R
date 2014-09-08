@@ -56,7 +56,7 @@ mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL,
 	thedata <- thedata[-multilevelPSA$removed,]
 	message(paste('Removed ', (length(response) - nrow(thedata)), 
 				  ' (', prettyNum(100 * (length(response) - nrow(thedata)) / 
-				  length(response), digits=3), '%) rows due to strata size being less than ', 
+				  length(response), digits=3), '%) rows due to stratum size being less than ', 
 				  minN, sep=''))
 	thedata$strata2 <- as.factor(as.character(thedata$strata2))
 	thedata$level2 <- as.factor(as.character(thedata$level2))
