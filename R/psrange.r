@@ -8,11 +8,15 @@
 #' @param nsteps number of steps to estimate from 1:1 to using all control records.
 #' @param nboot number of models to execute for each step.
 #' @param samples the sample sizes to draw from control group for each step.
+#' @param type either logistic for Logistic regression (using \code{glm} 
+#'        function) or ctree for Conditional Inference Trees (using the 
+#'        \code{ctree} function).
 #' @param ... other parameters passed to glm.
 #' @return a class of psrange that contains a summary data frame, a details data
 #'         frame, and a list of each individual result from glm.
 #' @export
-psrange <- function(df, treatvar, formula, nsteps=10, nboot=10, samples, ... ) {
+psrange <- function(df, treatvar, formula, nsteps=10, nboot=10, samples, 
+					type=c('logistic','ctree'), ... ) {
 	if(missing(samples)) {
 		samples <- seq(length(which(treatvar==1)), length(which(treatvar==0)),
 					   (length(which(treatvar==0)) - length(which(treatvar==1))) / nsteps )
@@ -35,14 +39,24 @@ psrange <- function(df, treatvar, formula, nsteps=10, nboot=10, samples, ... ) {
 		for(j in 1:nboot) {
 			rows <- c(which(treatvar == 1),
 					 sample(which(treatvar == 0), tosample))
-			lr.results <- glm(formula, data=df[rows,], family='binomial', ...)
+			model.fit <- NA
+			ps <- NA
+			if(type[1] == 'logistic') {
+				model.fit <- glm(formula, data=df[rows,], family='binomial', ...)
+				ps <- fitted(model.fit)
+			} else if(type[1] == 'ctree') {
+				model.fit <- ctree(formula, data=df[rows,])
+				ps <- sapply(treeresponse(model.fit), function(x) { x[[1]] })
+			} else {
+				stop('Unsupported type!')
+			}
 			dfrange <- rbind(dfrange, data.frame(ind=i, p=tosample/ncontrol*100, i=j,
 												ntreat=ntreat, ncontrol=tosample, 
-												psmin=range(fitted(lr.results))[1],
-												psmax=range(fitted(lr.results))[2]))
+												psmin=range(ps)[1],
+												psmax=range(ps)[2]))
 			density.df <- rbind(density.df, 
-					data.frame(iter=j, treat=treatvar[rows], ps=fitted(lr.results)))
-			models[[i]][[j]] <- lr.results
+					data.frame(iter=j, treat=treatvar[rows], ps=ps))
+			models[[i]][[j]] <- model.fit
 			setTxtProgressBar(pb, (((i-1)*nboot) + j))
 		}
 		fittedValues[[i]] <- density.df
@@ -135,7 +149,12 @@ plot.psrange <- function(x,
 		densities.df <- rbind(densities.df, cbind(p=x$summary[i,'p'], 
 												  x$fittedValues[[i]]))
 	}
-	densities.df$treat = factor(densities.df$treat)
+	#densities.df$treat = as.integer(densities.df$treat)
+	if(is.logical(densities.df$treat)) {
+		densities.df$treat = factor(as.integer(densities.df$treat))
+	} else {
+		densities.df$treat = factor(densities.df$treat)
+	}
 	
 	text.vjust = -.4
 	bar.factor = 1
@@ -148,17 +167,18 @@ plot.psrange <- function(x,
 		}
 	}
 	
-	p <- ggplot() + xlim(c(-.05,1.05)) + ylim(c(-1,1)) +
+	p <- ggplot() + 
+			xlim(c(-.05,1.05)) + ylim(c(-1,1)) +
 			stat_density(data=densities.df[densities.df$treat==1,], 
 				aes(x=ps, ymax=-..scaled.., fill=treat, ymin = 0),
 				geom="ribbon", position="identity", alpha=density.alpha) +
 			stat_density(data=densities.df[densities.df$treat==0,], 
 				aes(x=ps, ymax=..scaled.., fill=treat, ymin = 0),
 				geom="ribbon", position="identity", alpha=density.alpha) +
-			geom_rect(data=x$summary, aes(group=p, xmin=max.min-.005, xmax=(max.max+.005), 
-				ymin=0.25, ymax=.75), fill=rect.color, alpha=rect.alpha) +
-			geom_rect(data=x$summary, aes(group=p, xmin=(min.min-.005), xmax=min.max+.005, 
-				ymin=-.75, ymax=-0.25), fill=rect.color, alpha=rect.alpha) +
+			geom_rect(data=x$summary, aes(group=p, xmin=(max.min-.005), xmax=(max.max+.005)),
+				ymin=0.25, ymax=.75, fill=rect.color, alpha=rect.alpha) +
+			geom_rect(data=x$summary, aes(group=p, xmin=(min.min-.005), xmax=(min.max+.005)), 
+				ymin=-.75, ymax=-0.25, fill=rect.color, alpha=rect.alpha) +
 			geom_point(data=x$details, aes(y=-.5, x=psmin), 
 				size=point.size, alpha=point.alpha, shape=23) +
   		  	geom_point(data=x$details, aes(y=.5, x=psmax), 
