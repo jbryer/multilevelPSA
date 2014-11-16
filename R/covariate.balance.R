@@ -18,9 +18,9 @@ covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 	if('factor' %in% sapply(covariates, class)) {
 		#Convert remaining factors using cv.trans.psa from PSAgraphics
 		#covariates <- cv.trans.psa(covariates)[[1]]
-		tmp <- covariates[,sapply(covariates, class) == 'factor']
-		covariates <- covariates[,sapply(covariates, class) != 'factor']
-		covariates <- as.data.frame(rbind(model.matrix(~ ., tmp)))
+		tmp.covariates <- covariates[,sapply(covariates, class) == 'factor', drop=FALSE]
+		covariates <- covariates[,sapply(covariates, class) != 'factor', drop=FALSE]
+		covariates <- as.data.frame(rbind(model.matrix(~ ., tmp.covariates)))
 	}
 	
 	results <- data.frame(row.names=names(covariates), 
