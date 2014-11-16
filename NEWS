@@ -1,6 +1,8 @@
 multilevelPSA 1.2.2
 =========
 
+* Added The ci.adjust paramter to the mlpsa function to specify the confidence level (default is 0.05).
+* Added Bonferroni-Sidak adjusted confidence intervals based on the number of levels/clusters to what is returned in by the mlpsa package in the diff.wtd data frame. The mlpsa.difference.plot function will plot these confidence intervals in a dashed green line
 * Changed how factors are dummy coded in the balance functions to decrease
   execution time.
 * Updated psranges to add support for classification trees (using ctree in party

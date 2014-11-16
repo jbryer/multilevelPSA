@@ -13,6 +13,8 @@ utils::globalVariables(c('Diff','ci.min','ci.max','n'))
 #' @param level1.points logical value indicating whether level 1 strata should be plotted.
 #' @param errorbars logical value indicating whether error bars should be plotted for
 #'        for each level 1.
+#' @param errorbars.adjusted.ci whether the Bonferonni adjusted error bars should
+#'        be plotted (these will be dashed lines).
 #' @param level2.rug.plot logical value indicating whether a rug plot should be
 #'        plotted for level 2.
 #' @param jitter logical value indicating whether level 1 points should be jittered.
@@ -49,6 +51,7 @@ mlpsa.difference.plot <- function(x,
 		level2.point.size=NULL,
 		level1.points=TRUE,
 		errorbars=TRUE,
+		errorbars.adjusted.ci=TRUE,
 		level2.rug.plot=TRUE,
 		jitter=TRUE,
 		reorder=TRUE,
@@ -96,6 +99,8 @@ mlpsa.difference.plot <- function(x,
 		multilevelPSA$level2.summary$diffwtd = multilevelPSA$level2.summary$diffwtd / sd
 		multilevelPSA$level2.summary$ci.min = multilevelPSA$level2.summary$ci.min / sd
 		multilevelPSA$level2.summary$ci.max = multilevelPSA$level2.summary$ci.max / sd
+		multilevelPSA$level2.summary$ci.min.adjust = multilevelPSA$level2.summary$ci.min.adjust / sd
+		multilevelPSA$level2.summary$ci.max.adjust = multilevelPSA$level2.summary$ci.max.adjust / sd
 		multilevelPSA$level1.summary$Diff = multilevelPSA$level1.summary$Diff / sd
 		multilevelPSA$overall.ci = multilevelPSA$overall.ci / sd
 		multilevelPSA$overall.wtd = multilevelPSA$overall.wtd /sd
@@ -107,10 +112,15 @@ mlpsa.difference.plot <- function(x,
 			geom_hline(yintercept=multilevelPSA$overall.wtd, colour=overall.col, size=1) + 
 			geom_hline(yintercept=multilevelPSA$overall.ci, colour=overall.ci.col, size=1) + 
 			theme(axis.ticks.margin=unit(0, "cm"), axis.text.y=element_text(size=8, angle=0, hjust=.5))
+	if(errorbars.adjusted.ci) {
+		p = p + geom_errorbar(data=multilevelPSA$level2.summary, 
+							  aes(x=level2, y=NULL, ymin=ci.min.adjust, ymax=ci.max.adjust), 
+							  colour='green', alpha=.6, linetype=2)		
+	}
 	if(errorbars) {
 		p = p + geom_errorbar(data=multilevelPSA$level2.summary, 
 							  aes(x=level2, y=NULL, ymin=ci.min, ymax=ci.max), 
-							  colour='green', alpha=.6)
+							  colour='green', alpha=.6, linetype=1)
 	}
 	if(level1.points) {
 		if(jitter) {

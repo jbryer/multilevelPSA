@@ -2,6 +2,9 @@
 #' 
 #' TODO: Need more details
 #' 
+#' The ci.adjust provides a Bonferroni-Sidak adjusted confidence intervals based
+#' on the number of levels/clusters.
+#' 
 #' @param response vector containing the response values
 #' @param treatment vector containing the treatment conditions
 #' @param strata vector containing the strata for each response
@@ -31,7 +34,7 @@
 #' summary(results.psa.math)
 #' }
 mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL, 
-				  minN=5, reverse=FALSE) {
+				  minN=5, reverse=FALSE, ci.level=0.05) {
 	stopifnot(length(response) == length(treatment)  & 
 		length(treatment) == length(strata) & length(strata) == length(level2))
 	
@@ -80,6 +83,7 @@ mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL,
 	diff.wtd <- data.frame(level2=character(), n=integer(), diffwtd=numeric(), 
 						   mnx=numeric(), mny=numeric(), mnxy=numeric(), 
 						   ci.min=numeric(), ci.max=numeric(), df=numeric())
+	nlevels <- length(unique(d$level2))
 	for(i in unique(d$level2)) {
 		tmp <- d[which(d$level2==i),]
 		n <- sum(tmp$n)
@@ -113,14 +117,18 @@ mlpsa <- function(response, treatment=NULL, strata=NULL, level2=NULL,
 		se.wtd <- ((sum(frac.0) + sum(frac.1))^0.5)/nstrat
 		ci.diff <- diffwtd
 		df <- length(tmp$response) - 2 * length(unique(tmp$strata2))
-		ci.min=ci.diff - qt(0.975, df) * se.wtd
-		ci.max=ci.diff + qt(0.975, df) * se.wtd
+		ci.min <- ci.diff - qt((1 - (ci.level/2)), df) * se.wtd
+		ci.max <- ci.diff + qt((1 - (ci.level/2)), df) * se.wtd
+		ci.level.adjust <- (1-(1-ci.level)^(1/nlevels)) / 2
+		ci.min.adjust <- ci.diff - qt(1-ci.level.adjust, df) * se.wtd
+		ci.max.adjust <- ci.diff + qt(1-ci.level.adjust, df) * se.wtd
 		
 		diff.wtd <- rbind(diff.wtd, data.frame(level2=i, n=n, diffwtd=diffwtd, 
 							mnx=mnx, mny=mny, mnxy=mnxy,
 							xn=xn, yn=yn,
 							ci.min=ci.min, ci.max=ci.max, 
-							df=df, se.wtd=se.wtd))
+							df=df, se.wtd=se.wtd,
+							ci.min.adjust=ci.min.adjust, ci.max.adjust=ci.max.adjust))
 	}
 	names(diff.wtd)[which(names(diff.wtd)=='mnx')] <- names(d)[x.pos]
 	names(diff.wtd)[which(names(diff.wtd)=='mny')] <- names(d)[y.pos]
