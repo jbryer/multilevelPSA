@@ -13,6 +13,8 @@
 #'        included in the analysis.
 #' @param reverse reverse the order of treatment and control for the difference
 #'        calculation.
+#' @param ci.level the confidence level to use for confidence intervals. Defaults
+#'        to a 95\% confidence level.
 #' @return a mlpsa class
 #' @seealso \code{\link{mlpsa.ctree}} \code{\link{mlpsa.logistic}}
 #' @export

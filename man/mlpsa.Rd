@@ -20,6 +20,9 @@ included in the analysis.}
 
 \item{reverse}{reverse the order of treatment and control for the difference
 calculation.}
+
+\item{ci.level}{the confidence level to use for confidence intervals. Defaults
+to a 95\% confidence level.}
 }
 \value{
 a mlpsa class

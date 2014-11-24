@@ -1,4 +1,4 @@
-utils::globalVariables(c('Diff','ci.min','ci.max','n'))
+utils::globalVariables(c('Diff','ci.min','ci.max','n','ci.min.adjust','ci.max.adjust'))
 
 #' Creates a graphic summarizing the differences between treatment and comparison
 #' groups within and across level two clusters.
