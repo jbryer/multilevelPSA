@@ -20,9 +20,9 @@ Imports:
     psych,
     reshape,
     proto,
-    grid
+    grid,
+    party
 Suggests:
     testthat,
-    party,
     MASS
 Date: 2014-11-24

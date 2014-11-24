@@ -38,6 +38,7 @@
 #' @import PSAgraphics
 #' @import grid
 #' @import ggplot2
+#' @import party
 #' @importFrom reshape melt
 #' @importFrom reshape cast
 #' @importFrom psych describeBy
