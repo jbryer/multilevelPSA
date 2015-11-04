@@ -2,6 +2,7 @@ multilevelPSA 1.2.3
 =========
 
 * Will use brewer color scheme with 8 or fewer levels.
+* Update for new version of xtable package.
 
 multilevelPSA 1.2.2
 =========

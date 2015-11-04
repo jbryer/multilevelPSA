@@ -10,11 +10,13 @@
 #' @param label passed through to \code{\link{xtable}}.
 #' @param align Not used. 
 #' @param display passed through to \code{\link{xtable}}.
+#' @param auto passed through to \code{\link{xtable}}.
 #' @param ... other parameters passed to \code{\link{summary.mlpsa}}
 #' @method xtable mlpsa
 #' @import xtable
 #' @export
-xtable.mlpsa <- function(x, caption, label, align, digits=2, display, include.note=TRUE, ...) {
+xtable.mlpsa <- function(x, caption, label, align, digits=2, display=NULL,
+						 auto=FALSE, include.note=TRUE, ...) {
 	xdf <- suppressMessages(summary(x, ...))
 	
 	xdf$ci = NA
@@ -26,7 +28,7 @@ xtable.mlpsa <- function(x, caption, label, align, digits=2, display, include.no
 	xdf$ci.max <- NULL
 	xdf$Treat.n <- as.integer(xdf$Treat.n)
 	xdf$Control.n <- as.integer(xdf$Control.n)
-	xtab <- xtable(xdf, digits=digits, caption=caption, label=label, display=display,
+	xtab <- xtable(xdf, digits=digits, caption=caption, label=label, display=display, auto=auto,
 			align=c('l','l','r','r','r@{\\extracolsep{.25cm}}','r','r','c'), ...)
 	class(xtab) <- c('xmlpsa', class(xtab))
 	attr(xtab, 'treat.name') <- x$x.label
