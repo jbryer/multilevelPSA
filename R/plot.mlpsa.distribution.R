@@ -9,6 +9,7 @@
 #' @param level2.label the axis label for the level 2 indicators.
 #' @param legendlab the label for the legend, or NULL to exclude a legend.
 #' @param axis.text.size the size of the axis text
+#' @param fill.colors if specified, the colors to use for level 2 points.
 #' @param ... currently unused.
 #' @seealso plot.mlpsa
 #' @export 
@@ -20,6 +21,7 @@ mlpsa.distribution.plot <- function(x,
 									level2.label=NULL, 
 									legendlab=NULL, 
 									axis.text.size=8,
+									fill.colors=NULL, 
 									...) {
 	stopifnot(is.mlpsa(x))
 	multilevelPSA = x
@@ -86,16 +88,17 @@ mlpsa.distribution.plot <- function(x,
 	}
 	
 	p = p + geom_point(stat='identity', alpha=.3, size=1.3)
-	if(!is.null(fill.colours)) {
-		p = p + scale_colour_manual(guide='none', values=fill.colours) + 
-			scale_fill_manual(guide='none', values=fill.colours)
+	if(!is.null(fill.colors)) {
+		p = p + scale_color_manual(guide='none', values=fill.colors) + 
+			scale_fill_manual(guide='none', values=fill.colors)
 	} else if(length(unique(level2.summary$level2)) > 20) {
 		#No legend since the legend would be bigger than the plot
-		p = p + scale_colour_hue(guide='none') + scale_fill_hue(guide='none')
+		p = p + scale_color_hue(guide='none') + scale_fill_hue(guide='none')
 	} else if(length(unique(level1.summary$level2)) > 8) {
-		p = p + scale_colour_hue(legendlab) + scale_fill_hue(legendlab)
+		p = p + scale_color_hue(legendlab) + scale_fill_hue(legendlab)
 	} else {
-		p = p + scale_colour_brewer(legendlab) + scale_fill_brewer(legendlab)
+		p = p + scale_color_brewer(legendlab, type='qual') + 
+			scale_fill_brewer(legendlab, type='qual')
 	}
 	p = p + geom_point(data=level2.summary, aes_string(x=xname, y=yname, size='n', fill=fillname), 
 					   stat='identity', shape=21, colour='black')

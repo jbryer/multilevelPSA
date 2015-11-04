@@ -33,7 +33,7 @@ utils::globalVariables(c('mnx','mny','Diff','strata2','xmark','ymark','n','y','e
 #'        of PSA) means for each level 2, or cluster.
 #' @param weighted.means logical value indicating whether horizontal and vertical
 #'        lines are drawn representing the weighted means for each level 2, or cluster.
-#' @param fill.colours if specified, the colors to use for level 2 points.
+#' @param fill.colors if specified, the colors to use for level 2 points.
 #' @param ... currently unused.
 #' @seealso plot.mlpsa
 #' @export
@@ -69,7 +69,7 @@ mlpsa.circ.plot <- function(x,
 		level2.label=FALSE, 
 		unweighted.means=FALSE, 
 		weighted.means=FALSE,
-		fill.colours=NULL, 
+		fill.colors=NULL, 
 		...
 ) {
 	stopifnot(is.mlpsa(x))
@@ -109,61 +109,61 @@ mlpsa.circ.plot <- function(x,
 							 aes_string(x=names(unweighted.summary)[3], 
 							 	xend=names(unweighted.summary)[3], 
 							 	yend=names(unweighted.summary)[2], 
-							 	colour='level2'), 
+							 	color='level2'), 
 							 y=plot.range[1], 
 							 alpha=.4, linetype='dashed', size=.5) +
 				geom_segment(data=unweighted.summary, 
 							 aes_string(y=names(unweighted.summary)[2], 
 							 	xend=names(unweighted.summary)[3], 
 							 	yend=names(unweighted.summary)[2], 
-							 	colour='level2'),
+							 	color='level2'),
 							 x=plot.range[1], alpha=.4, linetype='dashed', size=.5)
 	}
 	#Draw solid lines for weighted means
 	if(weighted.means) {
 		p = p + geom_segment(data=level2.summary, 
-							 aes(x=mnx, xend=mnx, yend=mny, colour=level2),
+							 aes(x=mnx, xend=mnx, yend=mny, color=level2),
 							 y=plot.range[1], alpha=.7, size=.5) +
 				geom_segment(data=level2.summary, 
-							 aes(y=mny, xend=mnx, yend=mny, colour=level2),
+							 aes(y=mny, xend=mnx, yend=mny, color=level2),
 							 x=plot.range[1], alpha=.7, size=.5)
 	}
 	#Rug plots
 	if(!is.null(level1.rug.plot)) {
 		p = p + level1.rug.plot(data=level1.summary, 
 								aes_string(x=names(level1.summary)[5], 
-									y=names(level1.summary)[4], colour='level2'), 
-								alpha=.5, size=.25)
+									y=names(level1.summary)[4], color='level2'), 
+								alpha=.5, size=1)
 	}
 	if(!is.null(level2.rug.plot)) {
 		p = p + level2.rug.plot(data=level2.summary, 
-								aes(x=mnx, y=mny, colour=level2), alpha=.6, size=.5)
+								aes(x=mnx, y=mny, color=level2), alpha=.6, size=1)
 	}
 	#Projection lines
 	if(level1.projection.lines) {
 		p = p + geom_abline(data=level1.summary, 
-							aes(intercept=Diff, slope=1, colour=strata2), alpha=.5, size=.8)
+							aes(intercept=Diff, slope=1, color=strata2), alpha=1, size=1)
 	}
 	if(level2.projection.lines) {
 		tmp = level2.summary[order(level2.summary$diffwtd),]
-		p = p + geom_segment(data=tmp, aes(x=mnx, y=mny, xend=xmark, yend=ymark, colour=level2), 
-							 size=.5, alpha=.2, linetype=1)
+		p = p + geom_segment(data=tmp, aes(x=mnx, y=mny, xend=xmark, yend=ymark, color=level2), 
+							 size=1, alpha=1, linetype=1)
 	}
 	#Unit line
 	p = p + geom_abline(slope=1, intercept=0, alpha=.7, size=1.4)
 	#Overall multilevelPSA
 	p = p + geom_abline(slope=1, intercept=overall.ci[1], 
-						colour=overall.ci.col, linetype=3, size=.6, alpha=.9) +
+						color=overall.ci.col, linetype=3, size=.6, alpha=.9) +
 			geom_abline(slope=1, intercept=overall.ci[2], 
-						colour=overall.ci.col, linetype=3, size=.6, alpha=.9)
+						color=overall.ci.col, linetype=3, size=.6, alpha=.9)
 	#Overall difference line (parallel to the unit line)
 	p = p + geom_abline(slope=1, intercept=overall.wtd, 
-						colour=overall.col, linetype='dashed', size=.6, alpha=.9)
+						color=overall.col, linetype='dashed', size=.6, alpha=.9)
 	#Overall results (vertical line)
 	p = p + geom_vline(xintercept=overall.mnx, 
-					   colour=overall.col, size=.6, alpha=.7) +
+					   color=overall.col, size=.6, alpha=.7) +
 			geom_hline(yintercept=overall.mny, 
-					   colour=overall.col, size=.6, alpha=.7)
+					   color=overall.col, size=.6, alpha=.7)
 	#Point for each level 1 stratum
 	if(level1.plot) {
 		#TODO: WARNING can't seem to specify both size and fill for secondary data set 
@@ -188,23 +188,23 @@ mlpsa.circ.plot <- function(x,
 		if(is.null(level2.point.size)) {
 			p = p + geom_point(data=level2.summary, 
 							   aes(x=mnx, y=mny, fill=level2, size=n), 
-							   shape=21, colour='black') 
+							   shape=21, color='black') 
 		} else {
 			p = p + geom_point(data=level2.summary, 
 							   aes(x=mnx, y=mny, fill=level2, size=n), 
-							   size=multilevelPSA$level2.point.size, shape=21, colour='black')
+							   size=multilevelPSA$level2.point.size, shape=21, color='black')
 		}
 	}
 	#Label level 2 points
 	if(level2.label) { 
 		p = p + geom_text(data=level2.summary, 
 						  aes(x=mnx, y=mny, label=level2, hjust=.5, vjust=.5), 
-						  stat='identity', size=4, colour='black')
+						  stat='identity', size=4, color='black')
 	}
 	#Projected difference distribution
 	p = p + geom_abline(slope=-1, 
 						intercept=(projection.intercept - .03 * diff(plot.range)), 
-						colour='black', size=.5, alpha=.7)
+						color='black', size=.5, alpha=.7)
 	#Label the mean lines
 	labeling = rbind(
 		data.frame(x = plot.range[1] , y = overall.mny, 
@@ -213,26 +213,27 @@ mlpsa.circ.plot <- function(x,
 				   label = prettyNum(overall.mnx, digits=2))
 	)
 	p = p + geom_text(data=labeling[1,], aes(x=x, y=y, label=label), 
-					  colour=overall.col, vjust=-.5, hjust=-1, size=3)
+					  color=overall.col, vjust=-.5, hjust=-1, size=3)
 	p = p + geom_text(data=labeling[2,], aes(x=x, y=y, label=label), 
-					  colour=overall.col, vjust=-.5, hjust=1.5, angle=-90, size=3)
+					  color=overall.col, vjust=-.5, hjust=1.5, angle=-90, size=3)
 	#Labels
  	p = p + xlab(xlab) + ylab(ylab) + scale_size_continuous('Size')
 	#Difference disttribution (as x's)
 	p = p + geom_point(data=level2.summary, 
-					   aes(x=xmark, y=ymark, colour=level2), 
-					   label='x', stat='identity', size=2, shape=3, alpha=.5)
-	#Set colour scheme and legend
-	if(!is.null(fill.colours)) {
-		p = p + scale_colour_manual(guide='none', values=fill.colours) + 
-			scale_fill_manual(guide='none', values=fill.colours)
+					   aes(x=xmark, y=ymark, color=level2), # TODO: make the shape a parameter
+					   label='x', stat='identity', size=4, shape=3, alpha=1)
+	#Set color scheme and legend
+	if(!is.null(fill.colors)) {
+		p = p + scale_color_manual(guide='none', values=fill.colors) + 
+			scale_fill_manual(guide='none', values=fill.colors)
 	} else if(length(unique(level2.summary$level2)) > 20) {
 		#No legend since the legend would be bigger than the plot
-		p = p + scale_colour_hue(guide='none') + scale_fill_hue(guide='none')
+		p = p + scale_color_hue(guide='none') + scale_fill_hue(guide='none')
 	} else if(length(unique(level1.summary$level2)) > 8) {
-		p = p + scale_colour_hue(legendlab) + scale_fill_hue(legendlab)
+		p = p + scale_color_hue(legendlab) + scale_fill_hue(legendlab)
 	} else {
-		p = p + scale_colour_brewer(legendlab) + scale_fill_brewer(legendlab)
+		p = p + scale_color_brewer(legendlab, type='qual') + 
+			scale_fill_brewer(legendlab, type='qual')
 	}
 	if(!is.null(title)) {
 		p = p + theme(title=title)
