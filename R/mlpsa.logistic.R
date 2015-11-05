@@ -13,7 +13,7 @@
 #' @seealso getPropensityScores
 #' @export
 mlpsa.logistic <- function(vars, formula, level2, stepAIC=FALSE, ...) {
-	if(stepAIC) { require(MASS) }
+	#if(stepAIC) { require(MASS) }
 	lrPlyr <- function(x) {
 		excludeVars = names(x) %in% c(level2)
 		x = x[,!excludeVars]

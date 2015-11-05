@@ -42,6 +42,7 @@
 #' @importFrom reshape melt
 #' @importFrom reshape cast
 #' @importFrom psych describeBy
+#' @importFrom MASS stepAIC
 NA
 
 #' North American (i.e. Canada, Mexico, and United States) student results of the 2009
