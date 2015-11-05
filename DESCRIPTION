@@ -21,9 +21,9 @@ Imports:
     reshape,
     proto,
     grid,
-    party
-Suggests:
-    testthat,
+    party,
     MASS
+Suggests:
+    testthat
 Date: 2014-11-24
 RoxygenNote: 5.0.0
