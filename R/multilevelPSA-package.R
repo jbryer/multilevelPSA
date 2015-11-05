@@ -43,6 +43,8 @@
 #' @importFrom reshape cast
 #' @importFrom psych describeBy
 #' @importFrom MASS stepAIC
+#' @importFrom stats binomial density fitted glm median model.matrix na.omit qt quantile sd var
+#' @importFrom utils capture.output object.size setTxtProgressBar txtProgressBar
 NA
 
 #' North American (i.e. Canada, Mexico, and United States) student results of the 2009

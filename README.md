@@ -6,10 +6,8 @@
 
 The following example demonstrates how to get started the multilevelPSA package (more soon...).
 
-	library(devtools)
-
-	#Install the package
-	install_github('multilevelPSA', 'jbryer')
+	#Install the package from Github
+	devtools::install_github('multilevelPSA', 'jbryer')
 
 	#Load the package
 	library(multilevelPSA)

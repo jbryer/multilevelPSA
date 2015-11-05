@@ -12,6 +12,8 @@ check("multilevelPSA")
 library(multilevelPSA)
 ls('package:multilevelPSA')
 
+release('multilevelPSA')
+
 #Discussion of the Notes generated with ggplot2
 #http://stackoverflow.com/questions/9439256/
 #     how-can-i-handle-r-cmd-check-no-visible-binding-for-global-variable-notes-when
