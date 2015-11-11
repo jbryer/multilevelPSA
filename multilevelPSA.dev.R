@@ -8,7 +8,7 @@ run_examples("multilevelPSA")
 build("multilevelPSA", binary=FALSE)
 build("multilevelPSA", binary=TRUE)
 install("multilevelPSA")
-check("multilevelPSA")
+check("multilevelPSA", cran=TRUE)
 library(multilevelPSA)
 ls('package:multilevelPSA')
 

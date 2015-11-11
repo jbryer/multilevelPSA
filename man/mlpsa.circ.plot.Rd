@@ -9,7 +9,7 @@ mlpsa.circ.plot(x, xlab = names(multilevelPSA$level2.summary)[4],
   title = NULL, overall.col = "blue", overall.ci.col = "green",
   level1.plot = FALSE, level1.point.size = NULL, level1.rug.plot = NULL,
   level1.projection.lines = FALSE, level2.plot = TRUE,
-  level2.point.size = NULL, level2.rug.plot = geom_rug_alt,
+  level2.point.size = NULL, level2.rug.plot = "tr",
   level2.projection.lines = TRUE, level2.label = FALSE,
   unweighted.means = FALSE, weighted.means = FALSE, fill.colors = NULL,
   ...)
@@ -33,8 +33,8 @@ mlpsa.circ.plot(x, xlab = names(multilevelPSA$level2.summary)[4],
 
 \item{level1.point.size}{the size of level 1 points}
 
-\item{level1.rug.plot}{the geom to use for plotting a level 1 rug. Possible values
-are geom_rug (for left and bottom), geom_rug_alt (for top and right), or
+\item{level1.rug.plot}{the placement for plotting a level 2 rug. Possible values
+are \code{bl} (for left and bottom), \code{tr} (for top and right), or
 NULL (to exclude).}
 
 \item{level1.projection.lines}{logical value indicating whether level 1 project lines
@@ -44,8 +44,8 @@ NULL (to exclude).}
 
 \item{level2.point.size}{the size of level 2 points}
 
-\item{level2.rug.plot}{the geom to use for plotting a level 2 rug. Possible values
-are geom_rug (for left and bottom), geom_rug_alt (for top and right), or
+\item{level2.rug.plot}{the placement for plotting a level 2 rug. Possible values
+are \code{bl} (for left and bottom), \code{tr} (for top and right), or
 NULL (to exclude).}
 
 \item{level2.projection.lines}{logical value indicating whether level 2 project lines

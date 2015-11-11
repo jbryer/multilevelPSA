@@ -137,7 +137,7 @@ mlpsa.difference.plot <- function(x,
 	}
 	p = p + xlab(ylab) + ylab(xlab) + scale_size_continuous('Size')
 	if(!is.null(title)) {
-		p = p + opts(title=title)
+		p = p + ggtitle(title)
 	}
 	
 	if(!missing(xlim)) {

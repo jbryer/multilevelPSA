@@ -20,9 +20,9 @@ difftable.plot <- function(x,
 		label=prettyNum(diffwtd, digits=3, drop0trailing=FALSE))) + 
 		geom_point(alpha=0) +
 		geom_text(aes(colour=level2), size=5) + xlab(NULL) + ylab(NULL) + 
-		opts(legend.position='none', 
-			axis.text.x=theme_text(size=8, angle=-90, hjust=0, vjust=.5),
-			axis.text.y=theme_text(size=8, hjust=0, vjust=.5))
+		theme(legend.position='none', 
+			axis.text.x=element_text(size=8, angle=-90, hjust=0, vjust=.5),
+			axis.text.y=element_text(size=8, hjust=0, vjust=.5))
 	if(!is.null(fill.colours)) {
 		p = p + scale_colour_manual(legend=FALSE, values=fill.colours) + 
 			scale_fill_manual(legend=FALSE, values=fill.colours)
