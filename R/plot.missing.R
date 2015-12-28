@@ -17,8 +17,8 @@ utils::globalVariables(c('y','X2','X1','value'))
 #' @seealso plot.mlpsa
 #' @export
 missing.plot <- function(x, grouping, grid=FALSE, 
-						 widths=c(unit(3, 'null'),unit(1,'inches')), 
-						 heights=c(unit(1,'inches'),unit(3, 'null')),
+						 widths=c(ggplot2::unit(3, 'null'), ggplot2::unit(1,'inches')), 
+						 heights=c(ggplot2::unit(1,'inches'), ggplot2::unit(3, 'null')),
 						 color='red',
 						 ...) {
 	vars = x

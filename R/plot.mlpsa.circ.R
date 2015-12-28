@@ -42,7 +42,8 @@ utils::globalVariables(c('mnx','mny','Diff','strata2','xmark','ymark','n','y','e
 #' data(pisana)
 #' data(pisa.colnames)
 #' data(pisa.psa.cols)
-#' mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
+#' mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], 
+#'                       formula=PUBPRIV ~ ., level2='CNT')
 #' student.party = getStrata(mlctree, pisana, level2='CNT')
 #' student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5
 #' results.psa.math = mlpsa(response=student.party$mathscore, 
@@ -102,7 +103,7 @@ mlpsa.circ.plot <- function(x,
 	p = p + coord_fixed(ratio=1) + 
 			scale_x_continuous(limits=plot.range) +
 			scale_y_continuous(limits=plot.range) +
-			theme(axis.ticks.margin=unit(.1, "cm"))
+			theme(axis.text=element_text(margin=ggplot2::unit(.1, "cm")))
 	#Draw dashed lines for unweighted means
 	if(unweighted.means) {
 		p = p + geom_segment(data=unweighted.summary, 
@@ -222,7 +223,7 @@ mlpsa.circ.plot <- function(x,
 	#Difference disttribution (as x's)
 	p = p + geom_point(data=level2.summary, 
 					   aes(x=xmark, y=ymark, color=level2), # TODO: make the shape a parameter
-					   label='x', stat='identity', size=4, shape=3, alpha=1)
+					   stat='identity', size=4, shape=3, alpha=1)
 	#Set color scheme and legend
 	if(!is.null(fill.colors)) {
 		p = p + scale_color_manual(guide='none', values=fill.colors) + 

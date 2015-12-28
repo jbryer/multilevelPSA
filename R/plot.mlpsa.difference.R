@@ -108,10 +108,11 @@ mlpsa.difference.plot <- function(x,
 	}
 	
 	p = ggplot(multilevelPSA$level1.summary, aes(x=level2, y=Diff)) + coord_flip() +
-			geom_hline(aes(y=0), colour='black', size=1, alpha=.7) +
+			geom_hline(aes(yintercept=0), colour='black', size=1, alpha=.7) +
 			geom_hline(yintercept=multilevelPSA$overall.wtd, colour=overall.col, size=1) + 
 			geom_hline(yintercept=multilevelPSA$overall.ci, colour=overall.ci.col, size=1) + 
-			theme(axis.ticks.margin=unit(0, "cm"), axis.text.y=element_text(size=8, angle=0, hjust=.5))
+			theme(axis.text=element_text(margin=ggplot2::unit(0, "cm")), 
+				  axis.text.y=element_text(size=8, angle=0, hjust=.5))
 	if(errorbars.adjusted.ci) {
 		p = p + geom_errorbar(data=multilevelPSA$level2.summary, 
 							  aes(x=level2, y=NULL, ymin=ci.min.adjust, ymax=ci.max.adjust), 

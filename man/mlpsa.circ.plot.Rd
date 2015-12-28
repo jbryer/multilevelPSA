@@ -74,7 +74,8 @@ can be made. This plot is an extension of the \code{circ.psa} function in the
 data(pisana)
 data(pisa.colnames)
 data(pisa.psa.cols)
-mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
+mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], 
+                      formula=PUBPRIV ~ ., level2='CNT')
 student.party = getStrata(mlctree, pisana, level2='CNT')
 student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5
 results.psa.math = mlpsa(response=student.party$mathscore, 

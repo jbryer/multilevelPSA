@@ -36,11 +36,12 @@
 #' @seealso \code{PSAgraphics}
 #' @import plyr
 #' @import PSAgraphics
-#' @import grid
 #' @import ggplot2
 #' @import party
-#' @importFrom reshape melt
-#' @importFrom reshape cast
+#' @importFrom grid grob gTree editGrob vpPath viewport vpTree grid.layout 
+#'                  getGrob grobWidth grobHeight unit.c pushViewport grid.draw
+#'                  upViewport grid.newpage
+#' @importFrom reshape melt cast melt.data.frame
 #' @importFrom psych describeBy
 #' @importFrom MASS stepAIC
 #' @importFrom stats binomial density fitted glm median model.matrix na.omit qt quantile sd var
