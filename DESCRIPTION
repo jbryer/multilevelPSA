@@ -7,7 +7,7 @@ Maintainer: Jason Bryer <jason@bryer.org>
 Description: Functions to estimate and visualize propensity
     score analysis for multilevel, or clustered, data.
 Version: 1.2.4
-URL: http://jason.bryer.org/multilevelPSA,
+URL: http://jason.bryer.org/multilevelPSA/,
     http://github.com/jbryer/multilevelPSA
 BugReports: https://github.com/jbryer/multilevelPSA/issues
 Depends:
