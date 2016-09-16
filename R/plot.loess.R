@@ -64,7 +64,8 @@ loess.plot <- function(x, response, treatment,
 								   aes(x=ps, y=response, colour=treatment), alpha=points.treat.alpha)
 	}
 	pmain = pmain + geom_smooth(...) + ylab(responseTitle) + xlab("Propensity Score") + 
-				theme(legend.position='none', legend.justification='left') + 
+				theme(legend.position='none', legend.justification='left',
+					  axis.text.y=element_blank()) + 
 				scale_colour_hue(treatmentTitle) + 
 				xlim(range(df$ps)) + ylim(range(df$response))
 	
@@ -75,7 +76,7 @@ loess.plot <- function(x, response, treatment,
 	
 	ptop = ggplot(df, aes(x=ps, colour=treatment, group=treatment)) + 
 				geom_density() + 
-				theme(legend.position='none') + 
+				theme(legend.position='none', axis.text.y=element_blank()) + 
 				xlab(NULL) + ylab('Density') +
 				xlim(range(df$ps))
 	pright = ggplot(df, aes(x=response, colour=treatment)) + 

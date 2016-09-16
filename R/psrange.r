@@ -185,7 +185,7 @@ plot.psrange <- function(x,
   		  		size=point.size, alpha=point.alpha, shape=22) +
 			geom_errorbarh(data=x$summary, 
 				aes(y=0, x=min.mean + (max.mean-min.mean)/ 2, xmin=min.mean, xmax=max.mean), 
-				colour='black', width=line.width) + 
+				colour='black') + 
 		   	geom_text(data=x$summary,
 		   		aes(label=paste(prettyNum(floor(ncontrol), big.mark=','), sep='')), 
 		   		x=0, y=0, size=text.ncontrol.size, hjust=1.1, vjust=-0.2) +
