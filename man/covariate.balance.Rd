@@ -20,4 +20,3 @@ covariate.balance(covariates, treatment, level2, strata, abs = TRUE)
 \description{
 Estimate covariate effect sizes before and after propensity score adjustment.
 }
-

@@ -10,4 +10,3 @@ This data frame has two columns, \code{CNT3} for the three letter abbreviation
 of each country and \code{Country} that provides the full country name in English.
 }
 \keyword{datasets}
-

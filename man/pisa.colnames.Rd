@@ -12,4 +12,3 @@ description of the variable as a valid R object name, and \code{Desc} providing
 a longer description of the variable.
 }
 \keyword{datasets}
-

@@ -4,11 +4,10 @@ Title: Multilevel Propensity Score Analysis
 Type: Package
 Author: Jason Bryer <jason@bryer.org>
 Maintainer: Jason Bryer <jason@bryer.org>
-Description: Functions to estimate and visualize propensity
-    score analysis for multilevel, or clustered, data.
-Version: 1.2.4
-URL: http://jason.bryer.org/multilevelPSA/,
-    http://github.com/jbryer/multilevelPSA
+Description: This package provides functions to conduct and visualize propensity 
+    score analysis for multilevel, or clustered data.
+Version: 1.2.5
+URL: http://github.com/jbryer/multilevelPSA
 BugReports: https://github.com/jbryer/multilevelPSA/issues
 Depends:
     ggplot2,
@@ -24,5 +23,5 @@ Imports:
     MASS
 Suggests:
     testthat
-Date: 2015-12-28
-RoxygenNote: 5.0.1
+Date: 2018-03-22
+RoxygenNote: 6.0.1

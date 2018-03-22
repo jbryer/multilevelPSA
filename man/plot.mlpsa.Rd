@@ -39,4 +39,3 @@ results.psa.math = mlpsa(response=student.party$mathscore,
 plot(results.psa.math)
 }
 }
-

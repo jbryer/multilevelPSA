@@ -46,4 +46,3 @@ a ggplot2 object
 \description{
 Plots densities and ranges for the propensity scores.
 }
-

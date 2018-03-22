@@ -14,4 +14,3 @@
 \description{
 Prints the overall effects before and after propensity score adjustment.
 }
-

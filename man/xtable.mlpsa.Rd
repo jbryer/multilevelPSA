@@ -30,4 +30,3 @@ due to insufficient data within a strata.}
 \description{
 This function implements the \code{\link{xtable}} method for \code{\link{mlpsa}}.
 }
-

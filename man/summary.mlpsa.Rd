@@ -16,4 +16,3 @@
 \description{
 Provides a summary of a \code{mlpsa} class.
 }
-

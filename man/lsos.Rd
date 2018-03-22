@@ -19,4 +19,3 @@ a list of objects loaded sorted by size.
 Nicer list of objects in memory. Particularly useful for analysis of large data. 
 \url{# http://stackoverflow.com/questions/1358003/tricks-to-manage-the-available-memory-in-an-r-session}
 }
-

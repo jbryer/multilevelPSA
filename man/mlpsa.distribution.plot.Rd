@@ -36,4 +36,3 @@ Plots distribution for either the treatment or comparison group.
 \seealso{
 plot.mlpsa
 }
-

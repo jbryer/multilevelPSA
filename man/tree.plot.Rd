@@ -54,4 +54,3 @@ tree.plot(mlctree, level2Col=pisana$CNT)
 \seealso{
 plot.mlpsa
 }
-

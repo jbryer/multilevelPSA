@@ -14,4 +14,3 @@
 \description{
 Prints the summary results of psrange.
 }
-

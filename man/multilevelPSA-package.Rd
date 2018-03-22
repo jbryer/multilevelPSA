@@ -2,8 +2,8 @@
 % Please edit documentation in R/multilevelPSA-package.R
 \docType{package}
 \name{multilevelPSA-package}
-\alias{multilevelPSA}
 \alias{multilevelPSA-package}
+\alias{multilevelPSA}
 \title{Multilevel Propensity Score Analysis}
 \description{
 This packages provides functions to estimate and visualize multilvel propensity
@@ -34,9 +34,6 @@ This package also provides a number of visualizaions that provide a critical
 part in presenting, understanding, and interpreting the results. See
 \code{\link{plot.mlpsa}} for details.
 }
-\author{
-Jason Bryer \email{jason@bryer.org}
-}
 \references{
 \url{http://cran.r-project.org/web/packages/PSAgraphics/PSAgraphics.pdf}
 		\url{http://www.jstatsoft.org/v29/i06/}
@@ -44,10 +41,12 @@ Jason Bryer \email{jason@bryer.org}
 \seealso{
 \code{PSAgraphics}
 }
+\author{
+Jason Bryer \email{jason@bryer.org}
+}
 \keyword{analysis}
 \keyword{graphics}
 \keyword{multilevel}
 \keyword{propensity}
 \keyword{psa}
 \keyword{score}
-

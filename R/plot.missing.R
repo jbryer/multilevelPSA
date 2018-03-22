@@ -29,7 +29,7 @@ missing.plot <- function(x, grouping, grid=FALSE,
 	colMissing = data.frame(x=names(colMissing), y=as.numeric(colMissing))
 	
 	phist.right = ggplot(colMissing, aes(x=x, y=y, fill=y)) + 
-						geom_bar() + coord_flip()
+						geom_bar(stat = 'identity') + coord_flip()
 	phist.right = phist.right + xlab(NULL) + ylab(NULL)
 	phist.right = phist.right + scale_fill_gradient('Missingness', low='white', high=color, 
 						limits=c(0,100), breaks=seq(0, 100, 10), 
@@ -52,13 +52,13 @@ missing.plot <- function(x, grouping, grid=FALSE,
 	rowMissing = apply(colMissing[,3:ncol(colMissing),], 2, mean)
 	rowMissing = data.frame(x=names(rowMissing), y=as.numeric(rowMissing))
 	phist.top = ggplot(rowMissing, aes(x=x, y=y, fill=y)) + 
-					geom_bar() + ylim(c(0,100))
+					geom_bar(stat = 'identity') + ylim(c(0,100))
 	phist.top = phist.top + scale_fill_gradient('Missingness', low='white', high=color, 
 					limits=c(0,100), breaks=seq(0, 100, 10), 
 					labels=paste(seq(0,100,10), '%', sep=''))
 	phist.top = phist.top + xlab(NULL) + ylab(NULL)
 	phist.top = phist.top + theme(axis.text.x=element_text(size=6, angle=-90, hjust=.5, vjust=.5), 
-					axis.text.x=element_blank(), axis.ticks=element_blank())
+					axis.ticks=element_blank())
 	phist.top = phist.top + geom_text(aes(label=round(y, digits=0)), size=2)
 	phist.top = phist.top + theme(legend.position='none', axis.text.y=element_blank())
 	
@@ -71,7 +71,7 @@ missing.plot <- function(x, grouping, grid=FALSE,
 	}
 	testing.NA = testing.NA * 100
 	dimnames(testing.NA) = list(names(vars), unique(grouping))
-	testing.NA2 = melt(testing.NA)
+	testing.NA2 = reshape::melt(testing.NA)
 	p = ggplot(testing.NA2, aes(x=X2, y=X1, fill=value))
 	if(grid) {
 		p = p + geom_tile(colour='grey')

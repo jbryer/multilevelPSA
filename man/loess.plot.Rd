@@ -65,4 +65,3 @@ loess.plot(st$ps, response=st$math, treatment=st$treat, percentPoints.control = 
 \seealso{
 plot.mlpsa
 }
-

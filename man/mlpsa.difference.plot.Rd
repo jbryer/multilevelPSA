@@ -74,4 +74,3 @@ mlpsa.difference.plot(results.psa.math, sd=mean(student.party$mathscore, na.rm=T
 \seealso{
 plot.mlpsa
 }
-

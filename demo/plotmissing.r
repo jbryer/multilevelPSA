@@ -6,5 +6,5 @@ if(require(pisa, quietly=TRUE)) {
 	pisa.student$CNT = as.character(pisa.student$CNT)
 	missing.plot(pisa.student, pisa.student$CNT)
 } else {
-	message("pisa package not installed. Try\nrequire(devtools)\ninstall_github('pisa','jbryer')")
+	message("pisa package not installed. Try\nrequire(devtools)\ninstall_github('jbryer/pisa')")
 }

@@ -36,4 +36,3 @@ Torsten Hothorn, Kurt Hornik and Achim Zeileis (2006). Unbiased
 
 \code{\link{tree.plot}}
 }
-

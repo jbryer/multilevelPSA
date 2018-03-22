@@ -22,4 +22,3 @@ a data frame with overall covariate effects before and after adjustment.
 \description{
 Returns the overall effects as a data frame.
 }
-

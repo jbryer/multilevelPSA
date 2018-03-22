@@ -12,4 +12,3 @@ is.mlpsa(x)
 \description{
 Returns true if the object is of type \code{mlpsa}
 }
-

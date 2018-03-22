@@ -56,4 +56,3 @@ summary(results.psa.math)
 \seealso{
 \code{\link{mlpsa.ctree}} \code{\link{mlpsa.logistic}}
 }
-

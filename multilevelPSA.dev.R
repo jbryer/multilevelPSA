@@ -3,7 +3,6 @@ setwd("~/Dropbox/Projects") #Mac
 
 #Package building
 document("multilevelPSA")
-check_doc("multilevelPSA")
 run_examples("multilevelPSA")
 build("multilevelPSA", binary=FALSE)
 build("multilevelPSA", binary=TRUE)

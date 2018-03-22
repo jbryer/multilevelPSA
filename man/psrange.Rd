@@ -36,4 +36,3 @@ a class of psrange that contains a summary data frame, a details data
 Estimates models with increasing number of comparision subjects starting from
 1:1 to using all available comparison group subjects.
 }
-

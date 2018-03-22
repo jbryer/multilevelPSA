@@ -11,4 +11,3 @@ Character vector representing the list of covariates used for estimating
 propensity scores.
 }
 \keyword{datasets}
-

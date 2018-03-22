@@ -22,4 +22,3 @@ and the fitted value from the logistic regression.
 \seealso{
 mlpsa.logistic
 }
-

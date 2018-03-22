@@ -14,4 +14,3 @@
 \description{
 Prints basic information about a \code{mlpsa} class.
 }
-

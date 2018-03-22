@@ -88,4 +88,3 @@ mlpsa.circ.plot(results.psa.math, legendlab=FALSE)
 \seealso{
 plot.mlpsa
 }
-

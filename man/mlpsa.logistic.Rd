@@ -28,4 +28,3 @@ This method will estimate a separate logistic regression model for each level 2
 \seealso{
 getPropensityScores
 }
-

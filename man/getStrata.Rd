@@ -24,4 +24,3 @@ and the leaves from the conditional inference trees.
 \seealso{
 mlpsa.ctree
 }
-
