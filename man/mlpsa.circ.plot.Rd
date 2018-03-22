@@ -65,7 +65,7 @@ lines are drawn representing the weighted means for each level 2, or cluster.}
 \item{...}{currently unused.}
 }
 \description{
-The plot created uses the \code{ggplot2} framework. As such, additional modificaitons
+The plot created uses the \code{ggplot2} framework. As such, additional modifications
 can be made. This plot is an extension of the \code{circ.psa} function in the
 \code{PSAgraphics} package for multilevel models.
 }

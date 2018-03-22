@@ -15,7 +15,7 @@ loess.plot(x, response, treatment, responseTitle = "",
 
 \item{response}{the response variable.}
 
-\item{treatment}{the treatment varaible as a logical type.}
+\item{treatment}{the treatment variable as a logical type.}
 
 \item{responseTitle}{the label to use for the y-axis (i.e. the name of the response variable)}
 

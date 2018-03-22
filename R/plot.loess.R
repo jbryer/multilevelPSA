@@ -5,7 +5,7 @@ utils::globalVariables(c('ps','y'))
 #'
 #' @param x vector of propensity scores.
 #' @param response the response variable.
-#' @param treatment the treatment varaible as a logical type.
+#' @param treatment the treatment variable as a logical type.
 #' @param percentPoints.treat the percentage of treatment points to randomly plot.
 #' @param percentPoints.control the percentage of control points to randomly plot.
 #' @param points.treat.alpha the transparency level for treatment points.

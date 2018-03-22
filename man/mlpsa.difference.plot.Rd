@@ -16,7 +16,7 @@ mlpsa.difference.plot(x, xlab, ylab = NULL, title = NULL,
 
 \item{xlab}{label for the x-axis, or NULL to exclude.}
 
-\item{ylab}{label for the y-aixs, or NULL to exclude.}
+\item{ylab}{label for the y-axis, or NULL to exclude.}
 
 \item{title}{title of the figure, or NULL to exclude.}
 
@@ -31,7 +31,7 @@ mlpsa.difference.plot(x, xlab, ylab = NULL, title = NULL,
 \item{errorbars}{logical value indicating whether error bars should be plotted for
 for each level 1.}
 
-\item{errorbars.adjusted.ci}{whether the Bonferonni adjusted error bars should
+\item{errorbars.adjusted.ci}{whether the Bonferroni adjusted error bars should
 be plotted (these will be dashed lines).}
 
 \item{level2.rug.plot}{logical value indicating whether a rug plot should be

@@ -5,7 +5,7 @@ utils::globalVariables(c('Diff','ci.min','ci.max','n','ci.min.adjust','ci.max.ad
 #'
 #' @param x the results of \code{\link{mlpsa}}.
 #' @param xlab label for the x-axis, or NULL to exclude.
-#' @param ylab label for the y-aixs, or NULL to exclude.
+#' @param ylab label for the y-axis, or NULL to exclude.
 #' @param title title of the figure, or NULL to exclude.
 #' @param overall.col the color of the overall results line.
 #' @param overall.ci.col the color of the overall confidence interval.
@@ -13,7 +13,7 @@ utils::globalVariables(c('Diff','ci.min','ci.max','n','ci.min.adjust','ci.max.ad
 #' @param level1.points logical value indicating whether level 1 strata should be plotted.
 #' @param errorbars logical value indicating whether error bars should be plotted for
 #'        for each level 1.
-#' @param errorbars.adjusted.ci whether the Bonferonni adjusted error bars should
+#' @param errorbars.adjusted.ci whether the Bonferroni adjusted error bars should
 #'        be plotted (these will be dashed lines).
 #' @param level2.rug.plot logical value indicating whether a rug plot should be
 #'        plotted for level 2.
@@ -108,20 +108,20 @@ mlpsa.difference.plot <- function(x,
 	}
 	
 	p = ggplot(multilevelPSA$level1.summary, aes(x=level2, y=Diff)) + coord_flip() +
-			geom_hline(aes(yintercept=0), colour='black', size=1, alpha=.7) +
-			geom_hline(yintercept=multilevelPSA$overall.wtd, colour=overall.col, size=1) + 
-			geom_hline(yintercept=multilevelPSA$overall.ci, colour=overall.ci.col, size=1) + 
+			geom_hline(aes(yintercept=0), color='black', size=1, alpha=.7) +
+			geom_hline(yintercept=multilevelPSA$overall.wtd, color=overall.col, size=1) + 
+			geom_hline(yintercept=multilevelPSA$overall.ci, color=overall.ci.col, size=1) + 
 			theme(axis.text=element_text(margin=ggplot2::unit(0, "cm")), 
 				  axis.text.y=element_text(size=8, angle=0, hjust=.5))
 	if(errorbars.adjusted.ci) {
 		p = p + geom_errorbar(data=multilevelPSA$level2.summary, 
 							  aes(x=level2, y=NULL, ymin=ci.min.adjust, ymax=ci.max.adjust), 
-							  colour='green', alpha=.6, linetype=2)		
+							  color='green', alpha=.6, linetype=2)		
 	}
 	if(errorbars) {
 		p = p + geom_errorbar(data=multilevelPSA$level2.summary, 
 							  aes(x=level2, y=NULL, ymin=ci.min, ymax=ci.max), 
-							  colour='green', alpha=.6, linetype=1)
+							  color='green', alpha=.6, linetype=1)
 	}
 	if(level1.points) {
 		if(jitter) {
@@ -131,10 +131,10 @@ mlpsa.difference.plot <- function(x,
 		}
 	}
 	p = p + geom_point(data=multilevelPSA$level2.summary, aes(x=level2, y=diffwtd, size=n), 
-					   fill='blue', alpha=.6, stat='identity', shape=21, colour='black')
+					   fill='blue', alpha=.6, stat='identity', shape=21, color='black')
 	if(level2.rug.plot) {
 		p = p + geom_rug(data=multilevelPSA$level2.summary, aes(x=NULL, y=diffwtd), 
-						 alpha=.6, size=.5, colour='blue')
+						 alpha=.6, size=.5, color='blue')
 	}
 	p = p + xlab(ylab) + ylab(xlab) + scale_size_continuous('Size')
 	if(!is.null(title)) {

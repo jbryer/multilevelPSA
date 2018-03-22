@@ -1,9 +1,9 @@
 utils::globalVariables(c('value','covariate','EffectSize','level2','group'))
 
-#' Multiple covariate blance assessment plot.
+#' Multiple covariate balance assessment plot.
 #' 
 #' A graphic based upon \code{\link{cv.bal.psa}} function in the \code{PSAgraphics}
-#' package. This graphic plots the effect sizes for multiple covariated before and
+#' package. This graphic plots the effect sizes for multiple covariates before and
 #' after propensity score andjustement.
 #'
 #' @param x results of \code{\link{covariate.balance}}.
@@ -14,7 +14,7 @@ utils::globalVariables(c('value','covariate','EffectSize','level2','group'))
 #' @param strata.legend.guide guide for legend placement for strata.
 #' @param point.size size of the overall effect size points.
 #' @param point.alpha transparency level of the overall effect size points.
-#' @param line.color the color of the line connecting the overall effect size ponts.
+#' @param line.color the color of the line connecting the overall effect size points.
 #' @param line.alpha transparency level of the line connecting the overall effect size points.
 #' @param legend.position where to position the legend.
 #' @param ... currently unused.

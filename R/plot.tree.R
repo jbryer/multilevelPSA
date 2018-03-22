@@ -6,7 +6,7 @@ utils::globalVariables(c('Desc','level2.Freq','Var.Freq','value'))
 #' along with their relative importance. Covariates are listed on the y-axis and 
 #' level two clusters along the x-axis. Cells that are shaded indicate that that
 #' covariate was present in the conditional. The shade of the color represents
-#' the highest level witin the tree that covariate appeared. That is, the darkest
+#' the highest level within the tree that covariate appeared. That is, the darkest
 #' color, or depth 1, corresponds to the covariate used at the root of the tree, or
 #' the first split.
 #' 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.missing.R
 \name{missing.plot}
 \alias{missing.plot}
-\title{Returns a heat map graphic representing missinging of variables grouped by
+\title{Returns a heat map graphic representing missingness of variables grouped by
 the given grouping vector.}
 \usage{
 missing.plot(x, grouping, grid = FALSE, widths = c(ggplot2::unit(3, "null"),

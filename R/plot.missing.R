@@ -1,6 +1,6 @@
 utils::globalVariables(c('y','X2','X1','value'))
 
-#' Returns a heat map graphic representing missinging of variables grouped by
+#' Returns a heat map graphic representing missingness of variables grouped by
 #' the given grouping vector.
 #'
 #' NOTE: This is an experimental function and the results may vary depending on the

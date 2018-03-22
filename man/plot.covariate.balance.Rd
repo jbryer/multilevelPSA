@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.balance.R
 \name{plot.covariate.balance}
 \alias{plot.covariate.balance}
-\title{Multiple covariate blance assessment plot.}
+\title{Multiple covariate balance assessment plot.}
 \usage{
 \method{plot}{covariate.balance}(x, plot.strata = FALSE,
   order = c("unadjusted", "adjusted"), strata.size = 3,
@@ -26,7 +26,7 @@ unadjusted, or NULL (don't reorder).}
 
 \item{point.alpha}{transparency level of the overall effect size points.}
 
-\item{line.color}{the color of the line connecting the overall effect size ponts.}
+\item{line.color}{the color of the line connecting the overall effect size points.}
 
 \item{line.alpha}{transparency level of the line connecting the overall effect size points.}
 
@@ -40,6 +40,6 @@ a ggplot2 with an attribute, \code{effects}, that is the data frame
 }
 \description{
 A graphic based upon \code{\link{cv.bal.psa}} function in the \code{PSAgraphics}
-package. This graphic plots the effect sizes for multiple covariated before and
+package. This graphic plots the effect sizes for multiple covariates before and
 after propensity score andjustement.
 }

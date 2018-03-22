@@ -4,8 +4,8 @@
 \name{pisana}
 \alias{pisana}
 \title{North American (i.e. Canada, Mexico, and United States) student results of the 2009
-Programm of International Student Assessment.}
-\format{a data frame with 66,548 ovservations of 65 variables.}
+Programme of International Student Assessment.}
+\format{a data frame with 66,548 obvservations of 65 variables.}
 \source{
 Organization for Economic Co-operation and Development
 }
@@ -21,7 +21,7 @@ Details on the specific procedure are in the \code{pisa.impute} function
 in the \href{http://github.com/jbryer/pisa}{\code{pisa} package}.
 }
 \references{
-Organisation for Economic Co-operation and Development (2009).
+Organization for Economic Co-operation and Development (2009).
             Programme for International Student Assessment (PISA). 
             \url{http://www.pisa.oecd.org/}
 }
