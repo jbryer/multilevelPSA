@@ -1,4 +1,4 @@
-#' Estimates models with increasing number of comparision subjects starting from
+#' Estimates models with increasing number of comparison subjects starting from
 #' 1:1 to using all available comparison group subjects.
 #' 
 #' @param df data frame with variables to pass to glm

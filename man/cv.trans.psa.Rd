@@ -10,7 +10,7 @@ cv.trans.psa(covariates, fcol = NULL)
 \item{covariates}{A dataframe of covariates, presumably some factors.}
 
 \item{fcol}{An optional vector containing the factor columns in the covariate 
-data frame. In \code{NULL} (default) routine to identfy factors internally.}
+data frame. In \code{NULL} (default) routine to identify factors internally.}
 }
 \description{
 The function \code{cv.trans.psa} takes a covariate data frame and replaces each 

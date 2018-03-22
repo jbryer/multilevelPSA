@@ -10,7 +10,7 @@
 #' 
 #' @param covariates A dataframe of covariates, presumably some factors.
 #' @param fcol An optional vector containing the factor columns in the covariate 
-#'        data frame. In \code{NULL} (default) routine to identfy factors internally.
+#'        data frame. In \code{NULL} (default) routine to identify factors internally.
 #' 
 #' @author James E. Helmreich James.Helmreich@@Marist.edu
 #' @author Robert M. Pruzek RMPruzek@@yahoo.com

@@ -2,7 +2,7 @@
 % Please edit documentation in R/psrange.r
 \name{psrange}
 \alias{psrange}
-\title{Estimates models with increasing number of comparision subjects starting from
+\title{Estimates models with increasing number of comparison subjects starting from
 1:1 to using all available comparison group subjects.}
 \usage{
 psrange(df, treatvar, formula, nsteps = 10, nboot = 10, samples,
@@ -33,6 +33,6 @@ a class of psrange that contains a summary data frame, a details data
         frame, and a list of each individual result from glm.
 }
 \description{
-Estimates models with increasing number of comparision subjects starting from
+Estimates models with increasing number of comparison subjects starting from
 1:1 to using all available comparison group subjects.
 }

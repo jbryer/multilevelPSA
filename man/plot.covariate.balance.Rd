@@ -41,5 +41,5 @@ a ggplot2 with an attribute, \code{effects}, that is the data frame
 \description{
 A graphic based upon \code{\link{cv.bal.psa}} function in the \code{PSAgraphics}
 package. This graphic plots the effect sizes for multiple covariates before and
-after propensity score andjustement.
+after propensity score adjustement.
 }

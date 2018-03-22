@@ -4,7 +4,7 @@ utils::globalVariables(c('value','covariate','EffectSize','level2','group'))
 #' 
 #' A graphic based upon \code{\link{cv.bal.psa}} function in the \code{PSAgraphics}
 #' package. This graphic plots the effect sizes for multiple covariates before and
-#' after propensity score andjustement.
+#' after propensity score adjustement.
 #'
 #' @param x results of \code{\link{covariate.balance}}.
 #' @param plot.strata whether individual strata should be plotted.
