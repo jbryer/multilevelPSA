@@ -30,7 +30,7 @@
 #' @docType package
 #' @title Multilevel Propensity Score Analysis
 #' @author Jason Bryer \email{jason@@bryer.org}
-#' @references \url{http://cran.r-project.org/web/packages/PSAgraphics/PSAgraphics.pdf}
+#' @references \url{http://CRAN.R-project.org/package=PSAgraphics}
 #' 		\url{http://www.jstatsoft.org/v29/i06/}
 #' @keywords propensity score analysis psa multilevel graphics
 #' @seealso \code{PSAgraphics}
