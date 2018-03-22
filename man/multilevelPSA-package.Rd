@@ -35,7 +35,7 @@ part in presenting, understanding, and interpreting the results. See
 \code{\link{plot.mlpsa}} for details.
 }
 \references{
-\url{http://cran.r-project.org/web/packages/PSAgraphics/PSAgraphics.pdf}
+\url{https://CRAN.R-project.org/package=PSAgraphics}
 		\url{http://www.jstatsoft.org/v29/i06/}
 }
 \seealso{
