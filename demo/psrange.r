@@ -12,8 +12,8 @@ getSimulatedData <- function(nvars=3,
 	
 	df <- c(rep(0, ncontrol), rep(1, ntreat))
 	for(i in 1:nvars) {
-		df <- cbind(df, c(rnorm(ncontrol, mean=control.mean[1], sd=control.sd[1]),
-						  rnorm(ntreat, mean=treat.mean[1], sd=treat.sd[1])))
+		df <- cbind(df, c(rnorm(ncontrol, mean=control.mean[i], sd=control.sd[i]),
+						  rnorm(ntreat, mean=treat.mean[i], sd=treat.sd[i])))
 	}
 	df <- as.data.frame(df)
 	names(df) <- c('treat', letters[1:nvars])
