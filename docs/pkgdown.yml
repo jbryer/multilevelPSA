@@ -1,0 +1,6 @@
+pandoc: '3.2'
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  multilevelPSA: multilevelPSA.html
+last_built: 2025-04-02T18:00Z
