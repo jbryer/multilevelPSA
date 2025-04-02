@@ -5,7 +5,9 @@
 \alias{pisana}
 \title{North American (i.e. Canada, Mexico, and United States) student results of the 2009
 Programme of International Student Assessment.}
-\format{a data frame with 66,548 obvservations of 65 variables.}
+\format{
+a data frame with 66,548 obvservations of 65 variables.
+}
 \source{
 Organization for Economic Co-operation and Development
 }

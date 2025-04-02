@@ -8,7 +8,7 @@ and the leaves from the conditional inference trees.}
 getStrata(party.results, data, level2)
 }
 \arguments{
-\item{party.results}{the results of \code{\link{mlpsa.ctree}}}
+\item{party.results}{the results of [mlpsa.ctree()]}
 
 \item{data}{the data frame to merge results to}
 

@@ -2,11 +2,13 @@ Package: multilevelPSA
 License: GPL (>= 2)
 Title: Multilevel Propensity Score Analysis
 Type: Package
-Author: Jason Bryer <jason@bryer.org>
-Maintainer: Jason Bryer <jason@bryer.org>
+Authors@R: c(
+    person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-2454-0402"))
+    )
 Description: Conducts and visualizes propensity score analysis for multilevel, 
   or clustered data. Bryer & Pruzek (2011) <doi:10.1080/00273171.2011.636693>.
-Version: 1.2.5
+Version: 1.2.6
 URL: http://github.com/jbryer/multilevelPSA
 BugReports: https://github.com/jbryer/multilevelPSA/issues
 Depends:
@@ -22,6 +24,10 @@ Imports:
     party,
     MASS
 Suggests:
+    knitr,
+    rmarkdown,
     testthat
 Date: 2018-03-22
-RoxygenNote: 6.0.1
+RoxygenNote: 7.3.2
+VignetteBuilder: knitr
+Encoding: UTF-8

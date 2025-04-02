@@ -5,9 +5,15 @@
 \title{Returns a heat map graphic representing missingness of variables grouped by
 the given grouping vector.}
 \usage{
-missing.plot(x, grouping, grid = FALSE, widths = c(ggplot2::unit(3, "null"),
-  ggplot2::unit(1, "inches")), heights = c(ggplot2::unit(1, "inches"),
-  ggplot2::unit(3, "null")), color = "red", ...)
+missing.plot(
+  x,
+  grouping,
+  grid = FALSE,
+  widths = c(ggplot2::unit(3, "null"), ggplot2::unit(1, "inches")),
+  heights = c(ggplot2::unit(1, "inches"), ggplot2::unit(3, "null")),
+  color = "red",
+  ...
+)
 }
 \arguments{
 \item{x}{a data frame containing the variables to visualize missingness}

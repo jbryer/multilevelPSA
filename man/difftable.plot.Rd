@@ -8,7 +8,7 @@ each level two, or cluster.}
 difftable.plot(x, fill.colors = NULL, legendlab = NULL, ...)
 }
 \arguments{
-\item{x}{the results of \code{\link{mlpsa}}.}
+\item{x}{the results of [mlpsa()].}
 
 \item{fill.colors}{the colors to use for each level two.}
 

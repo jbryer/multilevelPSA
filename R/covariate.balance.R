@@ -9,9 +9,9 @@
 covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 	#Recode factors. First we'll covert logicals and factors with two levels to integers
 	for(i in 1:ncol(covariates)) {
-		if(class(covariates[,i]) == 'logical') {
+		if(is.logical(covariates[,i])) {
 			covariates[,i] <- as.integer(covariates[,i])
-		} else if(class(covariates[,i]) == 'factor' & length(levels(covariates[,i])) == 2) {
+		} else if(is.factor(covariates[,i]) & length(levels(covariates[,i])) == 2) {
 			covariates[,i] <- as.integer(covariates[,i])
 		}
 	}
@@ -75,7 +75,7 @@ covariate.balance <- function(covariates, treatment, level2, strata, abs=TRUE) {
 
 #' Returns the overall effects as a data frame.
 #' 
-#' @param x results of \code{\link{covariate.balance}}.
+#' @param x results of [covariate.balance()].
 #' @param row.names unused.
 #' @param optional unused.
 #' @param ... unused
@@ -88,7 +88,7 @@ as.data.frame.covariate.balance <- function(x, row.names=NULL, optional=FALSE, .
 
 #' Prints the overall effects before and after propensity score adjustment.
 #' 
-#' @param x results of \code{\link{covariate.balance}}.
+#' @param x results of [covariate.balance()].
 #' @param ... unused.
 #' @method print covariate.balance
 #' @export

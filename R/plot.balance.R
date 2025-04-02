@@ -2,11 +2,11 @@ utils::globalVariables(c('value','covariate','EffectSize','level2','group'))
 
 #' Multiple covariate balance assessment plot.
 #' 
-#' A graphic based upon \code{\link{cv.bal.psa}} function in the \code{PSAgraphics}
+#' A graphic based upon [cv.bal.psa()] function in the `PSAgraphics`
 #' package. This graphic plots the effect sizes for multiple covariates before and
 #' after propensity score adjustement.
 #'
-#' @param x results of \code{\link{covariate.balance}}.
+#' @param x results of [covariate.balance()].
 #' @param plot.strata whether individual strata should be plotted.
 #' @param order how to order the y-axis. Possible values are adjusted,
 #'        unadjusted, or NULL (don't reorder).

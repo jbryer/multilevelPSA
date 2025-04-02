@@ -3,7 +3,7 @@ utils::globalVariables(c('level2','diffwtd'))
 #' This function produces a ggplot2 figure containing the mean differences for
 #' each level two, or cluster.
 #'
-#' @param x the results of \code{\link{mlpsa}}.
+#' @param x the results of [mlpsa()].
 #' @param fill.colors the colors to use for each level two.
 #' @param legendlab the label to use for the legend, or NULL to exclude.
 #' @param ... currently unused.

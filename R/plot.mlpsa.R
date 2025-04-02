@@ -4,12 +4,11 @@
 #' can be made. This plot is an extension of the \code{circ.psa} function in the
 #' \code{PSAgraphics} package for multilevel models.
 #'
-#' @param x the results of \code{\link{mlpsa}}.
+#' @param x the results of [mlspa()].
 #' @param ratio the ratio of the size of the distribution plots (left and bottom)
 #'        to the circular plot.
 #' @param plotExtra a plot to place in the lower left corner.
-#' @param ... parameters passed to \code{\link{mlpsa.circ.plot}} and 
-#'        \code{\link{mlpsa.distribution.plot}}
+#' @param ... parameters passed to [mlpsa.circ.plot()] and [mlpsa.distribution.plot()]
 #' @method plot mlpsa
 #' @export
 #' @examples

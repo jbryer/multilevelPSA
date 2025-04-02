@@ -13,7 +13,7 @@ mlpsa.logistic(vars, formula, level2, stepAIC = FALSE, ...)
 
 \item{level2}{the name of the column containing the level 2 specification}
 
-\item{stepAIC}{if true, the \code{\link{stepAIC}} from the \code{MASS} package
+\item{stepAIC}{if true, the [MASS::stepAIC()] from the `MASS` package
 will be used within each level.}
 
 \item{...}{currently unused.}

@@ -7,7 +7,7 @@
 \method{print}{covariate.balance}(x, ...)
 }
 \arguments{
-\item{x}{results of \code{\link{covariate.balance}}.}
+\item{x}{results of [covariate.balance()].}
 
 \item{...}{unused.}
 }

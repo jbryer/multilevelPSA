@@ -1,3 +1,9 @@
+multilevelPSA 1.2.6
+=========
+
+* Updated documentation to address CRAN notes.
+* Added vignette.
+
 multilevelPSA 1.2.5
 =========
 

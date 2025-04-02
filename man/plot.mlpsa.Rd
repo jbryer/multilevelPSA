@@ -7,15 +7,14 @@
 \method{plot}{mlpsa}(x, ratio = c(1, 2), plotExtra = NULL, ...)
 }
 \arguments{
-\item{x}{the results of \code{\link{mlpsa}}.}
+\item{x}{the results of [mlspa()].}
 
 \item{ratio}{the ratio of the size of the distribution plots (left and bottom)
 to the circular plot.}
 
 \item{plotExtra}{a plot to place in the lower left corner.}
 
-\item{...}{parameters passed to \code{\link{mlpsa.circ.plot}} and 
-\code{\link{mlpsa.distribution.plot}}}
+\item{...}{parameters passed to [mlpsa.circ.plot()] and [mlpsa.distribution.plot()]}
 }
 \description{
 The plot created uses the \code{ggplot2} framework. As such, additional modifications

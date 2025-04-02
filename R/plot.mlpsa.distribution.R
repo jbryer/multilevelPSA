@@ -1,6 +1,6 @@
 #' Plots distribution for either the treatment or comparison group.
 #' 
-#' @param x the results of \code{\link{mlpsa}}.
+#' @param x the results of [mlpsa()].
 #' @param treat the group to plot. This must be one of the two levels of the treatment variable.
 #' @param fill.colours if specified, the colors to use for level 2 points.
 #' @param flip if TRUE, the level 2 clusters will be on the y-axis and the outcome

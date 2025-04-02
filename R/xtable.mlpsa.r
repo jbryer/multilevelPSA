@@ -1,17 +1,17 @@
-#' Prints the results of \code{\link{mlpsa}} as a LaTeX table.
+#' Prints the results of [mlpsa()] as a LaTeX table.
 #' 
-#' This function implements the \code{\link{xtable}} method for \code{\link{mlpsa}}.
+#' This function implements the [xtable::xtable()] method for [mlpsa()].
 #' 
-#' @param x results of \code{\link{mlpsa}}
+#' @param x results of [mlpsa()]
 #' @param digits number of digits to print.
 #' @param include.note include a table note indicating how many rows were removed
 #'        due to insufficient data within a strata.
-#' @param caption passed through to \code{\link{xtable}}.
-#' @param label passed through to \code{\link{xtable}}.
+#' @param caption passed through to [xtable::xtable()].
+#' @param label passed through to [xtable::xtable()].
 #' @param align Not used. 
-#' @param display passed through to \code{\link{xtable}}.
-#' @param auto passed through to \code{\link{xtable}}.
-#' @param ... other parameters passed to \code{\link{summary.mlpsa}}
+#' @param display passed through to [xtable::xtable()].
+#' @param auto passed through to [xtable::xtable()].
+#' @param ... other parameters passed to [summary.mlpsa()]
 #' @method xtable mlpsa
 #' @import xtable
 #' @export
@@ -41,14 +41,14 @@ xtable.mlpsa <- function(x, caption, label, align, digits=2, display=NULL,
 	return(xtab)
 }
 
-#' Prints the results of \code{\link{mlpsa}} and \code{\link{xtable.mlpsa}}.
+#' Prints the results of [mlpsa()] and [xtable.mlpsa()].
 #' 
-#' Print method for \code{\link{xtable.mlpsa}}.
+#' Print method for [xtable.mlpsa()].
 #' 
-#' @param x result of \code{\link{xtable.mlpsa}}
-#' @param tabular.environment see \code{\link{print.xtable}}.
-#' @param floating see \code{\link{print.xtable}}.
-#' @param ... other parameters passed to \code{\link{print.xtable}}
+#' @param x result of [xtable.mlpsa()]
+#' @param tabular.environment see [xtable::print.xtable()].
+#' @param floating see [xtable::print.xtable()].
+#' @param ... other parameters passed to [xtable::print.xtable()]
 #' @method print xmlpsa
 #' @export
 print.xmlpsa <- function(x, tabular.environment='longtable', floating=FALSE, ...) {

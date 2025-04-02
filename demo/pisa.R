@@ -70,8 +70,8 @@ results.psa.math$level2.summary[,c('level2','n','Private','Private.n','Public','
 								   'diffwtd','ci.min','ci.max','df')]
 results.psa.math$overall.ci
 
-View(results.psa.math$level1.summary)
-View(results.psa.math$level2.summary)
+# View(results.psa.math$level1.summary)
+# View(results.psa.math$level2.summary)
 
 # These are the two main plots
 plot(results.psa.math)

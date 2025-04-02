@@ -4,10 +4,25 @@
 \alias{covariateBalance}
 \title{Calculate covariate effect size differences before and after stratification.}
 \usage{
-covariateBalance(covariates, treatment, propensity, strata = NULL,
-  int = NULL, tree = FALSE, minsize = 2, universal.psd = TRUE,
-  trM = 0, absolute.es = TRUE, trt.value = NULL, use.trt.var = FALSE,
-  verbose = FALSE, xlim = NULL, plot.strata = TRUE, na.rm = TRUE, ...)
+covariateBalance(
+  covariates,
+  treatment,
+  propensity,
+  strata = NULL,
+  int = NULL,
+  tree = FALSE,
+  minsize = 2,
+  universal.psd = TRUE,
+  trM = 0,
+  absolute.es = TRUE,
+  trt.value = NULL,
+  use.trt.var = FALSE,
+  verbose = FALSE,
+  xlim = NULL,
+  plot.strata = TRUE,
+  na.rm = TRUE,
+  ...
+)
 }
 \arguments{
 \item{covariates}{dataframe of interest}
@@ -55,7 +70,7 @@ variance with be used in effect size calculations.}
 \item{...}{currently unused.}
 }
 \description{
-This function is modified from the \code{\link{cv.bal.psa}} function in the 
+This function is modified from the [cv.bal.psa()] function in the 
 \code{PSAgrpahics} package.
 }
 \details{

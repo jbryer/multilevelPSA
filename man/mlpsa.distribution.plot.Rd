@@ -4,12 +4,21 @@
 \alias{mlpsa.distribution.plot}
 \title{Plots distribution for either the treatment or comparison group.}
 \usage{
-mlpsa.distribution.plot(x, treat, fill.colours = NULL, flip = TRUE,
-  label = treat, level2.label = NULL, legendlab = NULL,
-  axis.text.size = 8, fill.colors = NULL, ...)
+mlpsa.distribution.plot(
+  x,
+  treat,
+  fill.colours = NULL,
+  flip = TRUE,
+  label = treat,
+  level2.label = NULL,
+  legendlab = NULL,
+  axis.text.size = 8,
+  fill.colors = NULL,
+  ...
+)
 }
 \arguments{
-\item{x}{the results of \code{\link{mlpsa}}.}
+\item{x}{the results of [mlpsa()].}
 
 \item{treat}{the group to plot. This must be one of the two levels of the treatment variable.}
 

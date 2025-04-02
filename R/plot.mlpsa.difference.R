@@ -3,7 +3,7 @@ utils::globalVariables(c('Diff','ci.min','ci.max','n','ci.min.adjust','ci.max.ad
 #' Creates a graphic summarizing the differences between treatment and comparison
 #' groups within and across level two clusters.
 #'
-#' @param x the results of \code{\link{mlpsa}}.
+#' @param x the results of [mlpsa()].
 #' @param xlab label for the x-axis, or NULL to exclude.
 #' @param ylab label for the y-axis, or NULL to exclude.
 #' @param title title of the figure, or NULL to exclude.

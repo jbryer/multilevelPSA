@@ -5,8 +5,16 @@
 \title{Estimates models with increasing number of comparison subjects starting from
 1:1 to using all available comparison group subjects.}
 \usage{
-psrange(df, treatvar, formula, nsteps = 10, nboot = 10, samples,
-  type = c("logistic", "ctree"), ...)
+psrange(
+  df,
+  treatvar,
+  formula,
+  nsteps = 10,
+  nboot = 10,
+  samples,
+  type = c("logistic", "ctree"),
+  ...
+)
 }
 \arguments{
 \item{df}{data frame with variables to pass to glm}

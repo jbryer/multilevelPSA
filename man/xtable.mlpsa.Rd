@@ -2,31 +2,40 @@
 % Please edit documentation in R/xtable.mlpsa.r
 \name{xtable.mlpsa}
 \alias{xtable.mlpsa}
-\title{Prints the results of \code{\link{mlpsa}} as a LaTeX table.}
+\title{Prints the results of [mlpsa()] as a LaTeX table.}
 \usage{
-\method{xtable}{mlpsa}(x, caption, label, align, digits = 2, display = NULL,
-  auto = FALSE, include.note = TRUE, ...)
+\method{xtable}{mlpsa}(
+  x,
+  caption,
+  label,
+  align,
+  digits = 2,
+  display = NULL,
+  auto = FALSE,
+  include.note = TRUE,
+  ...
+)
 }
 \arguments{
-\item{x}{results of \code{\link{mlpsa}}}
+\item{x}{results of [mlpsa()]}
 
-\item{caption}{passed through to \code{\link{xtable}}.}
+\item{caption}{passed through to [xtable::xtable()].}
 
-\item{label}{passed through to \code{\link{xtable}}.}
+\item{label}{passed through to [xtable::xtable()].}
 
 \item{align}{Not used.}
 
 \item{digits}{number of digits to print.}
 
-\item{display}{passed through to \code{\link{xtable}}.}
+\item{display}{passed through to [xtable::xtable()].}
 
-\item{auto}{passed through to \code{\link{xtable}}.}
+\item{auto}{passed through to [xtable::xtable()].}
 
 \item{include.note}{include a table note indicating how many rows were removed
 due to insufficient data within a strata.}
 
-\item{...}{other parameters passed to \code{\link{summary.mlpsa}}}
+\item{...}{other parameters passed to [summary.mlpsa()]}
 }
 \description{
-This function implements the \code{\link{xtable}} method for \code{\link{mlpsa}}.
+This function implements the [xtable::xtable()] method for [mlpsa()].
 }

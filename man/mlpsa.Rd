@@ -4,8 +4,15 @@
 \alias{mlpsa}
 \title{This function will perform phase II of the multilevel propensity score analysis.}
 \usage{
-mlpsa(response, treatment = NULL, strata = NULL, level2 = NULL,
-  minN = 5, reverse = FALSE, ci.level = 0.05)
+mlpsa(
+  response,
+  treatment = NULL,
+  strata = NULL,
+  level2 = NULL,
+  minN = 5,
+  reverse = FALSE,
+  ci.level = 0.05
+)
 }
 \arguments{
 \item{response}{vector containing the response values}
@@ -29,9 +36,6 @@ to a 95\% confidence level.}
 a mlpsa class
 }
 \description{
-TODO: Need more details
-}
-\details{
 The ci.adjust provides a Bonferroni-Sidak adjusted confidence intervals based
 on the number of levels/clusters.
 }
@@ -54,5 +58,5 @@ summary(results.psa.math)
 }
 }
 \seealso{
-\code{\link{mlpsa.ctree}} \code{\link{mlpsa.logistic}}
+[mlpsa.ctree()], [mlpsa.logistic()]
 }

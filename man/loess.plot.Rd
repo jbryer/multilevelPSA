@@ -5,10 +5,20 @@
 \title{Loess plot with density distributions for propensity scores and outcomes on
 top and right, respectively.}
 \usage{
-loess.plot(x, response, treatment, responseTitle = "",
-  treatmentTitle = "Treatment", percentPoints.treat = 0.1,
-  percentPoints.control = 0.01, points.treat.alpha = 0.1,
-  points.control.alpha = 0.1, plot.strata, plot.strata.alpha = 0.2, ...)
+loess.plot(
+  x,
+  response,
+  treatment,
+  responseTitle = "",
+  treatmentTitle = "Treatment",
+  percentPoints.treat = 0.1,
+  percentPoints.control = 0.01,
+  points.treat.alpha = 0.1,
+  points.control.alpha = 0.1,
+  plot.strata,
+  plot.strata.alpha = 0.2,
+  ...
+)
 }
 \arguments{
 \item{x}{vector of propensity scores.}
@@ -34,8 +44,8 @@ plot corresponding to quantiles.}
 
 \item{plot.strata.alpha}{the alpha level for the vertical lines.}
 
-\item{...}{other parameters passed to \code{\link{geom_smooth}} and
-\code{\link{stat_smooth}}.}
+\item{...}{other parameters passed to [ggplot2::geom_smooth()] and
+[ggplot2::stat_smooth()].}
 }
 \value{
 a ggplot2 figure

@@ -4,18 +4,31 @@
 \alias{mlpsa.circ.plot}
 \title{Plots the results of a multilevel propensity score model.}
 \usage{
-mlpsa.circ.plot(x, xlab = names(multilevelPSA$level2.summary)[4],
-  ylab = names(multilevelPSA$level2.summary)[5], legendlab = "Level 2",
-  title = NULL, overall.col = "blue", overall.ci.col = "green",
-  level1.plot = FALSE, level1.point.size = NULL, level1.rug.plot = NULL,
-  level1.projection.lines = FALSE, level2.plot = TRUE,
-  level2.point.size = NULL, level2.rug.plot = "tr",
-  level2.projection.lines = TRUE, level2.label = FALSE,
-  unweighted.means = FALSE, weighted.means = FALSE, fill.colors = NULL,
-  ...)
+mlpsa.circ.plot(
+  x,
+  xlab = names(multilevelPSA$level2.summary)[4],
+  ylab = names(multilevelPSA$level2.summary)[5],
+  legendlab = "Level 2",
+  title = NULL,
+  overall.col = "blue",
+  overall.ci.col = "green",
+  level1.plot = FALSE,
+  level1.point.size = NULL,
+  level1.rug.plot = NULL,
+  level1.projection.lines = FALSE,
+  level2.plot = TRUE,
+  level2.point.size = NULL,
+  level2.rug.plot = "tr",
+  level2.projection.lines = TRUE,
+  level2.label = FALSE,
+  unweighted.means = FALSE,
+  weighted.means = FALSE,
+  fill.colors = NULL,
+  ...
+)
 }
 \arguments{
-\item{x}{the results of \code{\link{mlpsa}}.}
+\item{x}{the results of [mlpsa()].}
 
 \item{xlab}{label for the x-axis.}
 

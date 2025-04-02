@@ -10,7 +10,7 @@ utils::globalVariables(c('Desc','level2.Freq','Var.Freq','value'))
 #' color, or depth 1, corresponds to the covariate used at the root of the tree, or
 #' the first split.
 #' 
-#' @param x the results of \code{\link{mlpsa.ctree}}
+#' @param x the results of [mlpsa.ctree()]
 #' @param colNames the columns to include in the graphic
 #' @param level2Col the name of the level 2 column.
 #' @param colLabels column labels to use. This is a data frame with two columns, the

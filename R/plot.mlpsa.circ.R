@@ -6,7 +6,7 @@ utils::globalVariables(c('mnx','mny','Diff','strata2','xmark','ymark','n','y','e
 #' can be made. This plot is an extension of the \code{circ.psa} function in the
 #' \code{PSAgraphics} package for multilevel models.
 #'
-#' @param x the results of \code{\link{mlpsa}}.
+#' @param x the results of [mlpsa()].
 #' @param xlab label for the x-axis.
 #' @param ylab label for the y-axis.
 #' @param legendlab the label for the legend, or NULL to exclude.

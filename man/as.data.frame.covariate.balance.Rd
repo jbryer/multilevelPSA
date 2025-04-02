@@ -4,11 +4,10 @@
 \alias{as.data.frame.covariate.balance}
 \title{Returns the overall effects as a data frame.}
 \usage{
-\method{as.data.frame}{covariate.balance}(x, row.names = NULL,
-  optional = FALSE, ...)
+\method{as.data.frame}{covariate.balance}(x, row.names = NULL, optional = FALSE, ...)
 }
 \arguments{
-\item{x}{results of \code{\link{covariate.balance}}.}
+\item{x}{results of [covariate.balance()].}
 
 \item{row.names}{unused.}
 

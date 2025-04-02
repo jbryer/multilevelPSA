@@ -32,7 +32,7 @@ Torsten Hothorn, Kurt Hornik and Achim Zeileis (2006). Unbiased
             of Computational and Graphical Statistics, 15(3), 651--674.
 }
 \seealso{
-\code{\link{getStrata}}
+[getStrata()]
 
-\code{\link{tree.plot}}
+[tree.plot()]
 }

@@ -6,7 +6,7 @@
 #' @param vars data frame containing the variables to estimate the logistic regression
 #' @param formula the logistic regression formula to use
 #' @param level2 the name of the column containing the level 2 specification
-#' @param stepAIC if true, the \code{\link{stepAIC}} from the \code{MASS} package
+#' @param stepAIC if true, the [MASS::stepAIC()] from the `MASS` package
 #'        will be used within each level.
 #' @param ... currently unused.
 #' @return a list of glm classes for each level 2 or stepwise-selected model if stepAIC is true.
@@ -40,7 +40,7 @@ mlpsa.logistic <- function(vars, formula, level2, stepAIC=FALSE, ...) {
 #' and the fitted value from the logistic regression.
 #' 
 #' @seealso mlpsa.logistic
-#' @param lr.results the results of \code{\link{mlpsa.logistic}}
+#' @param lr.results the results of [mlpsa.logistic()]
 #' @param nStrata number of strata within each level.
 #' @return a data frame
 #' @export getPropensityScores

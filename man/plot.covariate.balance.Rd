@@ -4,14 +4,22 @@
 \alias{plot.covariate.balance}
 \title{Multiple covariate balance assessment plot.}
 \usage{
-\method{plot}{covariate.balance}(x, plot.strata = FALSE,
-  order = c("unadjusted", "adjusted"), strata.size = 3,
-  strata.legend.guide = "none", point.size = 3, point.alpha = 1,
-  line.color = "black", line.alpha = 0.2, legend.position = c(0.8, 0.2),
-  ...)
+\method{plot}{covariate.balance}(
+  x,
+  plot.strata = FALSE,
+  order = c("unadjusted", "adjusted"),
+  strata.size = 3,
+  strata.legend.guide = "none",
+  point.size = 3,
+  point.alpha = 1,
+  line.color = "black",
+  line.alpha = 0.2,
+  legend.position = c(0.8, 0.2),
+  ...
+)
 }
 \arguments{
-\item{x}{results of \code{\link{covariate.balance}}.}
+\item{x}{results of [covariate.balance()].}
 
 \item{plot.strata}{whether individual strata should be plotted.}
 
@@ -39,7 +47,7 @@ a ggplot2 with an attribute, \code{effects}, that is the data frame
        used to create the plot.
 }
 \description{
-A graphic based upon \code{\link{cv.bal.psa}} function in the \code{PSAgraphics}
+A graphic based upon [cv.bal.psa()] function in the `PSAgraphics`
 package. This graphic plots the effect sizes for multiple covariates before and
 after propensity score adjustement.
 }

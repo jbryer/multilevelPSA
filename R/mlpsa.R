@@ -1,7 +1,5 @@
 #' This function will perform phase II of the multilevel propensity score analysis.
 #' 
-#' TODO: Need more details
-#' 
 #' The ci.adjust provides a Bonferroni-Sidak adjusted confidence intervals based
 #' on the number of levels/clusters.
 #' 
@@ -16,7 +14,7 @@
 #' @param ci.level the confidence level to use for confidence intervals. Defaults
 #'        to a 95\% confidence level.
 #' @return a mlpsa class
-#' @seealso \code{\link{mlpsa.ctree}} \code{\link{mlpsa.logistic}}
+#' @seealso [mlpsa.ctree()], [mlpsa.logistic()]
 #' @export
 #' @examples
 #' \dontrun{

@@ -13,3 +13,9 @@ JSSstyle
 cran-comments.md
 .travis.yml
 README.md
+build.R
+.github
+README.Rmd
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

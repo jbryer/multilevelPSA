@@ -7,30 +7,29 @@
 #' Propensity score analyses are typically done in two phases. In phase I, a
 #' statistical model predicting treatment using the available individual covariates 
 #' is estimated. This package currently currently provides functions to perform
-#' propensity score estimates using logistic regression (see \code{\link{mlpsa.logistic}})
-#' and conditional inference trees (see \code{\link{mlpsa.ctree}}). The latter method
+#' propensity score estimates using logistic regression (see [mlpsa.logistic()])
+#' and conditional inference trees (see [mlpsa.ctree()]). The latter method
 #' provides explicit stratifications as defined by each leaf node. The former however,
 #' results in a numerical value ranging from zero to one (i.e. the fitted values).
 #' A common approach is to then create stratifications using quintiles. However,
 #' other approaches such as Loess regression are also provided.
 #'
 #' Phase II of typical propensity score analyses concerns with the comparison of an
-#' outcome between the treatment and comparison groups. The \code{\link{mlpsa}}
+#' outcome between the treatment and comparison groups. The [mlpsa()]
 #' method will perform this analysis in a multilevel, or clustered, fashion. That
-#' is, the results of the \code{\link{mlpsa}} procedure produce summary results
+#' is, the results of the [mlpsa()] procedure produce summary results
 #' at level one (i.e. each strata within each cluster), level two (i.e. overall results
 #' for each cluster), and overall (i.e. overall results across all clusters).
 #'
 #' This package also provides a number of visualizations that provide a critical
 #' part in presenting, understanding, and interpreting the results. See
-#' \code{\link{plot.mlpsa}} for details.
+#' [plot.mlpsa()] for details.
 #' 
 #' @name multilevelPSA-package
 #' @aliases multilevelPSA
-#' @docType package
 #' @title Multilevel Propensity Score Analysis
 #' @author Jason Bryer \email{jason@@bryer.org}
-#' @references \url{http://CRAN.R-project.org/package=PSAgraphics}
+#' @references \url{https://CRAN.R-project.org/package=PSAgraphics}
 #' 		\url{http://www.jstatsoft.org/v29/i06/}
 #' @keywords propensity score analysis psa multilevel graphics
 #' @seealso \code{PSAgraphics}
@@ -46,7 +45,7 @@
 #' @importFrom MASS stepAIC
 #' @importFrom stats binomial density fitted glm median model.matrix na.omit qt quantile sd var
 #' @importFrom utils capture.output object.size setTxtProgressBar txtProgressBar
-NA
+"_PACKAGE"
 
 #' North American (i.e. Canada, Mexico, and United States) student results of the 2009
 #' Programme of International Student Assessment.
@@ -70,11 +69,11 @@ NA
 #' @keywords datasets
 NULL
 
-#' Mapping of variables in \code{\link{pisana}} with full descriptions.
+#' Mapping of variables in `pisana` with full descriptions.
 #' 
-#' This data frame provides three variables, \code{Variable} corresponding to the
-#' column names in \code{\link{pisana}}, \code{ShortDesc} providing a short
-#' description of the variable as a valid R object name, and \code{Desc} providing
+#' This data frame provides three variables, `Variable` corresponding to the
+#' column names in `pisana`, `ShortDesc` providing a short
+#' description of the variable as a valid R object name, and `Desc` providing
 #' a longer description of the variable.
 #' 
 #' @name pisa.colnames

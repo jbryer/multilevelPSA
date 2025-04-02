@@ -15,8 +15,8 @@ utils::globalVariables(c('ps','y'))
 #' @param plot.strata an integer value greater than 2 indicating the number of vertical lines to 
 #'        plot corresponding to quantiles.
 #' @param plot.strata.alpha the alpha level for the vertical lines.
-#' @param ... other parameters passed to \code{\link{geom_smooth}} and
-#'        \code{\link{stat_smooth}}.
+#' @param ... other parameters passed to [ggplot2::geom_smooth()] and
+#'        [ggplot2::stat_smooth()].
 #' @return a ggplot2 figure
 #' @seealso plot.mlpsa
 #' @export

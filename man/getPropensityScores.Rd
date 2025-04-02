@@ -8,7 +8,7 @@ and the fitted value from the logistic regression.}
 getPropensityScores(lr.results, nStrata = 5)
 }
 \arguments{
-\item{lr.results}{the results of \code{\link{mlpsa.logistic}}}
+\item{lr.results}{the results of [mlpsa.logistic()]}
 
 \item{nStrata}{number of strata within each level.}
 }

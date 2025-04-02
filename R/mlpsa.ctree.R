@@ -15,8 +15,8 @@
 #'             Recursive Partitioning: A Conditional Inference Framework. Journal
 #'             of Computational and Graphical Statistics, 15(3), 651--674.
 #' @return a list of BinaryTree-class classes for each level 2
-#' @seealso \code{\link{getStrata}}
-#' @seealso \code{\link{tree.plot}}
+#' @seealso [getStrata()]
+#' @seealso [tree.plot()]
 #' @export
 mlpsa.ctree <- function(vars, formula, level2, ...) {
 	partyPlyr <- function(x) {
@@ -38,7 +38,7 @@ mlpsa.ctree <- function(vars, formula, level2, ...) {
 #' and the leaves from the conditional inference trees.
 #' 
 #' @seealso mlpsa.ctree
-#' @param party.results the results of \code{\link{mlpsa.ctree}}
+#' @param party.results the results of [mlpsa.ctree()]
 #' @param data the data frame to merge results to
 #' @param level2 the name of the level 2 variable.
 #' @return a data frame

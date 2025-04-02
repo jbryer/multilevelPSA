@@ -1,6 +1,6 @@
 #' Calculate covariate effect size differences before and after stratification.
 #' 
-#' This function is modified from the \code{\link{cv.bal.psa}} function in the 
+#' This function is modified from the [cv.bal.psa()] function in the 
 #' \code{PSAgrpahics} package.
 #' 
 #' Note: effect sizes are calculated as treatment 1 - treatment 0, or treatment B - treatment A.
