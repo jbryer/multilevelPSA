@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 `r badger::badge_cran_release("multilevelPSA", "orange")`
 `r badger::badge_devel("jbryer/multilevelPSA", "blue")`
 `r badger::badge_github_actions("jbryer/multilevelPSA", action = "R-CMD-check")`
-![Downloads](http://cranlogs.r-pkg.org/badges/multilevelPSA)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/multilevelPSA)
 <!-- badges: end -->
 
 

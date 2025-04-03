@@ -4,10 +4,10 @@
 <!-- badges: start -->
 
 [![](https://www.r-pkg.org/badges/version/multilevelPSA?color=orange)](https://cran.r-project.org/package=multilevelPSA)
-[![](https://img.shields.io/badge/devel%20version-1.2.6-blue.svg)](https://github.com/jbryer/multilevelPSA)
+[![](https://img.shields.io/badge/devel%20version-1.3.0-blue.svg)](https://github.com/jbryer/multilevelPSA)
 [![R build
 status](https://github.com/jbryer/multilevelPSA/workflows/R-CMD-check/badge.svg)](https://github.com/jbryer/multilevelPSA/actions)
-![Downloads](http://cranlogs.r-pkg.org/badges/multilevelPSA)
+![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/multilevelPSA)
 <!-- badges: end -->
 
 ### Resources:
