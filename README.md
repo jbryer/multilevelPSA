@@ -1,5 +1,5 @@
 
-## <a href='https://github.com/jbryer/multilevelPSA'><img src='man/figures/multilevelPSA.png' align="right" width="120" /></a> multilevelPSA - An R package for estimating and visualizing multilevel propensity score models
+## <a href='https://github.com/jbryer/multilevelPSA'><img src='man/figures/multilevelPSA.png' align="right" width="200" /></a> multilevelPSA - An R package for estimating and visualizing multilevel propensity score models
 
 <!-- badges: start -->
 
@@ -18,8 +18,10 @@ status](https://github.com/jbryer/multilevelPSA/workflows/R-CMD-check/badge.svg)
   Analysis](https://scholarsarchive.library.albany.edu/legacy-etd/1090/).
   Analysis scripts and manuscript are available on Github here:
   <https://github.com/jbryer/dissertation>.
-- [Applied Propensity Score Analysis with R](https://psa.bryer.org) book
-  and R package.
+- See the [Applied Propensity Score Analysis with
+  R](https://psa.bryer.org) book and [R
+  package](https://github.com/jbryer/psa) for a general introduction to
+  propensity score methods.
 
 ### Abstract
 
