@@ -27,7 +27,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat
-Date: 2018-03-22
+Date: 2025-04-03
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 Encoding: UTF-8
