@@ -7,7 +7,8 @@
 [![](https://img.shields.io/badge/devel%20version-1.3.0-blue.svg)](https://github.com/jbryer/multilevelPSA)
 [![R build
 status](https://github.com/jbryer/multilevelPSA/workflows/R-CMD-check/badge.svg)](https://github.com/jbryer/multilevelPSA/actions)
-![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/multilevelPSA)
+![Downloads](https://cranlogs.r-pkg.org/badges/multilevelPSA) ![Total
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/multilevelPSA)
 <!-- badges: end -->
 
 ### Resources:
