@@ -24,6 +24,7 @@ mlpsa.circ.plot(
   unweighted.means = FALSE,
   weighted.means = FALSE,
   fill.colors = NULL,
+  plot.adjusted.means = TRUE,
   ...
 )
 }
@@ -74,6 +75,8 @@ of PSA) means for each level 2, or cluster.}
 lines are drawn representing the weighted means for each level 2, or cluster.}
 
 \item{fill.colors}{if specified, the colors to use for level 2 points.}
+
+\item{plot.adjusted.means}{whether to plot verticial and horizontal lines for the adjsuted means.}
 
 \item{...}{currently unused.}
 }

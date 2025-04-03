@@ -34,6 +34,7 @@ utils::globalVariables(c('mnx','mny','Diff','strata2','xmark','ymark','n','y','e
 #' @param weighted.means logical value indicating whether horizontal and vertical
 #'        lines are drawn representing the weighted means for each level 2, or cluster.
 #' @param fill.colors if specified, the colors to use for level 2 points.
+#' @param plot.adjusted.means whether to plot verticial and horizontal lines for the adjsuted means.
 #' @param ... currently unused.
 #' @seealso plot.mlpsa
 #' @export
@@ -71,6 +72,7 @@ mlpsa.circ.plot <- function(x,
 		unweighted.means=FALSE, 
 		weighted.means=FALSE,
 		fill.colors=NULL, 
+		plot.adjusted.means = TRUE,
 		...
 ) {
 	stopifnot(is.mlpsa(x))
@@ -162,10 +164,12 @@ mlpsa.circ.plot <- function(x,
 	p = p + geom_abline(slope=1, intercept=overall.wtd, 
 						color=overall.col, linetype='dashed', size=.6, alpha=.9)
 	#Overall results (vertical line)
-	p = p + geom_vline(xintercept=overall.mnx, 
-					   color=overall.col, size=.6, alpha=.7) +
-			geom_hline(yintercept=overall.mny, 
-					   color=overall.col, size=.6, alpha=.7)
+	if(plot.adjusted.means) {
+		p = p + geom_vline(xintercept=overall.mnx, 
+						   color=overall.col, size=.6, alpha=.7) +
+				geom_hline(yintercept=overall.mny, 
+						   color=overall.col, size=.6, alpha=.7)
+	}
 	#Point for each level 1 stratum
 	if(level1.plot) {
 		#TODO: WARNING can't seem to specify both size and fill for secondary data set 
