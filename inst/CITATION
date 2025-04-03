@@ -1,14 +1,15 @@
 citHeader("To cite multilevelPSA in publications, please use:")
 
-citEntry(entry = "article",
-	author = "Jason M. Bryer and Robert M. Pruzek",
+bibentry(
+	bibtype = "article",
+	author = c(
+	   person("Jason", "Bryer", "M", "jason@bryer.org", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-2454-0402")),
+       person("Robert", "Pruzek", "M")
+	),
 	title = "An international comparison of private and public schools using multilevel propensity score methods and graphics (Abstract)",
 	year = "2011",
 	number = "46",
 	pages = "1010--1011",
-	journal = "Multivariate Behavior Research",
-	textVersion = paste0("Bryer, J.M. & Pruzek, R.M. (2011). ",
-		"An international comparison of private and public schools using multilevel ",
-		"propensity score methods and graphics (Abstract). ",
-		"Multivariate Behavior Research 46, 1011-1011")
+	journal = "Multivariate Behavior Research"
 )

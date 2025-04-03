@@ -6,7 +6,7 @@ data(pisa.psa.cols)
 student <- NULL
 if(require(pisa, quietly=TRUE)) {
 	#If the full PISA dataset is available vis-a-vis the pisa package.
-	#See http://jason.bryer.org/pisa for more information.
+	#See https://github.com/jbryer/pisa for more information.
 	data(pisa.student)
 	data(pisa.school)
 	student <- pisa.student[,c('CNT', 'SCHOOLID',

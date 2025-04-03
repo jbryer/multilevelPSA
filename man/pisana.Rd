@@ -14,17 +14,18 @@ Organization for Economic Co-operation and Development
 \description{
 Student results from the 2009 Programme of International Student Assessment (PISA)
 as provided by the Organization for Economic Co-operation and Development (OECD).
-See \url{http://www.pisa.oecd.org/} for more information including the code book.
+See [https://www.oecd.org/en/about/programmes/pisa.html/](https://www.oecd.org/en/about/programmes/pisa.html/)
+for more information including the code book.
 }
 \details{
 Note that missing values have been imputed using the 
-\href{mice}{http://cran.r-project.org/web/packages/mice/index.html} package.
-Details on the specific procedure are in the \code{pisa.impute} function
-in the \href{http://github.com/jbryer/pisa}{\code{pisa} package}.
+\href{mice}{https://cran.r-project.org/package=mice} package.
+Details on the specific procedure are in the `pisa.impute` function
+in the \href{https://github.com/jbryer/pisa}{`pisa` package}.
 }
 \references{
 Organization for Economic Co-operation and Development (2009).
             Programme for International Student Assessment (PISA). 
-            \url{http://www.pisa.oecd.org/}
+            [https://www.oecd.org/en/about/programmes/pisa.html](https://www.oecd.org/en/about/programmes/pisa.html)
 }
 \keyword{datasets}

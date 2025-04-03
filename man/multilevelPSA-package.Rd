@@ -35,14 +35,14 @@ part in presenting, understanding, and interpreting the results. See
 [plot.mlpsa()] for details.
 }
 \references{
-\url{https://CRAN.R-project.org/package=PSAgraphics}
-		\url{http://www.jstatsoft.org/v29/i06/}
+[https://cran.r-project.org/package=PSAgraphics](https://www.oecd.org/en/about/programmes/pisa.html)
+		[https://www.jstatsoft.org/article/view/v029i06](https://www.jstatsoft.org/article/view/v029i06)
 }
 \seealso{
 \code{PSAgraphics}
 }
 \author{
-Jason Bryer \email{jason@bryer.org}
+Jason Bryer [jason@bryer.org](mailto:jason@bryer.or)
 }
 \keyword{analysis}
 \keyword{graphics}

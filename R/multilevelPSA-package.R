@@ -28,9 +28,9 @@
 #' @name multilevelPSA-package
 #' @aliases multilevelPSA
 #' @title Multilevel Propensity Score Analysis
-#' @author Jason Bryer \email{jason@@bryer.org}
-#' @references \url{https://CRAN.R-project.org/package=PSAgraphics}
-#' 		\url{http://www.jstatsoft.org/v29/i06/}
+#' @author Jason Bryer [jason@bryer.org](mailto:jason@bryer.or)
+#' @references [https://cran.r-project.org/package=PSAgraphics](https://www.oecd.org/en/about/programmes/pisa.html)
+#' 		[https://www.jstatsoft.org/article/view/v029i06](https://www.jstatsoft.org/article/view/v029i06)
 #' @keywords propensity score analysis psa multilevel graphics
 #' @seealso \code{PSAgraphics}
 #' @import plyr
@@ -52,16 +52,17 @@
 #'
 #' Student results from the 2009 Programme of International Student Assessment (PISA)
 #' as provided by the Organization for Economic Co-operation and Development (OECD).
-#' See \url{http://www.pisa.oecd.org/} for more information including the code book.
+#' See [https://www.oecd.org/en/about/programmes/pisa.html/](https://www.oecd.org/en/about/programmes/pisa.html/)
+#' for more information including the code book.
 #'
 #' Note that missing values have been imputed using the 
-#' \href{mice}{http://cran.r-project.org/web/packages/mice/index.html} package.
-#' Details on the specific procedure are in the \code{pisa.impute} function
-#' in the \href{http://github.com/jbryer/pisa}{\code{pisa} package}.
+#' \href{mice}{https://cran.r-project.org/package=mice} package.
+#' Details on the specific procedure are in the `pisa.impute` function
+#' in the \href{https://github.com/jbryer/pisa}{`pisa` package}.
 #' 
 #' @references Organization for Economic Co-operation and Development (2009).
 #'             Programme for International Student Assessment (PISA). 
-#'             \url{http://www.pisa.oecd.org/}
+#'             [https://www.oecd.org/en/about/programmes/pisa.html](https://www.oecd.org/en/about/programmes/pisa.html)
 #' @name pisana
 #' @docType data
 #' @format a data frame with 66,548 obvservations of 65 variables.

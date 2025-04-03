@@ -7,13 +7,15 @@
 #' @keywords internal
 #' @author hadley
 #' @references https://github.com/hadley/ggplot2/blob/master/R/grob-null.r
-zeroGrob <- function() .zeroGrob
+zeroGrob <- function() { .zeroGrob }
 
 .zeroGrob <- grob(cl = "zeroGrob", name = "NULL")
-widthDetails.zeroGrob <-
-	heightDetails.zeroGrob <- 
-	grobWidth.zeroGrob <- 
-	grobHeight.zeroGrob <- function(x) unit(0, "cm")
+widthDetails.zeroGrob <-function(x) unit(0, "cm")
+heightDetails.zeroGrob <- function(x) unit(0, "cm")
+#' @exportS3Method grid::grobWidth
+grobWidth.zeroGrob <- function(x) { unit(0, "cm") }
+#' @exportS3Method grid::grobHeight
+grobHeight.zeroGrob <- function(x) { unit(0, "cm") }
 
 drawDetails.zeroGrob <- function(x, recording) {}
 
