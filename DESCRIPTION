@@ -1,35 +1,36 @@
-Package: multilevelPSA
-License: GPL (>= 2)
-Title: Multilevel Propensity Score Analysis
 Type: Package
-Authors@R: c(
+Package: multilevelPSA
+Title: Multilevel Propensity Score Analysis
+Version: 1.3.0
+Date: 2025-04-03
+Authors@R: 
     person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2454-0402"))
-    )
-Description: Conducts and visualizes propensity score analysis for multilevel, 
-  or clustered data. Bryer & Pruzek (2011) <doi:10.1080/00273171.2011.636693>.
-Version: 1.3.0
-URL: https://jbryer.github.io/multilevelPSA
-BugReports: https://github.com/jbryer/multilevelPSA/issues
+Description: Conducts and visualizes propensity score analysis for
+    multilevel, or clustered data. Bryer & Pruzek (2011)
+    <doi:10.1080/00273171.2011.636693>.
+License: GPL (>= 2)
+URL: https://jbryer.github.io/multilevelPSA/
+BugReports: https://github.com/jbryer/multilevelPSA/issues/
 Depends:
     ggplot2,
-    xtable,
-    R (>= 3.0)
+    R (>= 3.0),
+    xtable
 Imports:
-    PSAgraphics,
-    plyr,
-    psych,
-    reshape,
     grid,
+    MASS,
     party,
-    MASS
+    plyr,
+    PSAgraphics,
+    psych,
+    reshape
 Suggests:
     knitr,
-    rmarkdown,
-    testthat,
     MatchIt,
-    mice
-Date: 2025-04-03
-RoxygenNote: 7.3.2
-VignetteBuilder: knitr
+    mice,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
+RoxygenNote: 7.3.2

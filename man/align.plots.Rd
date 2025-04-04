@@ -6,10 +6,10 @@
 an experimental mlpsa plot that will combine the circular plot along with
 the two individual distributions.}
 \usage{
-\method{align}{plots}(gl, ...)
+\method{align}{plots}(x, ...)
 }
 \arguments{
-\item{gl}{grid.layout}
+\item{x}{grid.layout}
 
 \item{...}{graphic elements to combine.}
 }

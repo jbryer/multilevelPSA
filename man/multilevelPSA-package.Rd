@@ -42,7 +42,8 @@ part in presenting, understanding, and interpreting the results. See
 \code{PSAgraphics}
 }
 \author{
-Jason Bryer [jason@bryer.org](mailto:jason@bryer.or)
+\strong{Maintainer}: Jason Bryer \email{jason@bryer.org} (\href{https://orcid.org/0000-0002-2454-0402}{ORCID})
+
 }
 \keyword{analysis}
 \keyword{graphics}

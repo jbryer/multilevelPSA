@@ -19,9 +19,9 @@ for more information including the code book.
 }
 \details{
 Note that missing values have been imputed using the 
-\href{mice}{https://cran.r-project.org/package=mice} package.
+[mice](https://cran.r-project.org/package=mice) package.
 Details on the specific procedure are in the `pisa.impute` function
-in the \href{https://github.com/jbryer/pisa}{`pisa` package}.
+in the [pisa](https://github.com/jbryer/pisa) package.
 }
 \references{
 Organization for Economic Co-operation and Development (2009).

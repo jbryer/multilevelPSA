@@ -28,7 +28,6 @@
 #' @name multilevelPSA-package
 #' @aliases multilevelPSA
 #' @title Multilevel Propensity Score Analysis
-#' @author Jason Bryer [jason@bryer.org](mailto:jason@bryer.or)
 #' @references [https://cran.r-project.org/package=PSAgraphics](https://www.oecd.org/en/about/programmes/pisa.html)
 #' 		[https://www.jstatsoft.org/article/view/v029i06](https://www.jstatsoft.org/article/view/v029i06)
 #' @keywords propensity score analysis psa multilevel graphics
@@ -56,9 +55,9 @@
 #' for more information including the code book.
 #'
 #' Note that missing values have been imputed using the 
-#' \href{mice}{https://cran.r-project.org/package=mice} package.
+#' [mice](https://cran.r-project.org/package=mice) package.
 #' Details on the specific procedure are in the `pisa.impute` function
-#' in the \href{https://github.com/jbryer/pisa}{`pisa` package}.
+#' in the [pisa](https://github.com/jbryer/pisa) package.
 #' 
 #' @references Organization for Economic Co-operation and Development (2009).
 #'             Programme for International Student Assessment (PISA). 

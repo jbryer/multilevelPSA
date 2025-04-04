@@ -3,9 +3,10 @@ citHeader("To cite multilevelPSA in publications, please use:")
 bibentry(
 	bibtype = "article",
 	author = c(
-	   person("Jason", "Bryer", "M", "jason@bryer.org", role = c("aut", "cre"),
+	   person(given = "Jason M", family = "Bryer",
+	       email = "jason@bryer.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2454-0402")),
-       person("Robert", "Pruzek", "M")
+       person(given = "Robert M", family = "Pruzek")
 	),
 	title = "An international comparison of private and public schools using multilevel propensity score methods and graphics (Abstract)",
 	year = "2011",

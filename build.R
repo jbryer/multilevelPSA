@@ -1,3 +1,4 @@
+usethis::use_tidy_description()
 devtools::document()
 devtools::install(upgrade = 'never')
 devtools::install()
@@ -12,7 +13,9 @@ pkgdown::build_site()
 # Ready for CRAN?
 devtools::release()
 
-# Sticker
+
+
+##### Sticker
 library(multilevelPSA)
 library(party)
 # remotes::install_github('jbryer/pisa')

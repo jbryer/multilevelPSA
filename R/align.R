@@ -3,23 +3,23 @@
 # note for use ::: the functions were copied here.
 
 #' The zero grob draws nothing and has zero size.
-#' 
 #' @keywords internal
 #' @author hadley
 #' @references https://github.com/hadley/ggplot2/blob/master/R/grob-null.r
 zeroGrob <- function() { .zeroGrob }
-
 .zeroGrob <- grob(cl = "zeroGrob", name = "NULL")
+#' @exportS3Method grid::widthDetails
 widthDetails.zeroGrob <-function(x) unit(0, "cm")
+#' @exportS3Method grid::heightDetails
 heightDetails.zeroGrob <- function(x) unit(0, "cm")
 #' @exportS3Method grid::grobWidth
 grobWidth.zeroGrob <- function(x) { unit(0, "cm") }
 #' @exportS3Method grid::grobHeight
 grobHeight.zeroGrob <- function(x) { unit(0, "cm") }
-
+#' @exportS3Method grid::drawDetails
 drawDetails.zeroGrob <- function(x, recording) {}
 
-is.zero <- function(x) is.null(x) || inherits(x, "zeroGrob")
+is.zero <- function(x) { is.null(x) || inherits(x, "zeroGrob") }
 
 ##### END zeroGrob FROM ggplot2 ################################################
 
@@ -27,9 +27,9 @@ is.zero <- function(x) is.null(x) || inherits(x, "zeroGrob")
 #' an experimental mlpsa plot that will combine the circular plot along with
 #' the two individual distributions.
 #' 
-#' @param gl grid.layout
+#' @param x grid.layout
 #' @param ... graphic elements to combine.
-align.plots <- function(gl, ...) {
+align.plots <- function(x, ...) {
 	#With ggplot2 version .9.2 these functions were removed. This is a bit of
 	#a hack copying them from an older version, but seems to still work!
 	ggplotGrob <- function (x) {
@@ -76,8 +76,8 @@ align.plots <- function(gl, ...) {
 	#    There seems to be a spacer used when a title is present.  Include the
 	#    size of the spacer.  Not sure how to do this yet.
 	
-	stats.row <- vector( "list", gl$nrow )
-	stats.col <- vector( "list", gl$ncol )
+	stats.row <- vector( "list", x$nrow )
+	stats.col <- vector( "list", x$ncol )
 	
 	lstAll <- list(...)
 	
@@ -183,5 +183,4 @@ align.plots <- function(gl, ...) {
 		grid.draw(dots[[i]])
 		upViewport(2)
 	}
-	
 }
