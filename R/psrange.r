@@ -126,17 +126,18 @@ utils::globalVariables(c('ps', '..scaled..','treat','max.min','max.max','min.min
 #' @method plot psrange
 #' @export
 plot.psrange <- function(x,
-		 xlab=NULL,
-		 ylab=NULL,
-		 labels=c('Comparison','Treatment'),
+		 xlab = NULL,
+		 ylab = NULL,
+		 labels = c('Comparison','Treatment'),
 		 text.ratio.size = 4,
 		 text.ncontrol.size = 3,
 		 point.size = 1, 
 		 point.alpha = .6,
 		 line.width = 6,
-		 density.alpha = .2,
+		 density.alpha = .5,
 		 rect.color = 'green',
 		 rect.alpha = .2,
+		 colors = c('#66c2a5', '#8da0cb'),
 		 ...
 ) {
 	if(missing(xlab)) {
@@ -167,14 +168,17 @@ plot.psrange <- function(x,
 		}
 	}
 	
+	densities.df$treat <- factor(densities.df$treat,
+								 levels = c(0,1),
+								 labels = labels)
 	p <- ggplot() + 
-			xlim(c(-.05,1.05)) + ylim(c(-1,1)) +
-			stat_density(data=densities.df[densities.df$treat==1,], 
-				aes(x=ps, ymax=-..scaled.., fill=treat, ymin = 0),
-				geom="ribbon", position="identity", alpha=density.alpha) +
-			stat_density(data=densities.df[densities.df$treat==0,], 
-				aes(x=ps, ymax=..scaled.., fill=treat, ymin = 0),
-				geom="ribbon", position="identity", alpha=density.alpha) +
+			xlim(c(-.05,1.05)) + #ylim(c(-1,1)) +
+			stat_density(data = densities.df[densities.df$treat==labels[2],], 
+				aes(x = ps, ymax = -after_stat(scaled), fill = treat, ymin = 0),
+				geom = "ribbon", position = "identity", alpha = density.alpha) +
+			stat_density(data = densities.df[densities.df$treat==labels[1],], 
+				aes(x = ps, ymax = after_stat(scaled), fill = treat, ymin = 0),
+				geom = "ribbon", position = "identity", alpha = density.alpha) +
 			geom_rect(data=x$summary, aes(group=p, xmin=(max.min-.005), xmax=(max.max+.005)),
 				ymin=0.25, ymax=.75, fill=rect.color, alpha=rect.alpha) +
 			geom_rect(data=x$summary, aes(group=p, xmin=(min.min-.005), xmax=(min.max+.005)), 
@@ -183,7 +187,7 @@ plot.psrange <- function(x,
 				size=point.size, alpha=point.alpha, shape=23) +
   		  	geom_point(data=x$details, aes(y=.5, x=psmax), 
   		  		size=point.size, alpha=point.alpha, shape=22) +
-			geom_errorbarh(data=x$summary, 
+			geom_errorbar(data=x$summary, 
 				aes(y=0, x=min.mean + (max.mean-min.mean)/ 2, xmin=min.mean, xmax=max.mean), 
 				colour='black') + 
 		   	geom_text(data=x$summary,
@@ -193,12 +197,16 @@ plot.psrange <- function(x,
    		  		aes(label=paste('1:', round(ratio, digits=1), sep=''), 
    		  		x=(min.mean + (max.mean-min.mean)/2)), y=0, 
    		  		size=text.ratio.size, vjust=text.vjust) +
-		  	facet_grid(p ~ ., as.table=FALSE, labeller=psrange_labeller) +
+		  	# facet_grid(p ~ ., as.table=FALSE, labeller=psrange_labeller) +
+			facet_grid(p ~ ., as.table=FALSE) +
 			theme(axis.text.y=element_blank(), axis.ticks.y=element_blank(),
 				  strip.background=element_rect(fill='#EFEFEF'),
 				  strip.text.y=element_text(angle=360)) +
-			ylab(ylab) + xlab(xlab) +
-			scale_fill_hue('', limits=c(0,1), labels=labels)
+			# scale_fill_hue('') +
+			scale_fill_discrete(limits = labels, labels = labels, palette = colors) +
+			theme(legend.title=element_blank()) +
+			ylab(ylab) +
+			xlab(xlab)
 	
 	return(p)
 }

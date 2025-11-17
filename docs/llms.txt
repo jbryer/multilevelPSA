@@ -1,0 +1,249 @@
+## [![](reference/figures/multilevelPSA.png)](https://github.com/jbryer/multilevelPSA) multilevelPSA - An R package for estimating and visualizing multilevel propensity score models
+
+### Resources:
+
+- This package was developed for my dissertation, [A National Study
+  Comparing Charter and Traditional Public Schools Using Propensity
+  Score
+  Analysis](https://scholarsarchive.library.albany.edu/legacy-etd/1090/).
+  Analysis scripts and manuscript are available on Github here:
+  <https://github.com/jbryer/dissertation>.
+- See the [Applied Propensity Score Analysis with
+  R](https://psa.bryer.org) book and [R
+  package](https://github.com/jbryer/psa) for a general introduction to
+  propensity score methods.
+
+### Abstract
+
+As can be seen from the recent Special Issue of MBR on propensity score
+analysis (PSA) methods, the use of PSA has gained increasing popularity
+for estimating causal effects in observational studies. However, PSA use
+with multilevel or clustered data has been limited, and to date there
+seems to have been no development of specialized graphics for such data.
+This paper introduces the multilevelPSA
+(<http://multilevelPSA.r-forge.r-project.org>) package for R that
+provides cluster-based functions for estimating propensity scores as
+well as graphics to exhibit results for multilevel data. This work
+extends to the multilevel case the framework for visualizing propensity
+score analysis introduced by Helmreich and Pruzek (2009). International
+data from the Programme for International Student Assessment
+(Organization for Economic Co-operation and Development, 2009) are
+comprehensively examined to compare private with public schools on
+reading, mathematics, and science outcomes after adjusting for covariate
+differences in the multilevel context.
+
+Particularly for analyses of large data sets, focusing on statistical
+significance is limiting. As can readily be seen, overall results favor
+“private” over “public” schools, at least for end of secondary school
+math achievement. But the graphics provide a more nuanced understanding
+of the nature and magnitude of adjusted differences for countries.
+Furthermore, the graphics are readily interpreted by a nontechnical
+audience. Broadly speaking, it is seen that modern graphics can enhance
+and extend conventional numerical summaries by focusing on details of
+what data have to say for multilevel comparisons of many countries based
+on propensity score methods.
+
+### Citation
+
+``` r
+citation(package = 'multilevelPSA')
+#> To cite multilevelPSA in publications, please use:
+#> 
+#>   Bryer, J.M. & Pruzek, R.M. (2011). An international comparison of
+#>   private and public schools using multilevel propensity score methods
+#>   and graphics (Abstract). Multivariate Behavior Research 46, 1011-1011
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Article{,
+#>     author = {Jason M. Bryer and Robert M. Pruzek},
+#>     title = {An international comparison of private and public schools using multilevel propensity score methods and graphics (Abstract)},
+#>     year = {2011},
+#>     number = {46},
+#>     pages = {1010--1011},
+#>     journal = {Multivariate Behavior Research},
+#>   }
+```
+
+### Getting Started
+
+The following example demonstrates how to get started the
+`multilevelPSA` package. A more detailed explaination is available in
+the package vignette
+([`vignette(topic = 'multilevelPSA')`](articles/multilevelPSA.md)).
+
+``` r
+# Install from CRAN
+install.packages('multilevelPSA')
+
+# Or install the package from Github
+remotes::install_github('multilevelPSA', 'jbryer')
+```
+
+Example estimating the effects of private versus public schools in North
+America using the 2009 Programme of International Student Assessment.
+
+``` r
+# Load the packages
+library(multilevelPSA)
+library(party)
+
+# Load the Programme for International Student Assessment data
+data("pisana", package = 'multilevelPSA')
+data("pisa.psa.cols", package = 'multilevelPSA')
+
+# Estimate the propensity scores
+mlctree <- mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], 
+                       formula = PUBPRIV ~ .,
+                       level2 = 'CNT')
+
+# Get the strata
+student.party <- getStrata(mlctree, pisana, level2 = 'CNT')
+
+# Create a total math score as the average of the five imputed scores
+student.party$mathscore <- apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5
+
+# Estimate the causal effects
+results.psa.math <- mlpsa(response=student.party$mathscore, 
+                         treatment=student.party$PUBPRIV, 
+                         strata=student.party$strata, 
+                         level2=student.party$CNT, minN=5)
+
+# Plot the results
+plot(results.psa.math)
+```
+
+![](reference/figures/README-pisa-math-plot-1.png)
+
+# Package index
+
+## All functions
+
+- [`align(`*`<plots>`*`)`](align.plots.md) : Adapted from ggExtra
+  package which is no longer available. This is related to an
+  experimental mlpsa plot that will combine the circular plot along with
+  the two individual distributions.
+
+- [`as.data.frame(`*`<covariate.balance>`*`)`](as.data.frame.covariate.balance.md)
+  : Returns the overall effects as a data frame.
+
+- [`covariate.balance()`](covariate.balance.md) : Estimate covariate
+  effect sizes before and after propensity score adjustment.
+
+- [`covariateBalance()`](covariateBalance.md) : Calculate covariate
+  effect size differences before and after stratification.
+
+- [`cv.trans.psa()`](cv.trans.psa.md) : Transformation of Factors to
+  Individual Levels
+
+- [`difftable.plot()`](difftable.plot.md) : This function produces a
+  ggplot2 figure containing the mean differences for each level two, or
+  cluster.
+
+- [`getPropensityScores()`](getPropensityScores.md) : Returns a data
+  frame with two columns corresponding to the level 2 variable and the
+  fitted value from the logistic regression.
+
+- [`getStrata()`](getStrata.md) : Returns a data frame with two columns
+  corresponding to the level 2 variable and the leaves from the
+  conditional inference trees.
+
+- [`is.mlpsa()`](is.mlpsa.md) :
+
+  Returns true if the object is of type `mlpsa`
+
+- [`loess.plot()`](loess.plot.md) : Loess plot with density
+  distributions for propensity scores and outcomes on top and right,
+  respectively.
+
+- [`lsos()`](lsos.md) : Nicer list of objects in memory. Particularly
+  useful for analysis of large data.
+  https://stackoverflow.com/questions/1358003/tricks-to-manage-the-available-memory-in-an-r-session
+
+- [`missing.plot()`](missing.plot.md) : Returns a heat map graphic
+  representing missingness of variables grouped by the given grouping
+  vector.
+
+- [`mlpsa()`](mlpsa.md) : This function will perform phase II of the
+  multilevel propensity score analysis.
+
+- [`mlpsa.circ.plot()`](mlpsa.circ.plot.md) : Plots the results of a
+  multilevel propensity score model.
+
+- [`mlpsa.ctree()`](mlpsa.ctree.md) : Estimates propensity scores using
+  the recursive partitioning in a conditional inference framework.
+
+- [`mlpsa.difference.plot()`](mlpsa.difference.plot.md) : Creates a
+  graphic summarizing the differences between treatment and comparison
+  groups within and across level two clusters.
+
+- [`mlpsa.distribution.plot()`](mlpsa.distribution.plot.md) : Plots
+  distribution for either the treatment or comparison group.
+
+- [`mlpsa.logistic()`](mlpsa.logistic.md) : Estimates propensity scores
+  using logistic regression.
+
+- [`multilevelPSA-package`](multilevelPSA-package.md)
+  [`multilevelPSA`](multilevelPSA-package.md) : Multilevel Propensity
+  Score Analysis
+
+- [`pisa.colnames`](pisa.colnames.md) : Mapping of variables in
+  \`pisana\` with full descriptions.
+
+- [`pisa.countries`](pisa.countries.md) : Data frame mapping PISA
+  countries to their three letter abbreviation.
+
+- [`pisa.psa.cols`](pisa.psa.cols.md) : Character vector representing
+  the list of covariates used for estimating propensity scores.
+
+- [`pisana`](pisana.md) : North American (i.e. Canada, Mexico, and
+  United States) student results of the 2009 Programme of International
+  Student Assessment.
+
+- [`plot(`*`<covariate.balance>`*`)`](plot.covariate.balance.md) :
+  Multiple covariate balance assessment plot.
+
+- [`plot(`*`<mlpsa>`*`)`](plot.mlpsa.md) : Plots the results of a
+  multilevel propensity score model.
+
+- [`plot(`*`<psrange>`*`)`](plot.psrange.md) : Plots densities and
+  ranges for the propensity scores.
+
+- [`print(`*`<covariate.balance>`*`)`](print.covariate.balance.md) :
+  Prints the overall effects before and after propensity score
+  adjustment.
+
+- [`print(`*`<mlpsa>`*`)`](print.mlpsa.md) :
+
+  Prints basic information about a `mlpsa` class.
+
+- [`print(`*`<psrange>`*`)`](print.psrange.md) : Prints information
+  about a psrange result.
+
+- [`print(`*`<xmlpsa>`*`)`](print.xmlpsa.md) : Prints the results of
+  \[mlpsa()\] and \[xtable.mlpsa()\].
+
+- [`psrange()`](psrange.md) : Estimates models with increasing number of
+  comparison subjects starting from 1:1 to using all available
+  comparison group subjects.
+
+- [`summary(`*`<mlpsa>`*`)`](summary.mlpsa.md) :
+
+  Provides a summary of a `mlpsa` class.
+
+- [`summary(`*`<psrange>`*`)`](summary.psrange.md) : Prints the summary
+  results of psrange.
+
+- [`tree.plot()`](tree.plot.md) : Heat map representing variables used
+  in a conditional inference tree across level 2 variables.
+
+- [`xtable(`*`<mlpsa>`*`)`](xtable.mlpsa.md) : Prints the results of
+  \[mlpsa()\] as a LaTeX table.
+
+# Articles
+
+### All vignettes
+
+- [Multilevel Propensity Score Analysis](multilevelPSA.md):
+- [Shrinking Fitted Values from Logistic
+  Regression](shrinking_fitted_values.md):

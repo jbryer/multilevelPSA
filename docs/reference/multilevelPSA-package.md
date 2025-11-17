@@ -1,0 +1,47 @@
+# Multilevel Propensity Score Analysis
+
+This packages provides functions to estimate and visualize multilevel
+propensity score analysis.
+
+## Details
+
+This package extends the principles put forth by the `PSAgraphics`
+(Helmreich, Pruzek, & Xiong, 2010) for multilevel, or clustered, data.
+
+Propensity score analyses are typically done in two phases. In phase I,
+a statistical model predicting treatment using the available individual
+covariates is estimated. This package currently currently provides
+functions to perform propensity score estimates using logistic
+regression (see \[mlpsa.logistic()\]) and conditional inference trees
+(see \[mlpsa.ctree()\]). The latter method provides explicit
+stratifications as defined by each leaf node. The former however,
+results in a numerical value ranging from zero to one (i.e. the fitted
+values). A common approach is to then create stratifications using
+quintiles. However, other approaches such as Loess regression are also
+provided.
+
+Phase II of typical propensity score analyses concerns with the
+comparison of an outcome between the treatment and comparison groups.
+The \[mlpsa()\] method will perform this analysis in a multilevel, or
+clustered, fashion. That is, the results of the \[mlpsa()\] procedure
+produce summary results at level one (i.e. each strata within each
+cluster), level two (i.e. overall results for each cluster), and overall
+(i.e. overall results across all clusters).
+
+This package also provides a number of visualizations that provide a
+critical part in presenting, understanding, and interpreting the
+results. See \[plot.mlpsa()\] for details.
+
+## References
+
+\[https://cran.r-project.org/package=PSAgraphics\](https://www.oecd.org/en/about/programmes/pisa.html)
+\[https://www.jstatsoft.org/article/view/v029i06\](https://www.jstatsoft.org/article/view/v029i06)
+
+## See also
+
+`PSAgraphics`
+
+## Author
+
+**Maintainer**: Jason Bryer <jason@bryer.org>
+([ORCID](https://orcid.org/0000-0002-2454-0402))

@@ -1,6 +1,7 @@
-pandoc: '3.2'
-pkgdown: 2.1.1
+pandoc: 3.6.4
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   multilevelPSA: multilevelPSA.html
-last_built: 2025-04-03T16:46Z
+  shrinking_fitted_values: shrinking_fitted_values.html
+last_built: 2025-11-17T15:30Z

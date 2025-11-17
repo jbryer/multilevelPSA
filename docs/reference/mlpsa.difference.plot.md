@@ -1,0 +1,126 @@
+# Creates a graphic summarizing the differences between treatment and comparison groups within and across level two clusters.
+
+Creates a graphic summarizing the differences between treatment and
+comparison groups within and across level two clusters.
+
+## Usage
+
+``` r
+mlpsa.difference.plot(
+  x,
+  xlab,
+  ylab = NULL,
+  title = NULL,
+  overall.col = "blue",
+  overall.ci.col = "green",
+  level2.point.size = NULL,
+  level1.points = TRUE,
+  errorbars = TRUE,
+  errorbars.adjusted.ci = TRUE,
+  level2.rug.plot = TRUE,
+  jitter = TRUE,
+  reorder = TRUE,
+  labelLevel2 = TRUE,
+  sd = NULL,
+  xlim,
+  ...
+)
+```
+
+## Arguments
+
+- x:
+
+  the results of \[mlpsa()\].
+
+- xlab:
+
+  label for the x-axis, or NULL to exclude.
+
+- ylab:
+
+  label for the y-axis, or NULL to exclude.
+
+- title:
+
+  title of the figure, or NULL to exclude.
+
+- overall.col:
+
+  the color of the overall results line.
+
+- overall.ci.col:
+
+  the color of the overall confidence interval.
+
+- level2.point.size:
+
+  the point size of level 2 points.
+
+- level1.points:
+
+  logical value indicating whether level 1 strata should be plotted.
+
+- errorbars:
+
+  logical value indicating whether error bars should be plotted for for
+  each level 1.
+
+- errorbars.adjusted.ci:
+
+  whether the Bonferroni adjusted error bars should be plotted (these
+  will be dashed lines).
+
+- level2.rug.plot:
+
+  logical value indicating whether a rug plot should be plotted for
+  level 2.
+
+- jitter:
+
+  logical value indicating whether level 1 points should be jittered.
+
+- reorder:
+
+  logical value indicating whether the level two clusters should be
+  reordered from largest difference to smallest.
+
+- labelLevel2:
+
+  logical value indicating whether the difference for each level 2
+  should be labeled.
+
+- sd:
+
+  If specified, effect sizes will be plotted instead of difference in
+  the native unit.
+
+- xlim:
+
+  the limits of the x-axis.
+
+- ...:
+
+  currently unused.
+
+## See also
+
+plot.mlpsa
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+data(pisana)
+data(pisa.colnames)
+data(pisa.psa.cols)
+mlctree = mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], formula=PUBPRIV ~ ., level2='CNT')
+student.party = getStrata(mlctree, pisana, level2='CNT')
+student.party$mathscore = apply(student.party[,paste0('PV', 1:5, 'MATH')], 1, sum) / 5
+results.psa.math = mlpsa(response=student.party$mathscore, 
+       treatment=student.party$PUBPRIV, 
+       strata=student.party$strata, 
+       level2=student.party$CNT, minN=5)
+mlpsa.difference.plot(results.psa.math, sd=mean(student.party$mathscore, na.rm=TRUE))
+} # }
+```

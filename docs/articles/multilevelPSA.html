@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">multilevelPSA</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,12 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/multilevelPSA.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/shrinking_fitted_values.html">Shrinking Fitted Values from Logistic Regression</a></li>
+  </ul>
+</li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
@@ -115,7 +121,7 @@ observe that Canada, which has the largest PISA scores for both groups,
 also has the largest diﬀerence (in favor of private schools) as
 represented by the larger distance from the unit line.</p>
 <div class="figure" style="text-align: center">
-<img src="AnnotatedCircPlot.png" alt="Annotated multilevel PSA assessment plot. This plot compares private schools (x- axis) against public schools (y-axis) for North America from the Programme of International Student Assessment." width="90%"><p class="caption">
+<img src="AnnotatedCircPlot.png" class="r-plt" alt="Annotated multilevel PSA assessment plot. This plot compares private schools (x- axis) against public schools (y-axis) for North America from the Programme of International Student Assessment." width="90%"><p class="caption">
 Annotated multilevel PSA assessment plot. This plot compares private
 schools (x- axis) against public schools (y-axis) for North America from
 the Programme of International Student Assessment.
@@ -135,7 +141,7 @@ plausible values for the academic scores since students complete a
 subset of the total assessment. For simplicity, the math score used for
 analysis is the average of these five plausible scores.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jbryer.github.io/multilevelPSA" class="external-link">multilevelPSA</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jbryer.github.io/multilevelPSA/" class="external-link">multilevelPSA</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://party.R-forge.R-project.org" class="external-link">party</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pisana</span><span class="op">)</span></span>
@@ -196,7 +202,7 @@ reflect less than 1% of variance explained.</p>
 <span><span class="co">#&gt; 6         ST10Q01&lt;ISCED level 2&gt;  0.030   -1.7e-04    0.171</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">cv.bal</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="multilevelPSA_files/figure-html/covariate-balance-1.png" alt="Multilevel PSA balance plot for PISA. The eﬀect sizes (standardized mean diﬀerences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles)." width="100%"><p class="caption">
+<img src="multilevelPSA_files/figure-html/covariate-balance-1.png" class="r-plt" alt="Multilevel PSA balance plot for PISA. The eﬀect sizes (standardized mean diﬀerences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles)." width="100%"><p class="caption">
 Multilevel PSA balance plot for PISA. The eﬀect sizes (standardized mean
 diﬀerences) for each covariate are provided before PSA adjustment (blue
 triangles) and after PSA adjustment (red circles).
@@ -319,9 +325,26 @@ private school students below. These panels can be plotted separately
 using the <code>mlpsa.circ.plot</code> and mlpsa.distribution.plot
 functions.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">results.psa.math</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">results.psa.math</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: `aes_string()` was deprecated in ggplot2 3.0.0.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use tidy evaluation idioms with `aes()`.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> See also `vignette("ggplot2-in-packages")` for more information.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">multilevelPSA</span> package.</span></span>
+<span><span class="co">#&gt;   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/jbryer/multilevelPSA/issues/&gt;</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
+<span><span class="co">#&gt; Warning: The `margin` argument should be constructed using the</span></span>
+<span><span class="co">#&gt; `margin()` function.</span></span>
+<span><span class="co">#&gt; Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">multilevelPSA</span> package.</span></span>
+<span><span class="co">#&gt;   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://github.com/jbryer/multilevelPSA/issues/&gt;</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span></code></pre></div>
 <div class="figure">
-<img src="multilevelPSA_files/figure-html/psa-circ-plot-1.png" alt="Multilevel PSA assessment plot for PISA. The main panel provides the adjusted mean for private (x-axis) and public (y-axis) for each country. The left and lower panels provide the mean for each stratum for the public and private students, respectively. The overall adjusted mean diﬀerence is represented by the dashed blue line and the 95% confidence interval by the dashed green lines. There is a statistically significant diﬀerence between private and public school student performance as evidenced by the confidence interval not spanning zero (i.e. not crossing the unit line y=x." width="100%"><p class="caption">
+<img src="multilevelPSA_files/figure-html/psa-circ-plot-1.png" class="r-plt" alt="Multilevel PSA assessment plot for PISA. The main panel provides the adjusted mean for private (x-axis) and public (y-axis) for each country. The left and lower panels provide the mean for each stratum for the public and private students, respectively. The overall adjusted mean diﬀerence is represented by the dashed blue line and the 95% confidence interval by the dashed green lines. There is a statistically significant diﬀerence between private and public school student performance as evidenced by the confidence interval not spanning zero (i.e. not crossing the unit line y=x." width="100%"><p class="caption">
 Multilevel PSA assessment plot for PISA. The main panel provides the
 adjusted mean for private (x-axis) and public (y-axis) for each country.
 The left and lower panels provide the mean for each stratum for the
@@ -339,9 +362,11 @@ specified, the x-axis can be interpreted as standardized eﬀect
 sizes.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/mlpsa.difference.plot.html">mlpsa.difference.plot</a></span><span class="op">(</span><span class="va">results.psa.math</span>, </span>
-<span>                      sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mlpsa.df</span><span class="op">$</span><span class="va">MathScore</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>                      sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">mlpsa.df</span><span class="op">$</span><span class="va">MathScore</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: The `margin` argument should be constructed using the</span></span>
+<span><span class="co">#&gt; `margin()` function.</span></span></code></pre></div>
 <div class="figure">
-<img src="multilevelPSA_files/figure-html/difference-plot-1.png" alt="Multilevel PSA diﬀerence plot for PISA. Each blue dot corresponds to the eﬀect size (standardized mean diﬀerence) for each country. The vertical blue line corresponds to the overall eﬀect size for all countries. The green lines correspond to the 95% confidence intervals. The dashed green lines Bonferroni-Sidak (c.f. Abdi, 2007) adjusted confidence intervals. The size of each dot is proportional to the sample size within each country." width="100%"><p class="caption">
+<img src="multilevelPSA_files/figure-html/difference-plot-1.png" class="r-plt" alt="Multilevel PSA diﬀerence plot for PISA. Each blue dot corresponds to the eﬀect size (standardized mean diﬀerence) for each country. The vertical blue line corresponds to the overall eﬀect size for all countries. The green lines correspond to the 95% confidence intervals. The dashed green lines Bonferroni-Sidak (c.f. Abdi, 2007) adjusted confidence intervals. The size of each dot is proportional to the sample size within each country." width="100%"><p class="caption">
 Multilevel PSA diﬀerence plot for PISA. Each blue dot corresponds to the
 eﬀect size (standardized mean diﬀerence) for each country. The vertical
 blue line corresponds to the overall eﬀect size for all countries. The
@@ -363,7 +388,7 @@ country.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

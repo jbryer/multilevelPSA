@@ -1,8 +1,8 @@
 Type: Package
 Package: multilevelPSA
 Title: Multilevel Propensity Score Analysis
-Version: 1.3.0
-Date: 2025-04-03
+Version: 1.3.1
+Date: 2025-11-17
 Authors@R: 
     person("Jason", "Bryer", , "jason@bryer.org", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-2454-0402"))
@@ -33,4 +33,4 @@ Suggests:
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3

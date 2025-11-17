@@ -1,3 +1,10 @@
+multilevelPSA 1.3.1
+=========
+
+* Updated plot.psrange to address an change in the ggplot2 package.
+* Added shrinking_fitted_values vignette that uses the psranges function.
+
+
 multilevelPSA 1.2.6
 =========
 
