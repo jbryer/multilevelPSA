@@ -11,7 +11,6 @@
 #' @param type either logistic for Logistic regression (using \code{glm} 
 #'        function) or ctree for Conditional Inference Trees (using the 
 #'        \code{ctree} function).
-#' @param colors vector for the colors of the two groups.
 #' @param ... other parameters passed to glm.
 #' @return a class of psrange that contains a summary data frame, a details data
 #'         frame, and a list of each individual result from glm.
@@ -122,6 +121,7 @@ utils::globalVariables(c('ps', '..scaled..','treat','max.min','max.max','min.min
 #' @param rect.color the color of the rectangle surrounding the range of minimum
 #'        and maximum ranges.
 #' @param rect.alpha the alpha (transparency) level of the rectangle.
+#' @param colors vector for the colors of the two groups.
 #' @param ... currently unused.
 #' @return a ggplot2 object
 #' @method plot psrange

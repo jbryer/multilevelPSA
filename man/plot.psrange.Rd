@@ -49,6 +49,8 @@ and maximum ranges.}
 
 \item{rect.alpha}{the alpha (transparency) level of the rectangle.}
 
+\item{colors}{vector for the colors of the two groups.}
+
 \item{...}{currently unused.}
 }
 \value{
