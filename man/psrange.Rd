@@ -35,6 +35,8 @@ function) or ctree for Conditional Inference Trees (using the
 \code{ctree} function).}
 
 \item{...}{other parameters passed to glm.}
+
+\item{colors}{vector for the colors of the two groups.}
 }
 \value{
 a class of psrange that contains a summary data frame, a details data

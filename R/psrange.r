@@ -11,6 +11,7 @@
 #' @param type either logistic for Logistic regression (using \code{glm} 
 #'        function) or ctree for Conditional Inference Trees (using the 
 #'        \code{ctree} function).
+#' @param colors vector for the colors of the two groups.
 #' @param ... other parameters passed to glm.
 #' @return a class of psrange that contains a summary data frame, a details data
 #'         frame, and a list of each individual result from glm.

@@ -1,4 +1,4 @@
-utils::globalVariables(c('value','covariate','EffectSize','level2','group'))
+utils::globalVariables(c('value','covariate','EffectSize','level2','group','scaled'))
 
 #' Multiple covariate balance assessment plot.
 #' 
